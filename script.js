@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     lucide.createIcons();
 
     try {
-        const response = await fetch('src/games.json');
+        const response = await fetch('games.json');
         games = await response.json();
         filteredGames = [...games];
         renderGames();

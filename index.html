@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unblocked Games</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Custom styles if needed */
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: system-ui, -apple-system, sans-serif;
         }
     </style>
 </head>
@@ -66,7 +66,11 @@
             </div>
 
             <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Games will be injected here -->
+                <!-- Loading State -->
+                <div class="col-span-full text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
+                    <p class="mt-2 text-gray-500">Loading games...</p>
+                </div>
             </div>
             
             <div id="no-results" class="hidden text-center py-12">
@@ -120,6 +124,6 @@
         </div>
     </footer>
 
-    <script src="src/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
