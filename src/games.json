@@ -1,0 +1,44 @@
+[
+  {
+    "id": "2048",
+    "title": "2048",
+    "description": "Join the numbers and get to the 2048 tile!",
+    "url": "https://play2048.co/",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2048_logo.svg/220px-2048_logo.svg.png"
+  },
+  {
+    "id": "hextris",
+    "title": "Hextris",
+    "description": "An addictive puzzle game inspired by Tetris.",
+    "url": "https://hextris.io/",
+    "thumbnail": "https://raw.githubusercontent.com/Hextris/hextris/gh-pages/images/icons/apple-touch-120.png"
+  },
+  {
+    "id": "geo-dash",
+    "title": "Geometry Dash Lite",
+    "description": "Jump and fly your way through danger in this rhythm-based action platformer!",
+    "url": "https://scratch.mit.edu/projects/105500895/embed",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/35/Geometry_Dash_Logo.PNG"
+  },
+  {
+    "id": "flappy-bird",
+    "title": "Flappy Bird",
+    "description": "Fly through the pipes without crashing!",
+    "url": "https://flappybird.io/",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/0a/Flappy_Bird_icon.png"
+  },
+  {
+    "id": "pacman",
+    "title": "Pacman",
+    "description": "The classic arcade game.",
+    "url": "https://scratch.mit.edu/projects/16363096/embed",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/59/Pac-man.png"
+  },
+  {
+    "id": "tetris",
+    "title": "Tetris",
+    "description": "The addictive puzzle game.",
+    "url": "https://scratch.mit.edu/projects/3958674/embed",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Tetris_logo.svg/1200px-Tetris_logo.svg.png"
+  }
+]
