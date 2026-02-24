@@ -1,13 +1,125 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unblocked Games</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="./src/main.jsx"></script>
-  </body>
-</html>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom styles if needed */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
 
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showGameList()">
+                <div class="bg-indigo-600 p-2 rounded-lg">
+                    <i data-lucide="gamepad-2" class="text-white w-6 h-6"></i>
+                </div>
+                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
+                    Unblocked Games
+                </span>
+            </div>
+
+            <div class="relative hidden sm:block w-64" id="desktop-search">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="text-gray-400 w-4 h-4"></i>
+                </div>
+                <input
+                    type="text"
+                    id="search-input-desktop"
+                    placeholder="Search games..."
+                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm transition-colors"
+                />
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        
+        <!-- Game List View -->
+        <div id="game-list-view">
+            <div class="mb-8 sm:hidden">
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="text-gray-400 w-4 h-4"></i>
+                    </div>
+                    <input
+                        type="text"
+                        id="search-input-mobile"
+                        placeholder="Search games..."
+                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                    />
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">All Games</h2>
+                <p className="text-gray-600">Select a game to start playing instantly.</p>
+            </div>
+
+            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Games will be injected here -->
+            </div>
+            
+            <div id="no-results" class="hidden text-center py-12">
+                <p class="text-gray-500 text-lg">No games found matching "<span id="search-term"></span>"</p>
+                <button onclick="clearSearch()" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium">
+                    Clear search
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Player View -->
+        <div id="game-player-view" class="hidden h-full flex flex-col">
+            <div class="flex items-center justify-between mb-4">
+                <button onclick="showGameList()" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span class="font-medium">Back to Games</span>
+                </button>
+                
+                <h1 id="game-title" class="text-xl font-bold text-gray-900 hidden sm:block"></h1>
+                
+                <button onclick="toggleFullscreen()" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors" title="Toggle Fullscreen">
+                    <i data-lucide="maximize-2" id="fullscreen-icon" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div id="game-container" class="flex-1 bg-black rounded-xl overflow-hidden shadow-lg relative min-h-[600px]">
+                <iframe
+                    id="game-iframe"
+                    src=""
+                    title="Game"
+                    class="w-full h-full border-0 absolute inset-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowFullScreen
+                ></iframe>
+            </div>
+            
+            <div class="mt-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                <h2 class="text-lg font-bold text-gray-900 mb-2">About <span id="game-about-title"></span></h2>
+                <p id="game-description" class="text-gray-600"></p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <p class="text-center text-gray-500 text-sm">
+                &copy; <span id="year"></span> Unblocked Games. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
