@@ -72,13 +72,18 @@ function clearSearch() {
 function renderGames() {
     gamesGrid.innerHTML = '';
     
+    if (games.length === 0) {
+        gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-[#E70012] text-lg font-bold pixel-font">NO GAMES IN THIS CASTLE YET!</p></div>';
+        return;
+    }
+
     filteredGames.forEach(game => {
         const card = document.createElement('div');
-        card.className = 'bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow cursor-pointer border border-gray-100 flex flex-col h-full';
+        card.className = 'bg-white rounded-xl overflow-hidden cursor-pointer flex flex-col h-full mario-card';
         card.onclick = () => openGame(game);
         
         card.innerHTML = `
-            <div class="h-40 w-full bg-gray-200 relative overflow-hidden">
+            <div class="h-40 w-full bg-[#6b8cff] relative overflow-hidden border-b-4 border-black">
                 <img 
                     src="${game.thumbnail}" 
                     alt="${game.title}"
@@ -87,9 +92,9 @@ function renderGames() {
                     onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(game.title)}'"
                 />
             </div>
-            <div class="p-4 flex-1 flex flex-col">
-                <h3 class="text-lg font-bold text-gray-900 mb-1">${game.title}</h3>
-                <p class="text-sm text-gray-600 line-clamp-2">${game.description}</p>
+            <div class="p-4 flex-1 flex flex-col bg-[#FFD700]">
+                <h3 class="text-lg font-bold text-[#E70012] mb-1 pixel-font tracking-tight leading-tight">${game.title}</h3>
+                <p class="text-sm text-black font-bold line-clamp-2">${game.description}</p>
             </div>
         `;
         

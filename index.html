@@ -3,39 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unblocked Games</title>
+    <title>Faisal's Unblocked Games</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* Custom styles if needed */
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'Fredoka', sans-serif;
+        }
+        h1, h2, .pixel-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        .mario-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2);
+        }
+        .mario-card {
+            border: 4px solid #000;
+            box-shadow: 6px 6px 0px 0px #000;
+            transition: all 0.1s;
+        }
+        .mario-card:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px #000;
+        }
+        .mario-card:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #000;
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col">
+<body class="bg-[#6b8cff] text-gray-900 font-sans min-h-screen flex flex-col bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
 
     <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="showGameList()">
-                <div class="bg-indigo-600 p-2 rounded-lg">
-                    <i data-lucide="gamepad-2" class="text-white w-6 h-6"></i>
+    <header class="bg-[#E70012] border-b-4 border-black sticky top-0 z-10 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="showGameList()">
+                <div class="bg-white p-2 border-4 border-black rounded-lg mario-shadow">
+                    <i data-lucide="gamepad-2" class="text-[#E70012] w-8 h-8"></i>
                 </div>
-                <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
-                    Unblocked Games
+                <span class="text-xl md:text-2xl font-bold text-white pixel-font tracking-tighter drop-shadow-md">
+                    Faisal's Unblocked Games
                 </span>
             </div>
 
-            <div class="relative hidden sm:block w-64" id="desktop-search">
+            <div class="relative hidden sm:block w-72" id="desktop-search">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i data-lucide="search" class="text-gray-400 w-4 h-4"></i>
+                    <i data-lucide="search" class="text-gray-500 w-5 h-5"></i>
                 </div>
                 <input
                     type="text"
                     id="search-input-desktop"
                     placeholder="Search games..."
-                    class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-gray-50 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm transition-colors"
+                    class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-[#FFD700] placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
                 />
             </div>
         </div>
@@ -49,54 +69,53 @@
             <div class="mb-8 sm:hidden">
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i data-lucide="search" class="text-gray-400 w-4 h-4"></i>
+                        <i data-lucide="search" class="text-gray-500 w-5 h-5"></i>
                     </div>
                     <input
                         type="text"
                         id="search-input-mobile"
                         placeholder="Search games..."
-                        class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                        class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-[#FFD700] placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                     />
                 </div>
             </div>
 
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold text-gray-900">All Games</h2>
-                <p className="text-gray-600">Select a game to start playing instantly.</p>
-            </div>
 
-            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Loading State -->
                 <div class="col-span-full text-center py-12">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-indigo-500 border-t-transparent"></div>
-                    <p class="mt-2 text-gray-500">Loading games...</p>
+                    <div class="inline-block animate-bounce">
+                        <div class="w-16 h-16 bg-[#E70012] border-4 border-black rounded-full flex items-center justify-center text-white font-bold text-2xl">M</div>
+                    </div>
+                    <p class="mt-4 text-white font-bold text-xl pixel-font shadow-black drop-shadow-md">Loading...</p>
                 </div>
             </div>
             
-            <div id="no-results" class="hidden text-center py-12">
-                <p class="text-gray-500 text-lg">No games found matching "<span id="search-term"></span>"</p>
-                <button onclick="clearSearch()" class="mt-4 text-indigo-600 hover:text-indigo-800 font-medium">
-                    Clear search
+            <div id="no-results" class="hidden text-center py-12 bg-white/90 border-4 border-black rounded-xl">
+                <p class="text-gray-800 text-xl font-bold">No games found matching "<span id="search-term" class="text-[#E70012]"></span>"</p>
+                <button onclick="clearSearch()" class="mt-6 bg-[#009E49] text-white px-6 py-3 rounded-xl border-4 border-black font-bold hover:bg-[#00b353] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                    TRY AGAIN
                 </button>
             </div>
         </div>
 
         <!-- Game Player View -->
         <div id="game-player-view" class="hidden h-full flex flex-col">
-            <div class="flex items-center justify-between mb-4">
-                <button onclick="showGameList()" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    <span class="font-medium">Back to Games</span>
+            <div class="flex items-center justify-between mb-6">
+                <button onclick="showGameList()" class="flex items-center gap-2 px-6 py-3 bg-[#FFD700] text-black border-4 border-black rounded-xl font-bold hover:bg-[#ffe033] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                    <i data-lucide="arrow-left" class="w-6 h-6"></i>
+                    <span class="pixel-font text-sm">BACK</span>
                 </button>
                 
-                <h1 id="game-title" class="text-xl font-bold text-gray-900 hidden sm:block"></h1>
+                <h1 id="game-title" class="text-xl md:text-2xl font-bold text-white pixel-font hidden sm:block drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] text-stroke-black"></h1>
                 
-                <button onclick="toggleFullscreen()" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors" title="Toggle Fullscreen">
-                    <i data-lucide="maximize-2" id="fullscreen-icon" class="w-5 h-5"></i>
+                <button onclick="toggleFullscreen()" class="flex items-center gap-2 px-4 py-3 bg-white text-black border-4 border-black rounded-xl hover:bg-gray-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" title="Toggle Fullscreen">
+                    <i data-lucide="maximize-2" id="fullscreen-icon" class="w-6 h-6"></i>
                 </button>
             </div>
 
-            <div id="game-container" class="flex-1 bg-black rounded-xl overflow-hidden shadow-lg relative min-h-[600px]">
+            <div id="game-container" class="flex-1 bg-black border-4 border-black rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] relative min-h-[600px]">
                 <iframe
                     id="game-iframe"
                     src=""
@@ -107,19 +126,22 @@
                 ></iframe>
             </div>
             
-            <div class="mt-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-                <h2 class="text-lg font-bold text-gray-900 mb-2">About <span id="game-about-title"></span></h2>
-                <p id="game-description" class="text-gray-600"></p>
+            <div class="mt-6 p-6 bg-[#009E49] border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]">
+                <h2 class="text-xl font-bold text-white mb-3 pixel-font flex items-center gap-3">
+                    <span class="bg-white text-black w-8 h-8 flex items-center justify-center rounded border-2 border-black text-sm">?</span>
+                    About <span id="game-about-title"></span>
+                </h2>
+                <p id="game-description" class="text-white font-bold text-lg leading-relaxed"></p>
             </div>
         </div>
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <p class="text-center text-gray-500 text-sm">
-                &copy; <span id="year"></span> Unblocked Games. All rights reserved.
+    <footer class="bg-[#E70012] border-t-4 border-black mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <p class="text-center text-white font-bold pixel-font text-xs md:text-sm">
+                &copy; <span id="year"></span> Faisal's Unblocked Games. PRESS START TO PLAY.
             </p>
         </div>
     </footer>
