@@ -29,5 +29,19 @@
         {"key": "Arrow Left", "action": "Move Left"},
         {"key": "Enter", "action": "Start"}
     ]
+  },
+  {
+    "id": "soccer-random",
+    "title": "Soccer Random",
+    "description": "Score goals in this funny and random soccer game with ragdoll physics!",
+    "url": "https://gameinclassroom.github.io/soccer-random/",
+    "thumbnail": "https://basket-random.uk/wp-content/uploads/2025/12/play-soccer-random-online-for-free.webp"
+  },
+  {
+    "id": "fnaf-3",
+    "title": "Five Nights at Freddy's 3",
+    "description": "Thirty years after Freddy Fazbear's Pizza closed its doors, the events that took place there have become nothing more than a rumor and a childhood memory.",
+    "url": "https://masonsunblockedgames.github.io/MasonsUnblockedGames/FNAF/3/index.html",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/b/b3/Five_Nights_at_Freddy%27s_3.jpg"
   }
 ]

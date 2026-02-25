@@ -89,7 +89,7 @@ function renderGames() {
                     alt="${game.title}"
                     class="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
-                    onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(game.title)}'"
+                    onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}'"
                 />
             </div>
             <div class="p-4 flex-1 flex flex-col bg-theme-card transition-colors duration-300">
