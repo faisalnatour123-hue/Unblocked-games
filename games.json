@@ -4,6 +4,30 @@
     "title": "Basket Random",
     "description": "A funny and random basketball game. Score baskets with ragdoll physics!",
     "url": "https://j0n12.github.io/macvg/projects/basket-random/game.html",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Basketball.png/640px-Basketball.png"
+    "thumbnail": "https://imgs.crazygames.com/basket-random_16x9/20240617090207/basket-random_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop"
+  },
+  {
+    "id": "rise-higher",
+    "title": "Rise Higher",
+    "description": "Protect the balloon as it rises higher into the sky!",
+    "url": "https://ijnfem.github.io/seraph/games/risehigher/index.html",
+    "thumbnail": "https://images.hellokids.com/_uploads/_tiny_galerie/20190624/vign-rise-higher-hk-eyc_424.jpg"
+  },
+  {
+    "id": "super-mario-advance-2",
+    "title": "Super Mario Advance 2",
+    "description": "Super Mario World on GBA! Help Mario save Princess Toadstool from Bowser.",
+    "url": "https://sreekar617.github.io/GBA-gh-pages/launcher.html#supermarioadvance2",
+    "thumbnail": "https://i.ytimg.com/vi/-4mC3mKifus/maxresdefault.jpg",
+    "controls": [
+        {"key": "X", "action": "Jump"},
+        {"key": "Hold Z", "action": "Run"},
+        {"key": "S", "action": "Spin"},
+        {"key": "Arrow Up", "action": "Look Up"},
+        {"key": "Arrow Down", "action": "Crouch"},
+        {"key": "Arrow Right", "action": "Move Right"},
+        {"key": "Arrow Left", "action": "Move Left"},
+        {"key": "Enter", "action": "Start"}
+    ]
   }
 ]

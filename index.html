@@ -83,13 +83,7 @@
 
 
             <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Loading State -->
-                <div class="col-span-full text-center py-12">
-                    <div class="inline-block animate-bounce">
-                        <div class="w-16 h-16 bg-[#E70012] border-4 border-black rounded-full flex items-center justify-center text-white font-bold text-2xl">M</div>
-                    </div>
-                    <p class="mt-4 text-white font-bold text-xl pixel-font shadow-black drop-shadow-md">Loading...</p>
-                </div>
+                <!-- Games will be injected here -->
             </div>
             
             <div id="no-results" class="hidden text-center py-12 bg-white/90 border-4 border-black rounded-xl">
@@ -101,7 +95,7 @@
         </div>
 
         <!-- Game Player View -->
-        <div id="game-player-view" class="hidden h-full flex flex-col">
+        <div id="game-player-view" class="hidden flex flex-col">
             <div class="flex items-center justify-between mb-6">
                 <button onclick="showGameList()" class="flex items-center gap-2 px-6 py-3 bg-[#FFD700] text-black border-4 border-black rounded-xl font-bold hover:bg-[#ffe033] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                     <i data-lucide="arrow-left" class="w-6 h-6"></i>
@@ -115,15 +109,28 @@
                 </button>
             </div>
 
-            <div id="game-container" class="flex-1 bg-black border-4 border-black rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] relative min-h-[600px]">
-                <iframe
-                    id="game-iframe"
-                    src=""
-                    title="Game"
-                    class="w-full h-full border-0 absolute inset-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                    allowFullScreen
-                ></iframe>
+            <div class="flex flex-col lg:flex-row gap-6 h-full">
+                <div id="game-container" class="flex-1 bg-black border-4 border-black rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] relative min-h-[600px]">
+                    <iframe
+                        id="game-iframe"
+                        src=""
+                        title="Game"
+                        class="w-full h-full border-0 absolute inset-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                        allowFullScreen
+                    ></iframe>
+                </div>
+                
+                <!-- Controls Sidebar -->
+                <div id="game-controls" class="hidden w-full lg:w-72 bg-[#FFD700] border-4 border-black rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] h-fit">
+                    <h3 class="text-xl font-bold text-[#E70012] mb-4 pixel-font flex items-center gap-2">
+                        <i data-lucide="gamepad" class="w-6 h-6"></i>
+                        CONTROLS
+                    </h3>
+                    <ul id="controls-list" class="space-y-3 font-bold text-black text-sm">
+                        <!-- Controls injected here -->
+                    </ul>
+                </div>
             </div>
             
             <div class="mt-6 p-6 bg-[#009E49] border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]">
@@ -141,7 +148,7 @@
     <footer class="bg-[#E70012] border-t-4 border-black mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p class="text-center text-white font-bold pixel-font text-xs md:text-sm">
-                &copy; <span id="year"></span> Faisal's Unblocked Games. PRESS START TO PLAY.
+                &copy; <span id="year"></span> Faisal's Unblocked Games.
             </p>
         </div>
     </footer>

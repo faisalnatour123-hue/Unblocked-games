@@ -110,6 +110,23 @@ function openGame(game) {
     gameAboutTitle.textContent = game.title;
     gameDescription.textContent = game.description;
     gameIframe.src = game.url;
+
+    // Handle Controls
+    const controlsContainer = document.getElementById('game-controls');
+    const controlsList = document.getElementById('controls-list');
+    
+    if (game.controls && game.controls.length > 0) {
+        controlsContainer.classList.remove('hidden');
+        controlsList.innerHTML = game.controls.map(control => `
+            <li class="flex items-center justify-between bg-white/50 p-2 rounded border-2 border-black">
+                <span class="bg-black text-white px-2 py-1 rounded font-mono text-xs">${control.key}</span>
+                <span class="text-[#E70012] text-xs uppercase tracking-wide">${control.action}</span>
+            </li>
+        `).join('');
+    } else {
+        controlsContainer.classList.add('hidden');
+        controlsList.innerHTML = '';
+    }
     
     // Scroll to top
     window.scrollTo(0, 0);
