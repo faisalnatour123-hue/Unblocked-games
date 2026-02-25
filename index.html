@@ -9,6 +9,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* Custom styles if needed */
+        :root {
+            --bg-main: #ffffff;
+            --bg-header: #1a1a1a;
+            --bg-card: #f3f4f6;
+            --bg-accent: #e5e7eb;
+            --text-header: #ffffff;
+            --text-card: #000000;
+        }
+
         body {
             font-family: 'Fredoka', sans-serif;
         }
@@ -31,32 +40,86 @@
             transform: translate(2px, 2px);
             box-shadow: 2px 2px 0px 0px #000;
         }
+        
+        /* Theme classes */
+        .bg-theme-main { background-color: var(--bg-main); }
+        .bg-theme-header { background-color: var(--bg-header); }
+        .bg-theme-card { background-color: var(--bg-card); }
+        .bg-theme-accent { background-color: var(--bg-accent); }
+        .text-theme-header { color: var(--text-header); }
+        .text-theme-card { color: var(--text-card); }
     </style>
 </head>
-<body class="bg-[#6b8cff] text-gray-900 font-sans min-h-screen flex flex-col bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+<body class="bg-theme-main text-gray-900 font-sans min-h-screen flex flex-col bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] transition-colors duration-300">
 
     <!-- Header -->
-    <header class="bg-[#E70012] border-b-4 border-black sticky top-0 z-10 shadow-lg">
+    <header class="bg-theme-header border-b-4 border-black sticky top-0 z-10 shadow-lg transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="showGameList()">
                 <div class="bg-white p-2 border-4 border-black rounded-lg mario-shadow">
-                    <i data-lucide="gamepad-2" class="text-[#E70012] w-8 h-8"></i>
+                    <i data-lucide="gamepad-2" class="text-theme-card w-8 h-8"></i>
                 </div>
-                <span class="text-xl md:text-2xl font-bold text-white pixel-font tracking-tighter drop-shadow-md">
+                <span class="text-xl md:text-2xl font-bold text-theme-header pixel-font tracking-tighter drop-shadow-md">
                     Faisal's Unblocked Games
                 </span>
             </div>
 
-            <div class="relative hidden sm:block w-72" id="desktop-search">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i data-lucide="search" class="text-gray-500 w-5 h-5"></i>
+            <div class="flex items-center gap-4">
+                <div class="relative hidden sm:block w-72" id="desktop-search">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="text-gray-500 w-5 h-5"></i>
+                    </div>
+                    <input
+                        type="text"
+                        id="search-input-desktop"
+                        placeholder="Search games..."
+                        class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-theme-card placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
+                    />
                 </div>
-                <input
-                    type="text"
-                    id="search-input-desktop"
-                    placeholder="Search games..."
-                    class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-[#FFD700] placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
-                />
+
+                <!-- Theme Button -->
+                <div class="relative">
+                    <button onclick="toggleThemeMenu()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Change Theme">
+                        <i data-lucide="palette" class="w-6 h-6 text-black"></i>
+                    </button>
+                    
+                    <!-- Theme Dropdown -->
+                    <div id="theme-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 overflow-hidden">
+                        <div class="p-2 space-y-1">
+                            <button onclick="setTheme('mario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#E70012] border border-black"></div> Mario
+                            </button>
+                            <button onclick="setTheme('luigi')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#009E49] border border-black"></div> Luigi
+                            </button>
+                            <button onclick="setTheme('peach')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#FF69B4] border border-black"></div> Peach
+                            </button>
+                            <button onclick="setTheme('bowser')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#2C2C2C] border border-black"></div> Bowser
+                            </button>
+                            <button onclick="setTheme('wario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#FCD116] border border-black"></div> Wario
+                            </button>
+                            <button onclick="setTheme('classic')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-black"></div> Classic
+                            </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <button onclick="setTheme('red')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#dc2626] border border-black"></div> Red
+                            </button>
+                            <button onclick="setTheme('green')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#16a34a] border border-black"></div> Green
+                            </button>
+                            <button onclick="setTheme('blue')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#2563eb] border border-black"></div> Blue
+                            </button>
+                            <button onclick="setTheme('dark')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#111827] border border-black"></div> Dark
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -75,7 +138,7 @@
                         type="text"
                         id="search-input-mobile"
                         placeholder="Search games..."
-                        class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-[#FFD700] placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
+                        class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-theme-card placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                     />
                 </div>
             </div>
@@ -87,8 +150,8 @@
             </div>
             
             <div id="no-results" class="hidden text-center py-12 bg-white/90 border-4 border-black rounded-xl">
-                <p class="text-gray-800 text-xl font-bold">No games found matching "<span id="search-term" class="text-[#E70012]"></span>"</p>
-                <button onclick="clearSearch()" class="mt-6 bg-[#009E49] text-white px-6 py-3 rounded-xl border-4 border-black font-bold hover:bg-[#00b353] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                <p class="text-gray-800 text-xl font-bold">No games found matching "<span id="search-term" class="text-theme-card"></span>"</p>
+                <button onclick="clearSearch()" class="mt-6 bg-theme-accent text-white px-6 py-3 rounded-xl border-4 border-black font-bold hover:brightness-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                     TRY AGAIN
                 </button>
             </div>
@@ -97,7 +160,7 @@
         <!-- Game Player View -->
         <div id="game-player-view" class="hidden flex flex-col">
             <div class="flex items-center justify-between mb-6">
-                <button onclick="showGameList()" class="flex items-center gap-2 px-6 py-3 bg-[#FFD700] text-black border-4 border-black rounded-xl font-bold hover:bg-[#ffe033] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                <button onclick="showGameList()" class="flex items-center gap-2 px-6 py-3 bg-theme-card text-black border-4 border-black rounded-xl font-bold hover:brightness-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                     <i data-lucide="arrow-left" class="w-6 h-6"></i>
                     <span class="pixel-font text-sm">BACK</span>
                 </button>
@@ -122,8 +185,8 @@
                 </div>
                 
                 <!-- Controls Sidebar -->
-                <div id="game-controls" class="hidden w-full lg:w-72 bg-[#FFD700] border-4 border-black rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] h-fit">
-                    <h3 class="text-xl font-bold text-[#E70012] mb-4 pixel-font flex items-center gap-2">
+                <div id="game-controls" class="hidden w-full lg:w-72 bg-theme-card border-4 border-black rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] h-fit">
+                    <h3 class="text-xl font-bold text-theme-card mb-4 pixel-font flex items-center gap-2" style="color: var(--text-card)">
                         <i data-lucide="gamepad" class="w-6 h-6"></i>
                         CONTROLS
                     </h3>
@@ -133,7 +196,7 @@
                 </div>
             </div>
             
-            <div class="mt-6 p-6 bg-[#009E49] border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]">
+            <div class="mt-6 p-6 bg-theme-accent border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]">
                 <h2 class="text-xl font-bold text-white mb-3 pixel-font flex items-center gap-3">
                     <span class="bg-white text-black w-8 h-8 flex items-center justify-center rounded border-2 border-black text-sm">?</span>
                     About <span id="game-about-title"></span>
@@ -145,7 +208,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#E70012] border-t-4 border-black mt-auto">
+    <footer class="bg-theme-header border-t-4 border-black mt-auto transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <p class="text-center text-white font-bold pixel-font text-xs md:text-sm">
                 &copy; <span id="year"></span> Faisal's Unblocked Games.
