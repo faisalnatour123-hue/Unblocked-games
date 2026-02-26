@@ -102,9 +102,62 @@ function renderGames() {
     });
 }
 
+// Settings Logic
+function toggleSettings() {
+    const modal = document.getElementById('settings-modal');
+    modal.classList.toggle('hidden');
+}
+
+function saveSettings() {
+    const openNewTab = document.getElementById('setting-new-tab').checked;
+    const hideHeader = document.getElementById('setting-hide-header').checked;
+    
+    localStorage.setItem('settingNewTab', openNewTab);
+    localStorage.setItem('settingHideHeader', hideHeader);
+    
+    toggleSettings();
+    applySettings();
+}
+
+function applySettings() {
+    const hideHeader = localStorage.getItem('settingHideHeader') === 'true';
+    const header = document.querySelector('header');
+    
+    // Only hide header in game view if setting is enabled
+    if (hideHeader && !gamePlayerView.classList.contains('hidden')) {
+        header.classList.add('hidden');
+    } else {
+        header.classList.remove('hidden');
+    }
+}
+
+// Load Settings
+document.addEventListener('DOMContentLoaded', () => {
+    const newTab = localStorage.getItem('settingNewTab') === 'true';
+    const hideHeader = localStorage.getItem('settingHideHeader') === 'true';
+    
+    const newTabCheckbox = document.getElementById('setting-new-tab');
+    const hideHeaderCheckbox = document.getElementById('setting-hide-header');
+    
+    if (newTabCheckbox) newTabCheckbox.checked = newTab;
+    if (hideHeaderCheckbox) hideHeaderCheckbox.checked = hideHeader;
+    
+    applySettings();
+});
+
+// Update openGame to respect settings
 function openGame(game) {
+    const newTab = localStorage.getItem('settingNewTab') === 'true';
+    
+    if (newTab) {
+        window.open(game.url, '_blank');
+        return;
+    }
+
     gameListView.classList.add('hidden');
     gamePlayerView.classList.remove('hidden');
+    
+    applySettings(); // Re-apply settings (e.g. hide header)
     
     gameTitle.textContent = game.title;
     gameAboutTitle.textContent = game.title;
@@ -146,7 +199,12 @@ const themes = {
         '--bg-card': '#FFD700',
         '--bg-accent': '#009E49',
         '--text-header': '#ffffff',
-        '--text-card': '#E70012'
+        '--text-card': '#E70012',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     luigi: {
         '--bg-main': '#4B9CD3',
@@ -154,7 +212,12 @@ const themes = {
         '--bg-card': '#00158F',
         '--bg-accent': '#FFD700',
         '--text-header': '#ffffff',
-        '--text-card': '#ffffff'
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     peach: {
         '--bg-main': '#FFD1DC',
@@ -162,7 +225,12 @@ const themes = {
         '--bg-card': '#00FFFF',
         '--bg-accent': '#FF1493',
         '--text-header': '#ffffff',
-        '--text-card': '#FF1493'
+        '--text-card': '#FF1493',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     bowser: {
         '--bg-main': '#2C2C2C',
@@ -170,7 +238,12 @@ const themes = {
         '--bg-card': '#ff4400',
         '--bg-accent': '#550000',
         '--text-header': '#ff0000',
-        '--text-card': '#000000'
+        '--text-card': '#000000',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     wario: {
         '--bg-main': '#9C59D1',
@@ -178,7 +251,12 @@ const themes = {
         '--bg-card': '#9C59D1',
         '--bg-accent': '#000000',
         '--text-header': '#000000',
-        '--text-card': '#FCD116'
+        '--text-card': '#FCD116',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     classic: {
         '--bg-main': '#ffffff',
@@ -186,7 +264,12 @@ const themes = {
         '--bg-card': '#f3f4f6',
         '--bg-accent': '#e5e7eb',
         '--text-header': '#ffffff',
-        '--text-card': '#000000'
+        '--text-card': '#000000',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     red: {
         '--bg-main': '#fee2e2',
@@ -194,7 +277,12 @@ const themes = {
         '--bg-card': '#fecaca',
         '--bg-accent': '#991b1b',
         '--text-header': '#ffffff',
-        '--text-card': '#7f1d1d'
+        '--text-card': '#7f1d1d',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     green: {
         '--bg-main': '#dcfce7',
@@ -202,7 +290,12 @@ const themes = {
         '--bg-card': '#bbf7d0',
         '--bg-accent': '#14532d',
         '--text-header': '#ffffff',
-        '--text-card': '#14532d'
+        '--text-card': '#14532d',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     blue: {
         '--bg-main': '#dbeafe',
@@ -210,7 +303,12 @@ const themes = {
         '--bg-card': '#bfdbfe',
         '--bg-accent': '#1e3a8a',
         '--text-header': '#ffffff',
-        '--text-card': '#1e3a8a'
+        '--text-card': '#1e3a8a',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     },
     dark: {
         '--bg-main': '#111827',
@@ -218,7 +316,220 @@ const themes = {
         '--bg-card': '#1f2937',
         '--bg-accent': '#374151',
         '--text-header': '#ffffff',
-        '--text-card': '#ffffff'
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    basketball: {
+        '--bg-main': '#fff7ed',
+        '--bg-header': '#ea580c',
+        '--bg-card': '#fdba74',
+        '--bg-accent': '#9a3412',
+        '--text-header': '#ffffff',
+        '--text-card': '#431407',
+        '--bg-image': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='15' y='40' font-size='30'%3E🏀%3C/text%3E%3C/svg%3E\")",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    soccer: {
+        '--bg-main': '#f0fdf4',
+        '--bg-header': '#16a34a',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#15803d',
+        '--text-header': '#ffffff',
+        '--text-card': '#000000',
+        '--bg-image': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='15' y='40' font-size='30'%3E⚽%3C/text%3E%3C/svg%3E\")",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    tennis: {
+        '--bg-main': '#fefce8',
+        '--bg-header': '#84cc16',
+        '--bg-card': '#d9f99d',
+        '--bg-accent': '#3f6212',
+        '--text-header': '#ffffff',
+        '--text-card': '#1a2e05',
+        '--bg-image': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='15' y='40' font-size='30'%3E🎾%3C/text%3E%3C/svg%3E\")",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    jordan: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#000000',
+        '--bg-card': '#007a3d',
+        '--bg-accent': '#ce1126',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://flagcdn.com/jo.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    palestine: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#000000',
+        '--bg-card': '#009736',
+        '--bg-accent': '#ce1126',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://flagcdn.com/ps.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    usa: {
+        '--bg-main': '#f3f4f6',
+        '--bg-header': '#3c3b6e',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#b22234',
+        '--text-header': '#ffffff',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://flagcdn.com/us.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    japan: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#bc002d',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#bc002d',
+        '--text-header': '#ffffff',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://flagcdn.com/jp.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    south_korea: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#000000',
+        '--bg-card': '#0047a0',
+        '--bg-accent': '#cd2e3a',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://flagcdn.com/kr.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    china: {
+        '--bg-main': '#de2910',
+        '--bg-header': '#ffde00',
+        '--bg-card': '#de2910',
+        '--bg-accent': '#ffde00',
+        '--text-header': '#de2910',
+        '--text-card': '#ffde00',
+        '--bg-image': "url('https://flagcdn.com/cn.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    india: {
+        '--bg-main': '#ff9933',
+        '--bg-header': '#138808',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#000080',
+        '--text-header': '#ffffff',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://flagcdn.com/in.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    saudi_arabia: {
+        '--bg-main': '#165d31',
+        '--bg-header': '#165d31',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#165d31',
+        '--text-header': '#ffffff',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://flagcdn.com/sa.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    philippines: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#0038a8',
+        '--bg-card': '#ce1126',
+        '--bg-accent': '#fcd116',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://flagcdn.com/ph.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    vietnam: {
+        '--bg-main': '#da251d',
+        '--bg-header': '#ffff00',
+        '--bg-card': '#da251d',
+        '--bg-accent': '#ffff00',
+        '--text-header': '#da251d',
+        '--text-card': '#ffff00',
+        '--bg-image': "url('https://flagcdn.com/vn.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    thailand: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#2D2A4A',
+        '--bg-card': '#A51931',
+        '--bg-accent': '#F4F5F8',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://flagcdn.com/th.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    indonesia: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#FF0000',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#FF0000',
+        '--text-header': '#ffffff',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://flagcdn.com/id.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
+    },
+    malaysia: {
+        '--bg-main': '#ffffff',
+        '--bg-header': '#010066',
+        '--bg-card': '#CC0000',
+        '--bg-accent': '#FFCC00',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "url('https://flagcdn.com/my.svg')",
+        '--bg-size': 'cover',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
     }
 };
 
@@ -235,6 +546,11 @@ function setTheme(themeName) {
     for (const [property, value] of Object.entries(theme)) {
         root.style.setProperty(property, value);
     }
+    
+    // Ensure logo is always gamepad-2
+    const logoContainer = document.getElementById('logo-container');
+    logoContainer.innerHTML = `<i data-lucide="gamepad-2" class="text-theme-card w-8 h-8"></i>`;
+    lucide.createIcons();
 
     localStorage.setItem('selectedTheme', themeName);
     toggleThemeMenu();
@@ -261,6 +577,7 @@ if (savedTheme && themes[savedTheme]) {
 function showGameList() {
     gamePlayerView.classList.add('hidden');
     gameListView.classList.remove('hidden');
+    document.querySelector('header').classList.remove('hidden'); // Always show header in list view
     gameIframe.src = ''; // Stop game execution
 }
 

@@ -16,10 +16,20 @@
             --bg-accent: #e5e7eb;
             --text-header: #ffffff;
             --text-card: #000000;
+            --bg-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            --bg-size: auto;
+            --bg-repeat: repeat;
+            --bg-position: top left;
+            --bg-attachment: scroll;
         }
 
         body {
             font-family: 'Fredoka', sans-serif;
+            background-image: var(--bg-image);
+            background-size: var(--bg-size);
+            background-repeat: var(--bg-repeat);
+            background-position: var(--bg-position);
+            background-attachment: var(--bg-attachment);
         }
         h1, h2, .pixel-font {
             font-family: 'Press Start 2P', cursive;
@@ -50,14 +60,14 @@
         .text-theme-card { color: var(--text-card); }
     </style>
 </head>
-<body class="bg-theme-main text-gray-900 font-sans min-h-screen flex flex-col bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] transition-colors duration-300">
+<body class="bg-theme-main text-gray-900 font-sans min-h-screen flex flex-col transition-colors duration-300">
 
     <!-- Header -->
     <header class="bg-theme-header border-b-4 border-black sticky top-0 z-10 shadow-lg transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="showGameList()">
-                <div class="bg-white p-2 border-4 border-black rounded-lg mario-shadow">
-                    <i data-lucide="gamepad-2" class="text-theme-card w-8 h-8"></i>
+                <div class="bg-white p-2 border-4 border-black rounded-lg mario-shadow flex items-center justify-center w-12 h-12" id="logo-container">
+                    <i data-lucide="gamepad-2" class="text-theme-card w-8 h-8" id="app-logo"></i>
                 </div>
                 <span class="text-xl md:text-2xl font-bold text-theme-header pixel-font tracking-tighter drop-shadow-md">
                     Faisal's Unblocked Games
@@ -77,6 +87,11 @@
                     />
                 </div>
 
+                <!-- Settings Button -->
+                <button onclick="toggleSettings()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Settings">
+                    <i data-lucide="settings" class="w-6 h-6 text-black"></i>
+                </button>
+
                 <!-- Theme Button -->
                 <div class="relative">
                     <button onclick="toggleThemeMenu()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Change Theme">
@@ -84,7 +99,7 @@
                     </button>
                     
                     <!-- Theme Dropdown -->
-                    <div id="theme-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 overflow-hidden">
+                    <div id="theme-menu" class="hidden absolute right-0 mt-2 w-64 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 max-h-96 overflow-y-auto">
                         <div class="p-2 space-y-1">
                             <button onclick="setTheme('mario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-[#E70012] border border-black"></div> Mario
@@ -105,6 +120,61 @@
                                 <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-black"></div> Classic
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Sports</p>
+                            <button onclick="setTheme('basketball')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🏀</span> Basketball
+                            </button>
+                            <button onclick="setTheme('soccer')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">⚽</span> Soccer
+                            </button>
+                            <button onclick="setTheme('tennis')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🎾</span> Tennis
+                            </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Flags</p>
+                            <button onclick="setTheme('usa')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇺🇸</span> USA
+                            </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Asia</p>
+                            <button onclick="setTheme('jordan')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇯🇴</span> Jordan
+                            </button>
+                            <button onclick="setTheme('palestine')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇵🇸</span> Palestine
+                            </button>
+                            <button onclick="setTheme('japan')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇯🇵</span> Japan
+                            </button>
+                            <button onclick="setTheme('south_korea')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇰🇷</span> South Korea
+                            </button>
+                            <button onclick="setTheme('china')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇨🇳</span> China
+                            </button>
+                            <button onclick="setTheme('india')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇮🇳</span> India
+                            </button>
+                            <button onclick="setTheme('saudi_arabia')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇸🇦</span> Saudi Arabia
+                            </button>
+                            <button onclick="setTheme('philippines')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇵🇭</span> Philippines
+                            </button>
+                            <button onclick="setTheme('vietnam')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇻🇳</span> Vietnam
+                            </button>
+                            <button onclick="setTheme('thailand')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇹🇭</span> Thailand
+                            </button>
+                            <button onclick="setTheme('indonesia')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇮🇩</span> Indonesia
+                            </button>
+                            <button onclick="setTheme('malaysia')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <span class="text-lg">🇲🇾</span> Malaysia
+                            </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Colors</p>
                             <button onclick="setTheme('red')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-[#dc2626] border border-black"></div> Red
                             </button>
@@ -215,6 +285,49 @@
             </p>
         </div>
     </footer>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm">
+        <div class="bg-white border-4 border-black rounded-xl p-6 w-full max-w-md shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] m-4">
+            <div class="flex justify-between items-center mb-6 border-b-4 border-black pb-4">
+                <h2 class="text-2xl font-bold pixel-font">SETTINGS</h2>
+                <button onclick="toggleSettings()" class="hover:bg-gray-100 p-1 rounded">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Open in New Tab -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg">Open in New Tab</h3>
+                        <p class="text-sm text-gray-600">Launch games in a separate browser tab</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="setting-new-tab" class="sr-only peer">
+                        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-black border-2 border-black"></div>
+                    </label>
+                </div>
+
+                <!-- Hide Header in Game -->
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg">Focus Mode</h3>
+                        <p class="text-sm text-gray-600">Hide header while playing games</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="setting-hide-header" class="sr-only peer">
+                        <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-black border-2 border-black"></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end gap-4">
+                <button onclick="toggleSettings()" class="px-4 py-2 font-bold text-gray-600 hover:bg-gray-100 rounded-lg">CANCEL</button>
+                <button onclick="saveSettings()" class="px-6 py-2 bg-black text-white font-bold rounded-lg border-2 border-black hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all">SAVE</button>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
