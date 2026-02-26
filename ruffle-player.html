@@ -39,7 +39,10 @@
             unmuteOverlay: "hidden",
             backgroundColor: "#000000",
             letterbox: "on",
-            scale: "showAll"
+            scale: "showAll",
+            allowScriptAccess: true,
+            forceScale: true,
+            quality: "high"
         };
 
         window.addEventListener("load", (event) => {
@@ -50,9 +53,12 @@
             
             container.insertBefore(player, loading);
 
-            // Get SWF URL from query parameter
-            const urlParams = new URLSearchParams(window.location.search);
-            const swfUrl = urlParams.get('swf');
+            // Robustly get SWF URL (handling unencoded ampersands in the target URL)
+            const queryString = window.location.search;
+            let swfUrl = null;
+            if (queryString.includes('swf=')) {
+                swfUrl = queryString.split('swf=')[1];
+            }
 
             if (swfUrl) {
                 console.log("Loading SWF:", swfUrl);

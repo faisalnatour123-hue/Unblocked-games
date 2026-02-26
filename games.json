@@ -14,23 +14,6 @@
     "thumbnail": "https://images.hellokids.com/_uploads/_tiny_galerie/20190624/vign-rise-higher-hk-eyc_424.jpg"
   },
   {
-    "id": "super-mario-advance-2",
-    "title": "Super Mario Advance 2",
-    "description": "Super Mario World on GBA! Help Mario save Princess Toadstool from Bowser.",
-    "url": "https://sreekar617.github.io/GBA-gh-pages/launcher.html#supermarioadvance2",
-    "thumbnail": "https://i.ytimg.com/vi/-4mC3mKifus/maxresdefault.jpg",
-    "controls": [
-        {"key": "X", "action": "Jump"},
-        {"key": "Hold Z", "action": "Run"},
-        {"key": "S", "action": "Spin"},
-        {"key": "Arrow Up", "action": "Look Up"},
-        {"key": "Arrow Down", "action": "Crouch"},
-        {"key": "Arrow Right", "action": "Move Right"},
-        {"key": "Arrow Left", "action": "Move Left"},
-        {"key": "Enter", "action": "Start"}
-    ]
-  },
-  {
     "id": "soccer-random",
     "title": "Soccer Random",
     "description": "Score goals in this funny and random soccer game with ragdoll physics!",
@@ -42,6 +25,28 @@
     "title": "Five Nights at Freddy's 3",
     "description": "Thirty years after Freddy Fazbear's Pizza closed its doors, the events that took place there have become nothing more than a rumor and a childhood memory.",
     "url": "https://masonsunblockedgames.github.io/MasonsUnblockedGames/FNAF/3/index.html",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/b/b3/Five_Nights_at_Freddy%27s_3.jpg"
+    "thumbnail": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/header.jpg"
+  },
+  {
+    "id": "papas-pizzeria",
+    "title": "Papa's Pizzeria",
+    "description": "Help Papa Louie run his pizza shop! Bake, top, and serve pizzas to hungry customers in this classic time-management game.",
+    "url": "https://www.miniplay.com/embed/papas-pizzeria",
+    "thumbnail": "https://static.wikia.nocookie.net/flipline-studios/images/6/67/Papa%27s_Pizzeria_Icon.png/revision/latest?cb=20120807204938",
+    "customStyle": "top: -100px; height: calc(100% + 100px);"
+  },
+  {
+    "id": "super-mario-world",
+    "title": "Super Mario World",
+    "description": "The classic SNES adventure! Join Mario and Yoshi to save Princess Toadstool from Bowser in Dinosaur Land. (Note: Takes a few seconds to load)",
+    "url": "https://ext.minijuegos.com/smw/emujs/play.php?c=snes&f=Super%20Mario%20World%20(U).smc&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=205484&mp_game_uid=super-mario-world-online&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fsuper-mario-world-online&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/32/Super_Mario_World_Coverart.png"
+  },
+  {
+    "id": "fireboy-and-watergirl",
+    "title": "Fireboy and Watergirl",
+    "description": "Help Fireboy and Watergirl explore the Forest Temple. Solve puzzles and avoid hazards in this classic cooperative platformer!",
+    "url": "https://html5.gamedistribution.com/rvvASMiM/a55c9cc9c21e4fc683c8c6857f3d0c75/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Ffire-and-water&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy50d29wbGF5ZXJnYW1lcy5vcmcvZ2FtZS9maXJlLWFuZC13YXRlciIsInBhcmVudERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsInRvcERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsImhhc0ltcHJlc3Npb24iOmZhbHNlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE4In0%253D",
+    "thumbnail": "https://img.gamedistribution.com/a55c9cc9c21e4fc683c8c6857f3d0c75-512x512.jpeg"
   }
 ]

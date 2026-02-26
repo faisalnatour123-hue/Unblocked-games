@@ -111,6 +111,12 @@ function openGame(game) {
     gameDescription.textContent = game.description;
     gameIframe.src = game.url;
 
+    // Apply custom styles if present (e.g. for cropping)
+    gameIframe.style.cssText = '';
+    if (game.customStyle) {
+        gameIframe.style.cssText = game.customStyle;
+    }
+
     // Handle Controls
     const controlsContainer = document.getElementById('game-controls');
     const controlsList = document.getElementById('controls-list');
