@@ -87,7 +87,7 @@ function renderGames() {
                 <img 
                     src="${game.thumbnail}" 
                     alt="${game.title}"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-fill"
                     referrerPolicy="no-referrer"
                     onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}'"
                 />
@@ -538,7 +538,7 @@ function toggleThemeMenu() {
     menu.classList.toggle('hidden');
 }
 
-function setTheme(themeName) {
+function setTheme(themeName, toggleMenu = true) {
     const theme = themes[themeName];
     if (!theme) return;
 
@@ -553,7 +553,9 @@ function setTheme(themeName) {
     lucide.createIcons();
 
     localStorage.setItem('selectedTheme', themeName);
-    toggleThemeMenu();
+    if (toggleMenu) {
+        toggleThemeMenu();
+    }
 }
 
 // Close theme menu when clicking outside
@@ -569,9 +571,9 @@ document.addEventListener('click', (e) => {
 // Load saved theme
 const savedTheme = localStorage.getItem('selectedTheme');
 if (savedTheme && themes[savedTheme]) {
-    setTheme(savedTheme);
+    setTheme(savedTheme, false);
 } else {
-    setTheme('classic');
+    setTheme('classic', false);
 }
 
 function showGameList() {
