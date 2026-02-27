@@ -87,6 +87,19 @@
                     />
                 </div>
 
+                <!-- Sort Button -->
+                <div class="relative">
+                    <button onclick="toggleSortMenu()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Sort Games">
+                        <i data-lucide="arrow-up-down" class="w-6 h-6 text-black"></i>
+                    </button>
+                    <div id="sort-menu" class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-black hidden z-50">
+                        <button onclick="sortGames('newest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 first:rounded-t-lg">Newest First</button>
+                        <button onclick="sortGames('oldest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">Oldest First</button>
+                        <button onclick="sortGames('az'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">A-Z</button>
+                        <button onclick="sortGames('za'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 last:rounded-b-lg">Z-A</button>
+                    </div>
+                </div>
+
                 <!-- Settings Button -->
                 <button onclick="toggleSettings()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Settings">
                     <i data-lucide="settings" class="w-6 h-6 text-black"></i>
@@ -101,6 +114,29 @@
                     <!-- Theme Dropdown -->
                     <div id="theme-menu" class="hidden absolute right-0 mt-2 w-64 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 max-h-96 overflow-y-auto">
                         <div class="p-2 space-y-1">
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Dark Modes</p>
+                            <button onclick="setTheme('dark')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#111827] border border-black"></div> Dark
+                            </button>
+                            <button onclick="setTheme('obsidian')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#0b0c10] border border-black"></div> Obsidian
+                            </button>
+                            <button onclick="setTheme('abyss')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#050505] border border-black"></div> Abyss
+                            </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Night Modes</p>
+                            <button onclick="setTheme('midnight')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#191970] border border-black"></div> Midnight
+                            </button>
+                            <button onclick="setTheme('deepspace')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#000000] border border-black"></div> Deep Space
+                            </button>
+                            <button onclick="setTheme('neon_night')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <div class="w-4 h-4 rounded-full bg-[#2e003e] border border-black"></div> Neon Night
+                            </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Mario Bros</p>
                             <button onclick="setTheme('mario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-[#E70012] border border-black"></div> Mario
                             </button>
@@ -197,9 +233,6 @@
                             </button>
                             <button onclick="setTheme('blue')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-[#2563eb] border border-black"></div> Blue
-                            </button>
-                            <button onclick="setTheme('dark')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#111827] border border-black"></div> Dark
                             </button>
                         </div>
                     </div>

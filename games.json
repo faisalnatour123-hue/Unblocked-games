@@ -104,5 +104,12 @@
     "url": "https://ext.minijuegosgratis.com/papas-burgeria/index.html?g=papas-burgeria&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=16831&mp_game_uid=papa-s-burgueria&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fpapa-s-burgueria&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-4RmY1l3XfA-E4utZUWowBpYu1Pd-x6WNPw&s",
     "customStyle": "top: -100px; height: calc(100% + 100px);"
+  },
+  {
+    "id": "a-small-world-cup",
+    "title": "A Small World Cup",
+    "description": "A fun and chaotic physics-based soccer game where you control a ragdoll player to score goals.",
+    "thumbnail": "https://play-lh.googleusercontent.com/R47kNu-wEYMVnoo7rFOXiAHoBvW26KHps65Oi0S6zMF722x0LYqHJUiXRvB_xhsj0CM",
+    "url": "https://a-small-world-cup.gamestores.fun"
   }
 ]

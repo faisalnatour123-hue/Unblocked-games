@@ -34,7 +34,35 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Search listeners
     searchInputDesktop.addEventListener('input', handleSearch);
     searchInputMobile.addEventListener('input', handleSearch);
+
+    // Initial render
+    renderGames();
 });
+
+function toggleSortMenu() {
+    const menu = document.getElementById('sort-menu');
+    menu.classList.toggle('hidden');
+}
+
+function sortGames(method) {
+    switch(method) {
+        case 'az':
+            filteredGames.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+        case 'za':
+            filteredGames.sort((a, b) => b.title.localeCompare(a.title));
+            break;
+        case 'newest':
+            // Assuming the original 'games' array order is roughly chronological (newest at bottom)
+            // We need to reverse the original index order
+            filteredGames.sort((a, b) => games.indexOf(b) - games.indexOf(a));
+            break;
+        case 'oldest':
+            filteredGames.sort((a, b) => games.indexOf(a) - games.indexOf(b));
+            break;
+    }
+    renderGames();
+}
 
 function handleSearch(e) {
     const query = e.target.value.toLowerCase();
@@ -84,9 +112,10 @@ function renderGames() {
 
     filteredGames.forEach(game => {
         const card = document.createElement('div');
-        card.className = 'bg-white rounded-xl overflow-hidden cursor-pointer flex flex-col h-full mario-card';
         card.onclick = () => openGame(game);
         
+        // Default Grid
+        card.className = 'bg-white rounded-xl overflow-hidden cursor-pointer flex flex-col h-full mario-card';
         card.innerHTML = `
             <div class="h-40 w-full bg-theme-main relative overflow-hidden border-b-4 border-black">
                 <img 
@@ -582,6 +611,97 @@ const themes = {
         '--bg-accent': '#DF0024',
         '--text-header': '#FFFFFF',
         '--text-card': '#000000',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    cyberpunk: {
+        '--bg-main': '#000b1e',
+        '--bg-header': '#0f0f0f',
+        '--bg-card': '#050505',
+        '--bg-accent': '#fcee0a',
+        '--text-header': '#00ff9f',
+        '--text-card': '#00ff9f',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/carbon-fibre.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    pastel: {
+        '--bg-main': '#fff0f5',
+        '--bg-header': '#ffb7b2',
+        '--bg-card': '#ffffff',
+        '--bg-accent': '#c7ceea',
+        '--text-header': '#ffffff',
+        '--text-card': '#6d6d6d',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/diagmonds-light.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    midnight: {
+        '--bg-main': '#0a0a23',
+        '--bg-header': '#191970',
+        '--bg-card': '#1c1c3c',
+        '--bg-accent': '#483d8b',
+        '--text-header': '#e6e6fa',
+        '--text-card': '#e6e6fa',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/stardust.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    obsidian: {
+        '--bg-main': '#0b0c10',
+        '--bg-header': '#1f2833',
+        '--bg-card': '#1f2833',
+        '--bg-accent': '#66fcf1',
+        '--text-header': '#c5c6c7',
+        '--text-card': '#45a29e',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    deepspace: {
+        '--bg-main': '#000000',
+        '--bg-header': '#0f0f2d',
+        '--bg-card': '#1a1a2e',
+        '--bg-accent': '#e94560',
+        '--text-header': '#ffffff',
+        '--text-card': '#16213e',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/twinkle-twinkle.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    abyss: {
+        '--bg-main': '#050505',
+        '--bg-header': '#0a0a0a',
+        '--bg-card': '#141414',
+        '--bg-accent': '#333333',
+        '--text-header': '#a0a0a0',
+        '--text-card': '#808080',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    neon_night: {
+        '--bg-main': '#0d0221',
+        '--bg-header': '#261447',
+        '--bg-card': '#2e003e',
+        '--bg-accent': '#ff00cc',
+        '--text-header': '#00f7ff',
+        '--text-card': '#ff00cc',
         '--bg-image': 'none',
         '--bg-size': 'auto',
         '--bg-repeat': 'repeat',
