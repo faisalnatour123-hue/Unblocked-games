@@ -72,6 +72,11 @@ function clearSearch() {
 function renderGames() {
     gamesGrid.innerHTML = '';
     
+    if (filteredGames.length === 0 && games.length > 0) {
+        // Handled by search logic
+        return;
+    }
+
     if (games.length === 0) {
         gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">NO GAMES IN THIS CASTLE YET!</p></div>';
         return;
@@ -530,6 +535,58 @@ const themes = {
         '--bg-repeat': 'no-repeat',
         '--bg-position': 'center',
         '--bg-attachment': 'fixed'
+    },
+    nes: {
+        '--bg-main': '#202020',
+        '--bg-header': '#000000',
+        '--bg-card': '#E0E0E0',
+        '--bg-accent': '#FF0000',
+        '--text-header': '#FF0000',
+        '--text-card': '#000000',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    gameboy: {
+        '--bg-main': '#8BAC0F',
+        '--bg-header': '#306230',
+        '--bg-card': '#9BBC0F',
+        '--bg-accent': '#0F380F',
+        '--text-header': '#9BBC0F',
+        '--text-card': '#0F380F',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    snes: {
+        '--bg-main': '#B0A0C0',
+        '--bg-header': '#5D3FD3',
+        '--bg-card': '#E6E6E6',
+        '--bg-accent': '#8A6FC4',
+        '--text-header': '#FFFFFF',
+        '--text-card': '#5D3FD3',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    ps1: {
+        '--bg-main': '#B0B0B0',
+        '--bg-header': '#003087',
+        '--bg-card': '#D0D0D0',
+        '--bg-accent': '#DF0024',
+        '--text-header': '#FFFFFF',
+        '--text-card': '#000000',
+        '--bg-image': 'none',
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
     }
 };
 
