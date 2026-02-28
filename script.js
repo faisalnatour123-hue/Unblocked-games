@@ -270,6 +270,14 @@ function openGame(game) {
     gameListView.classList.add('hidden');
     gamePlayerView.classList.remove('hidden');
     
+    // Detect mobile and apply fit screen if on mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth <= 768 && 'ontouchstart' in window);
+    if (isMobile) {
+        document.body.classList.add('mobile-fit-active');
+    } else {
+        document.body.classList.remove('mobile-fit-active');
+    }
+    
     applySettings(); // Re-apply settings (e.g. hide header)
     
     gameTitle.textContent = game.title;
@@ -284,7 +292,6 @@ function openGame(game) {
     }
 
     // Mobile Controls Logic
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth <= 768 && 'ontouchstart' in window);
     const mobileControls = document.getElementById('mobile-controls');
     
     // Show controls only for specific games on mobile
@@ -985,6 +992,7 @@ if (savedTheme && themes[savedTheme]) {
 function showGameList() {
     gamePlayerView.classList.add('hidden');
     gameListView.classList.remove('hidden');
+    document.body.classList.remove('mobile-fit-active');
     document.querySelector('header').classList.remove('hidden'); // Always show header in list view
     gameIframe.src = ''; // Stop game execution
 }

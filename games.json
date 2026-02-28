@@ -111,5 +111,12 @@
     "description": "A fun and chaotic physics-based soccer game where you control a ragdoll player to score goals.",
     "thumbnail": "https://play-lh.googleusercontent.com/R47kNu-wEYMVnoo7rFOXiAHoBvW26KHps65Oi0S6zMF722x0LYqHJUiXRvB_xhsj0CM",
     "url": "https://a-small-world-cup.gamestores.fun"
+  },
+  {
+    "id": "slope",
+    "title": "Slope",
+    "description": "A 3D endless runner game where you control a ball rolling down a slope. Avoid obstacles and keep the ball on the track!",
+    "url": "https://kdata1.com/2020/05/slope/",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2HXY67NSbyMMpzlnSbBWUpcSmNMDM3CPoEA&s"
   }
 ]
