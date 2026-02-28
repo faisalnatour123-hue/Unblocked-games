@@ -74,6 +74,18 @@ function handleSearch(e) {
         searchInputDesktop.value = query;
     }
 
+    // City Boy Easter Egg
+    if (query === 'city boy') {
+        triggerCityBoy();
+        
+        // Clear search
+        searchInputDesktop.value = '';
+        searchInputMobile.value = '';
+        filteredGames = [...games];
+        renderGames();
+        return;
+    }
+
     filteredGames = games.filter(game => 
         game.title.toLowerCase().includes(query) ||
         game.description.toLowerCase().includes(query)
@@ -86,6 +98,16 @@ function handleSearch(e) {
         searchTermSpan.textContent = query;
     } else {
         noResults.classList.add('hidden');
+    }
+}
+
+function closeCityBoy() {
+    const easterEgg = document.getElementById('city-boy-easter-egg');
+    if (easterEgg) {
+        if (cityBoyPlayer && typeof cityBoyPlayer.stopVideo === 'function') {
+            cityBoyPlayer.stopVideo();
+        }
+        easterEgg.classList.add('hidden');
     }
 }
 
@@ -179,7 +201,64 @@ document.addEventListener('DOMContentLoaded', () => {
     applySettings();
 });
 
-// Update openGame to respect settings
+// YouTube Player API
+let cityBoyPlayer;
+// We don't need to do anything in onYouTubeIframeAPIReady if we init lazily,
+// but we need to know if API is ready.
+function onYouTubeIframeAPIReady() {
+    // API is ready
+}
+
+function triggerCityBoy() {
+    const easterEgg = document.getElementById('city-boy-easter-egg');
+    if (!easterEgg) return;
+    
+    easterEgg.classList.remove('hidden');
+
+    if (cityBoyPlayer) {
+        // Player already exists
+        cityBoyPlayer.seekTo(0);
+        cityBoyPlayer.playVideo();
+    } else {
+        // Initialize player
+        if (typeof YT === 'undefined' || !YT.Player) {
+            console.log("YouTube API not ready");
+            return; 
+        }
+        
+        cityBoyPlayer = new YT.Player('city-boy-video', {
+            height: '100%',
+            width: '100%',
+            videoId: 'WDkyggKE0E8',
+            playerVars: {
+                'playsinline': 1,
+                'controls': 1,
+                'autoplay': 1,
+                'rel': 0
+            },
+            events: {
+                'onReady': (event) => {
+                    event.target.playVideo();
+                },
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+}
+
+function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        closeCityBoy();
+    }
+}
+
+// Load YouTube API
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// Update openGame to respect settings and show mobile controls
 function openGame(game) {
     const newTab = localStorage.getItem('settingNewTab') === 'true';
     
@@ -204,6 +283,24 @@ function openGame(game) {
         gameIframe.style.cssText = game.customStyle;
     }
 
+    // Mobile Controls Logic
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth <= 768 && 'ontouchstart' in window);
+    const mobileControls = document.getElementById('mobile-controls');
+    
+    // Show controls only for specific games on mobile
+    const gamesWithControls = ['super-mario-world', 'sonic-cd'];
+    
+    if (mobileControls) {
+        if (isMobile && gamesWithControls.includes(game.id)) {
+            mobileControls.classList.remove('hidden');
+            mobileControls.classList.add('flex');
+            setupMobileControls();
+        } else {
+            mobileControls.classList.add('hidden');
+            mobileControls.classList.remove('flex');
+        }
+    }
+
     // Handle Controls
     const controlsContainer = document.getElementById('game-controls');
     const controlsList = document.getElementById('controls-list');
@@ -223,6 +320,73 @@ function openGame(game) {
     
     // Scroll to top
     window.scrollTo(0, 0);
+}
+
+function setupMobileControls() {
+    const buttons = document.querySelectorAll('#mobile-controls button');
+    const iframe = document.getElementById('game-iframe');
+    
+    buttons.forEach(btn => {
+        const key = btn.dataset.key;
+        
+        const handlePress = (e) => {
+            e.preventDefault();
+            btn.classList.add('scale-95', 'brightness-125');
+            simulateKeyEvent(iframe, key, 'keydown');
+        };
+        
+        const handleRelease = (e) => {
+            e.preventDefault();
+            btn.classList.remove('scale-95', 'brightness-125');
+            simulateKeyEvent(iframe, key, 'keyup');
+        };
+
+        btn.addEventListener('touchstart', handlePress, { passive: false });
+        btn.addEventListener('touchend', handleRelease, { passive: false });
+        btn.addEventListener('mousedown', handlePress);
+        btn.addEventListener('mouseup', handleRelease);
+        btn.addEventListener('mouseleave', handleRelease);
+    });
+}
+
+function simulateKeyEvent(target, key, type) {
+    // Mapping for specific games if needed
+    let code = key;
+    let keyCode = 0;
+    
+    switch(key) {
+        case 'ArrowUp': keyCode = 38; break;
+        case 'ArrowDown': keyCode = 40; break;
+        case 'ArrowLeft': keyCode = 37; break;
+        case 'ArrowRight': keyCode = 39; break;
+        case 'Enter': keyCode = 13; code = 'Enter'; break;
+        case 'z': keyCode = 90; code = 'KeyZ'; break;
+        case 'x': keyCode = 88; code = 'KeyX'; break;
+    }
+
+    // Try multiple ways to dispatch the event
+    const eventOptions = {
+        key: key,
+        code: code,
+        keyCode: keyCode,
+        which: keyCode,
+        bubbles: true,
+        cancelable: true,
+        view: window
+    };
+
+    // 1. Dispatch to window (some emulators listen here)
+    window.dispatchEvent(new KeyboardEvent(type, eventOptions));
+    
+    // 2. Dispatch to document
+    document.dispatchEvent(new KeyboardEvent(type, eventOptions));
+
+    // 3. Try to focus iframe and dispatch
+    if (document.activeElement !== target) {
+        target.focus();
+    }
+    
+    // Note: Direct dispatch to cross-origin iframe content is blocked by security policies.
 }
 
 // Themes Logic
@@ -274,6 +438,71 @@ const themes = {
         '--text-header': '#ff0000',
         '--text-card': '#000000',
         '--bg-image': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    naruto: {
+        '--bg-main': '#FF8C00',
+        '--bg-header': '#000000',
+        '--bg-card': '#1a1a1a',
+        '--bg-accent': '#FF4500',
+        '--text-header': '#FF8C00',
+        '--text-card': '#FFFFFF',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/clouds.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    one_piece: {
+        '--bg-main': '#00BFFF',
+        '--bg-header': '#DC143C',
+        '--bg-card': '#FFD700',
+        '--bg-accent': '#FFFFFF',
+        '--text-header': '#FFFFFF',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/nautical-leather.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    dragon_ball: {
+        '--bg-main': '#FF4500',
+        '--bg-header': '#00008B',
+        '--bg-card': '#FFFF00',
+        '--bg-accent': '#FFFFFF',
+        '--text-header': '#FFFF00',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/stardust.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    demon_slayer: {
+        '--bg-main': '#2E8B57',
+        '--bg-header': '#000000',
+        '--bg-card': '#FFFFFF',
+        '--bg-accent': '#2E8B57',
+        '--text-header': '#2E8B57',
+        '--text-card': '#000000',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/checkered-pattern.png')",
+        '--bg-size': 'auto',
+        '--bg-repeat': 'repeat',
+        '--bg-position': 'top left',
+        '--bg-attachment': 'scroll'
+    },
+    bleach: {
+        '--bg-main': '#000000',
+        '--bg-header': '#FFFFFF',
+        '--bg-card': '#000000',
+        '--bg-accent': '#FF4500',
+        '--text-header': '#000000',
+        '--text-card': '#FFFFFF',
+        '--bg-image': "url('https://www.transparenttextures.com/patterns/shattered-island.png')",
         '--bg-size': 'auto',
         '--bg-repeat': 'repeat',
         '--bg-position': 'top left',

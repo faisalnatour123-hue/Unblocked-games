@@ -152,6 +152,23 @@
                             <button onclick="setTheme('wario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-[#FCD116] border border-black"></div> Wario
                             </button>
+                            <div class="border-t border-gray-200 my-1"></div>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Anime</p>
+                            <button onclick="setTheme('naruto')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/128px-Naruto_logo.svg.png" class="w-6 h-6 object-contain" alt="Naruto" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#FF8C00] border border-black\'></div>'"> Naruto
+                            </button>
+                            <button onclick="setTheme('one_piece')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <img src="https://static.wikia.nocookie.net/onepiece/images/8/87/One_Piece_Anime_Logo.png/revision/latest?cb=20250813015436" class="w-6 h-6 object-contain" alt="One Piece" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#00BFFF] border border-black\'></div>'"> One Piece
+                            </button>
+                            <button onclick="setTheme('dragon_ball')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlAZAb25Y2kMY741duDSJ9xm4ARsSWijeSRA&s" class="w-6 h-6 object-contain" alt="Dragon Ball" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#FF4500] border border-black\'></div>'"> Dragon Ball
+                            </button>
+                            <button onclick="setTheme('demon_slayer')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqLSe0YxHCOtJikJKKAC5nm7NmlqwyXG1tWA&s" class="w-6 h-6 object-contain" alt="Demon Slayer" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#2E8B57] border border-black\'></div>'"> Demon Slayer
+                            </button>
+                            <button onclick="setTheme('bleach')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTFfcX6ww1AJvhRsWEF7rDFKijx0wtv_fZRQ&s" class="w-6 h-6 object-contain" alt="Bleach" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#000000] border border-white\'></div>'"> Bleach
+                            </button>
                             <button onclick="setTheme('classic')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-black"></div> Classic
                             </button>
@@ -374,6 +391,12 @@
                 <button onclick="saveSettings()" class="px-6 py-2 bg-black text-white font-bold rounded-lg border-2 border-black hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all">SAVE</button>
             </div>
         </div>
+    </div>
+
+    <!-- City Boy Easter Egg -->
+    <div id="city-boy-easter-egg" class="fixed inset-0 z-[100] hidden bg-black flex items-center justify-center">
+        <div id="city-boy-video" class="w-full h-full"></div>
+        <button onclick="closeCityBoy()" class="absolute top-4 right-4 bg-white text-black p-2 rounded-full font-bold z-[101]">CLOSE</button>
     </div>
 
     <script src="script.js"></script>
