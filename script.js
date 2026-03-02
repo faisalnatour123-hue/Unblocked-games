@@ -1,9 +1,13 @@
 // Game data will be fetched from games.json
 let games = [];
 let filteredGames = [];
+let favorites = new Set();
+let recentGames = [];
+let currentCategory = 'all';
 
 // DOM Elements
 const gamesGrid = document.getElementById('games-grid');
+const categoryFilters = document.getElementById('category-filters');
 const gameListView = document.getElementById('game-list-view');
 const gamePlayerView = document.getElementById('game-player-view');
 const searchInputDesktop = document.getElementById('search-input-desktop');
@@ -21,10 +25,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('year').textContent = new Date().getFullYear();
     lucide.createIcons();
 
+    // Load Favorites and Recent Games
+    loadUserData();
+
     try {
         const response = await fetch('games.json');
         games = await response.json();
         filteredGames = [...games];
+        
+        setupCategoryFilters();
         renderGames();
     } catch (error) {
         console.error('Error loading games:', error);
@@ -119,12 +128,145 @@ function clearSearch() {
     noResults.classList.add('hidden');
 }
 
+function loadUserData() {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+        favorites = new Set(JSON.parse(savedFavorites));
+    }
+
+    const savedRecent = localStorage.getItem('recentGames');
+    if (savedRecent) {
+        recentGames = JSON.parse(savedRecent);
+    }
+}
+
+function saveUserData() {
+    localStorage.setItem('favorites', JSON.stringify([...favorites]));
+    localStorage.setItem('recentGames', JSON.stringify(recentGames));
+}
+
+function toggleFavorite(e, gameId) {
+    e.stopPropagation(); // Prevent opening the game
+    if (favorites.has(gameId)) {
+        favorites.delete(gameId);
+    } else {
+        favorites.add(gameId);
+    }
+    saveUserData();
+    
+    // Re-render to update UI
+    if (currentCategory === 'favorites') {
+        filterGames('favorites');
+    } else {
+        renderGames();
+    }
+}
+
+function addToRecent(gameId) {
+    // Remove if already exists to move it to top
+    recentGames = recentGames.filter(id => id !== gameId);
+    // Add to front
+    recentGames.unshift(gameId);
+    // Keep max 4
+    if (recentGames.length > 4) {
+        recentGames.pop();
+    }
+    saveUserData();
+}
+
+function playRandomGame() {
+    if (games.length > 0) {
+        const randomGame = games[Math.floor(Math.random() * games.length)];
+        openGame(randomGame);
+    }
+}
+
+function setupCategoryFilters() {
+    const tags = new Set();
+    games.forEach(game => {
+        if (game.tags) {
+            game.tags.forEach(tag => tags.add(tag));
+        }
+    });
+
+    const sortedTags = [...tags].sort();
+    
+    sortedTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn px-6 py-2 bg-theme-card text-theme-card font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all whitespace-nowrap';
+        btn.textContent = tag.toUpperCase();
+        btn.dataset.category = tag;
+        btn.onclick = () => filterGames(tag);
+        categoryFilters.appendChild(btn);
+    });
+}
+
+function filterGames(category) {
+    currentCategory = category;
+    
+    // Update active button state
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.category === category) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+
+    if (category === 'all') {
+        filteredGames = [...games];
+    } else if (category === 'favorites') {
+        filteredGames = games.filter(game => favorites.has(game.id));
+    } else {
+        filteredGames = games.filter(game => game.tags && game.tags.includes(category));
+    }
+    
+    renderGames();
+}
+
+function createGameCard(game) {
+    const isFav = favorites.has(game.id);
+    const card = document.createElement('div');
+    card.onclick = () => openGame(game);
+    
+    card.className = 'bg-white rounded-xl overflow-hidden cursor-pointer flex flex-col h-full mario-card relative group';
+    card.innerHTML = `
+        <div class="h-40 w-full bg-theme-main relative overflow-hidden border-b-4 border-black">
+            <img 
+                src="${game.thumbnail}" 
+                alt="${game.title}"
+                class="w-full h-full object-fill"
+                referrerPolicy="no-referrer"
+                onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}'"
+            />
+            <button onclick="toggleFavorite(event, '${game.id}')" class="absolute top-2 right-2 p-2 bg-white border-2 border-black rounded-full shadow-md hover:scale-110 transition-transform z-10">
+                <i data-lucide="heart" class="w-5 h-5 ${isFav ? 'fill-red-500 text-red-500' : 'text-gray-400'}"></i>
+            </button>
+        </div>
+        <div class="p-4 flex-1 flex flex-col bg-theme-card transition-colors duration-300">
+            <h3 class="text-lg font-bold text-theme-card mb-1 pixel-font tracking-tight leading-tight" style="color: var(--text-card)">${game.title}</h3>
+            <p class="text-sm text-black font-bold line-clamp-2">${game.description}</p>
+            ${game.tags ? `<div class="mt-2 flex flex-wrap gap-1">
+                ${game.tags.slice(0, 2).map(tag => `<span class="text-[10px] uppercase px-1.5 py-0.5 bg-black/10 rounded border border-black/20">${tag}</span>`).join('')}
+            </div>` : ''}
+        </div>
+    `;
+    return card;
+}
+
 function renderGames() {
     gamesGrid.innerHTML = '';
     
     if (filteredGames.length === 0 && games.length > 0) {
-        // Handled by search logic
-        return;
+        if (currentCategory === 'favorites') {
+             gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">NO FAVORITES YET! CLICK THE HEART ICON TO ADD SOME.</p></div>';
+             return;
+        }
+        // Handled by search logic or empty category
+        if (currentCategory !== 'all') {
+             gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">NO GAMES FOUND IN THIS CATEGORY.</p></div>';
+             return;
+        }
     }
 
     if (games.length === 0) {
@@ -133,29 +275,9 @@ function renderGames() {
     }
 
     filteredGames.forEach(game => {
-        const card = document.createElement('div');
-        card.onclick = () => openGame(game);
-        
-        // Default Grid
-        card.className = 'bg-white rounded-xl overflow-hidden cursor-pointer flex flex-col h-full mario-card';
-        card.innerHTML = `
-            <div class="h-40 w-full bg-theme-main relative overflow-hidden border-b-4 border-black">
-                <img 
-                    src="${game.thumbnail}" 
-                    alt="${game.title}"
-                    class="w-full h-full object-fill"
-                    referrerPolicy="no-referrer"
-                    onerror="this.src='https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}'"
-                />
-            </div>
-            <div class="p-4 flex-1 flex flex-col bg-theme-card transition-colors duration-300">
-                <h3 class="text-lg font-bold text-theme-card mb-1 pixel-font tracking-tight leading-tight" style="color: var(--text-card)">${game.title}</h3>
-                <p class="text-sm text-black font-bold line-clamp-2">${game.description}</p>
-            </div>
-        `;
-        
-        gamesGrid.appendChild(card);
+        gamesGrid.appendChild(createGameCard(game));
     });
+    lucide.createIcons();
 }
 
 // Settings Logic
@@ -269,6 +391,9 @@ function openGame(game) {
 
     gameListView.classList.add('hidden');
     gamePlayerView.classList.remove('hidden');
+    
+    // Add to recent games
+    addToRecent(game.id);
     
     // Detect mobile and apply fit screen if on mobile
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || (window.innerWidth <= 768 && 'ontouchstart' in window);

@@ -4,28 +4,32 @@
     "title": "Basket Random",
     "description": "A funny and random basketball game. Score baskets with ragdoll physics!",
     "url": "https://j0n12.github.io/macvg/projects/basket-random/game.html",
-    "thumbnail": "https://imgs.crazygames.com/basket-random_16x9/20240617090207/basket-random_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop"
+    "thumbnail": "https://imgs.crazygames.com/basket-random_16x9/20240617090207/basket-random_16x9-cover?metadata=none&quality=100&width=1200&height=630&fit=crop",
+    "tags": ["Sports", "2 Player", "Funny"]
   },
   {
     "id": "rise-higher",
     "title": "Rise Higher",
     "description": "Protect the balloon as it rises higher into the sky!",
     "url": "https://ijnfem.github.io/seraph/games/risehigher/index.html",
-    "thumbnail": "https://images.hellokids.com/_uploads/_tiny_galerie/20190624/vign-rise-higher-hk-eyc_424.jpg"
+    "thumbnail": "https://images.hellokids.com/_uploads/_tiny_galerie/20190624/vign-rise-higher-hk-eyc_424.jpg",
+    "tags": ["Arcade", "Skill"]
   },
   {
     "id": "soccer-random",
     "title": "Soccer Random",
     "description": "Score goals in this funny and random soccer game with ragdoll physics!",
     "url": "https://gameinclassroom.github.io/soccer-random/",
-    "thumbnail": "https://basket-random.uk/wp-content/uploads/2025/12/play-soccer-random-online-for-free.webp"
+    "thumbnail": "https://basket-random.uk/wp-content/uploads/2025/12/play-soccer-random-online-for-free.webp",
+    "tags": ["Sports", "2 Player", "Funny"]
   },
   {
     "id": "fnaf-3",
     "title": "Five Nights at Freddy's 3",
     "description": "Thirty years after Freddy Fazbear's Pizza closed its doors, the events that took place there have become nothing more than a rumor and a childhood memory.",
     "url": "https://masonsunblockedgames.github.io/MasonsUnblockedGames/FNAF/3/index.html",
-    "thumbnail": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/header.jpg"
+    "thumbnail": "https://cdn.cloudflare.steamstatic.com/steam/apps/354140/header.jpg",
+    "tags": ["Horror", "Strategy"]
   },
   {
     "id": "papas-pizzeria",
@@ -33,7 +37,8 @@
     "description": "Help Papa Louie run his pizza shop! Bake, top, and serve pizzas to hungry customers in this classic time-management game.",
     "url": "https://www.miniplay.com/embed/papas-pizzeria",
     "thumbnail": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/377fd7d97c2b2f4fe25618ccffcc601b/papas-pizzeria.jfif",
-    "customStyle": "top: -100px; height: calc(100% + 100px);"
+    "customStyle": "top: -100px; height: calc(100% + 100px);",
+    "tags": ["Papa's", "Cooking", "Strategy"]
   },
   {
     "id": "super-mario-world",
@@ -47,21 +52,24 @@
       { "key": "Z", "action": "Spin Jump" },
       { "key": "S", "action": "Run / Pickup / Interact" },
       { "key": "Enter", "action": "Start" }
-    ]
+    ],
+    "tags": ["Retro", "Platformer", "Adventure"]
   },
   {
     "id": "fireboy-and-watergirl",
     "title": "Fireboy and Watergirl",
     "description": "Help Fireboy and Watergirl explore the Forest Temple. Solve puzzles and avoid hazards in this classic cooperative platformer!",
     "url": "https://html5.gamedistribution.com/rvvASMiM/a55c9cc9c21e4fc683c8c6857f3d0c75/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Ffire-and-water&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy50d29wbGF5ZXJnYW1lcy5vcmcvZ2FtZS9maXJlLWFuZC13YXRlciIsInBhcmVudERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsInRvcERvbWFpbiI6InR3b3BsYXllcmdhbWVzLm9yZyIsImhhc0ltcHJlc3Npb24iOmZhbHNlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE4In0%253D",
-    "thumbnail": "https://img.gamedistribution.com/a55c9cc9c21e4fc683c8c6857f3d0c75-512x512.jpeg"
+    "thumbnail": "https://img.gamedistribution.com/a55c9cc9c21e4fc683c8c6857f3d0c75-512x512.jpeg",
+    "tags": ["2 Player", "Platformer", "Puzzle"]
   },
   {
     "id": "volley-random",
     "title": "Volley Random",
     "description": "A funny and random volleyball game. Score points with ragdoll physics!",
     "url": "https://rycellgames.github.io/raw/games/volleyrandom/index.html",
-    "thumbnail": "https://static.keygames.com/2/115182/101048/1200x630/volley-random.webp"
+    "thumbnail": "https://static.keygames.com/2/115182/101048/1200x630/volley-random.webp",
+    "tags": ["Sports", "2 Player", "Funny"]
   },
   {
     "id": "papas-wingeria",
@@ -69,21 +77,24 @@
     "description": "Cook and serve delicious wings in Papa's Wingeria! Take orders, fry wings, toss them in sauce, and arrange them on platters for your hungry customers.",
     "url": "https://www.gameslol.net/data/waflash/index.php?g=1730&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=21747&mp_game_uid=papa-s-wingeria&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fpapa-s-wingeria&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
     "thumbnail": "https://img.poki-cdn.com/cdn-cgi/image/q=78,scq=50,width=1200,height=1200,fit=cover,f=png/0ef4d3c4bd35cc2e9b65f3da07448fc2/papas-wingeria.jfif",
-    "customStyle": "top: -100px; height: calc(100% + 100px);"
+    "customStyle": "top: -100px; height: calc(100% + 100px);",
+    "tags": ["Papa's", "Cooking", "Strategy"]
   },
   {
     "id": "tag",
     "title": "Tag",
     "description": "Play the classic game of Tag! Run, jump, and slide to avoid being 'it' in this fast-paced multiplayer game.",
     "url": "https://taggame.io/game/tag/?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=240976&mp_game_uid=tag&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Ftag&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4Qzt8ikS3CI6LKq3Ch2Ye8zeaEqDNpzCUA&s"
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu4Qzt8ikS3CI6LKq3Ch2Ye8zeaEqDNpzCUA&s",
+    "tags": ["Multiplayer", "Action", "Funny"]
   },
   {
     "id": "boxing-random",
     "title": "Boxing Random",
     "description": "Throw punches in this funny and random boxing game with ragdoll physics! Play against the CPU or a friend.",
     "url": "https://html5.gamedistribution.com/rvvASMiM/e8c02771085e4c8b9de3deda5e087e0e/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Fboxing-random&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy50d29wbGF5ZXJnYW1lcy5vcmcvZ2FtZS9ib3hpbmctcmFuZG9tIiwicGFyZW50RG9tYWluIjoidHdvcGxheWVyZ2FtZXMub3JnIiwidG9wRG9tYWluIjoidHdvcGxheWVyZ2FtZXMub3JnIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTgifQ%253D%253D",
-    "thumbnail": "https://img.gamedistribution.com/e8c02771085e4c8b9de3deda5e087e0e-512x512.jpeg"
+    "thumbnail": "https://img.gamedistribution.com/e8c02771085e4c8b9de3deda5e087e0e-512x512.jpeg",
+    "tags": ["Sports", "2 Player", "Funny"]
   },
   {
     "id": "sonic-cd",
@@ -95,7 +106,8 @@
       { "key": "Arrow Keys", "action": "Move" },
       { "key": "Z", "action": "Jump" },
       { "key": "Enter", "action": "Start" }
-    ]
+    ],
+    "tags": ["Retro", "Platformer", "Adventure"]
   },
   {
     "id": "papas-burgeria",
@@ -103,20 +115,23 @@
     "description": "Grill, stack, and serve burgers to all your wacky customers! Run the best burger shop in town.",
     "url": "https://ext.minijuegosgratis.com/papas-burgeria/index.html?g=papas-burgeria&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=16831&mp_game_uid=papa-s-burgueria&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fpapa-s-burgueria&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-4RmY1l3XfA-E4utZUWowBpYu1Pd-x6WNPw&s",
-    "customStyle": "top: -100px; height: calc(100% + 100px);"
+    "customStyle": "top: -100px; height: calc(100% + 100px);",
+    "tags": ["Papa's", "Cooking", "Strategy"]
   },
   {
     "id": "a-small-world-cup",
     "title": "A Small World Cup",
     "description": "A fun and chaotic physics-based soccer game where you control a ragdoll player to score goals.",
     "thumbnail": "https://play-lh.googleusercontent.com/R47kNu-wEYMVnoo7rFOXiAHoBvW26KHps65Oi0S6zMF722x0LYqHJUiXRvB_xhsj0CM",
-    "url": "https://a-small-world-cup.gamestores.fun"
+    "url": "https://a-small-world-cup.gamestores.fun",
+    "tags": ["Sports", "Funny", "Arcade"]
   },
   {
     "id": "slope",
     "title": "Slope",
     "description": "A 3D endless runner game where you control a ball rolling down a slope. Avoid obstacles and keep the ball on the track!",
     "url": "https://kdata1.com/2020/05/slope/",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2HXY67NSbyMMpzlnSbBWUpcSmNMDM3CPoEA&s"
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2HXY67NSbyMMpzlnSbBWUpcSmNMDM3CPoEA&s",
+    "tags": ["Arcade", "Skill", "3D"]
   }
 ]

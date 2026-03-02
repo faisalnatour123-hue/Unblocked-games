@@ -40,15 +40,33 @@
         .mario-card {
             border: 4px solid #000;
             box-shadow: 6px 6px 0px 0px #000;
-            transition: all 0.1s;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
         }
         .mario-card:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0px 0px #000;
+            transform: translateY(-5px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 12px 12px 0px 0px #000;
         }
         .mario-card:active {
             transform: translate(2px, 2px);
             box-shadow: 2px 2px 0px 0px #000;
+        }
+        
+        .filter-btn.active {
+            background-color: var(--bg-header);
+            color: var(--text-header);
+            transform: translateY(-4px);
+            box-shadow: 6px 6px 0px 0px #000;
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
         
         /* Theme classes */
@@ -177,18 +195,10 @@
                     />
                 </div>
 
-                <!-- Sort Button -->
-                <div class="relative">
-                    <button onclick="toggleSortMenu()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Sort Games">
-                        <i data-lucide="arrow-up-down" class="w-6 h-6 text-black"></i>
-                    </button>
-                    <div id="sort-menu" class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-black hidden z-50">
-                        <button onclick="sortGames('newest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 first:rounded-t-lg">Newest First</button>
-                        <button onclick="sortGames('oldest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">Oldest First</button>
-                        <button onclick="sortGames('az'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">A-Z</button>
-                        <button onclick="sortGames('za'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 last:rounded-b-lg">Z-A</button>
-                    </div>
-                </div>
+                <!-- Random Game Button -->
+                <button onclick="playRandomGame()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all mr-2" title="Play Random Game">
+                    <i data-lucide="dices" class="w-6 h-6 text-black"></i>
+                </button>
 
                 <!-- Settings Button -->
                 <button onclick="toggleSettings()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Settings">
@@ -353,6 +363,19 @@
         
         <!-- Game List View -->
         <div id="game-list-view">
+            <!-- Category Filters (Tags) - Moved to top -->
+            <div class="mb-8 overflow-x-auto pb-4 scrollbar-hide">
+                <div class="flex gap-3 min-w-max" id="category-filters">
+                    <button onclick="filterGames('all')" class="filter-btn active px-6 py-2 bg-theme-card text-theme-card font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all" data-category="all">
+                        ALL GAMES
+                    </button>
+                    <button onclick="filterGames('favorites')" class="filter-btn px-6 py-2 bg-white text-black font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-2" data-category="favorites">
+                        <i data-lucide="heart" class="w-4 h-4"></i> FAVORITES
+                    </button>
+                    <!-- Dynamic categories will be added here -->
+                </div>
+            </div>
+
             <div class="mb-8 sm:hidden">
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -368,6 +391,28 @@
             </div>
 
 
+
+            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Games will be injected here -->
+            </div>
+
+            <!-- Recently Played Section Removed -->
+
+            <!-- Sort Button Row -->
+            <div class="flex justify-end mb-4">
+                <div class="relative">
+                    <button onclick="toggleSortMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Sort Games">
+                        <i data-lucide="arrow-up-down" class="w-5 h-5 text-black"></i>
+                        <span class="text-sm">SORT</span>
+                    </button>
+                    <div id="sort-menu" class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-black hidden z-50">
+                        <button onclick="sortGames('newest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 first:rounded-t-lg">Newest First</button>
+                        <button onclick="sortGames('oldest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">Oldest First</button>
+                        <button onclick="sortGames('az'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">A-Z</button>
+                        <button onclick="sortGames('za'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 last:rounded-b-lg">Z-A</button>
+                    </div>
+                </div>
+            </div>
 
             <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 <!-- Games will be injected here -->
