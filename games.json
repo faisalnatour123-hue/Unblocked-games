@@ -133,5 +133,21 @@
     "url": "https://kdata1.com/2020/05/slope/",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2HXY67NSbyMMpzlnSbBWUpcSmNMDM3CPoEA&s",
     "tags": ["Arcade", "Skill", "3D"]
+  },
+  {
+    "id": "ragdoll-hit",
+    "title": "Ragdoll Hit",
+    "description": "A fun ragdoll fighting game where you battle opponents with physics-based combat.",
+    "url": "https://genizymath.github.io/iframe/44.html",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVhM-EI0zrO1RMbeCFkfC-4gJ5GfyWfCZqoQ&s",
+    "tags": ["Action", "Fighting", "Ragdoll"]
+  },
+  {
+    "id": "gunspin",
+    "title": "GunSpin",
+    "description": "Shoot your gun to spin it and fly as far as possible! Upgrade your weapons and reach new distances.",
+    "url": "https://23azostore.github.io/s/gunspin/",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvt6AgqS55L_VrEPIguBhwf3WGGcvWqRMkkr7bXSYdM6RsnSjV3tdIUA8EDlSc2kjsktA_w&s=10",
+    "tags": ["Action", "Arcade", "Shooter"]
   }
 ]

@@ -51,6 +51,14 @@
             transform: translate(2px, 2px);
             box-shadow: 2px 2px 0px 0px #000;
         }
+
+        /* Glassmorphism Styles */
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
         
         .filter-btn.active {
             background-color: var(--bg-header);
@@ -207,8 +215,9 @@
 
                 <!-- Theme Button -->
                 <div class="relative">
-                    <button onclick="toggleThemeMenu()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all" title="Change Theme">
+                    <button onclick="toggleThemeMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Change Theme">
                         <i data-lucide="palette" class="w-6 h-6 text-black"></i>
+                        <span class="text-sm">THEMES</span>
                     </button>
                     
                     <!-- Theme Dropdown -->
