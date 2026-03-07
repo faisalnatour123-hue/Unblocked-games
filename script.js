@@ -523,6 +523,35 @@ function simulateKeyEvent(target, key, type) {
 
 // Themes Logic
 const themes = {
+    minecraft: {
+        '--bg-main': '#121212',
+        '--bg-header': '#585858',
+        '--bg-card': '#c6c6c6',
+        '--bg-accent': '#373737',
+        '--text-header': '#ffffff',
+        '--text-card': '#3f3f3f',
+        
+        // Layer 1: Grass Block (Top 64px) - Green top, dirt sides
+        // Layer 2: Dirt Layer (192px)
+        // Layer 3: Bedrock Bottom (256px)
+        // Layer 4: Darkness Gradient
+        // Layer 5: Stone & Ores (Base)
+        '--bg-image': `
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 16 16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%235d4037'/%3E%3Crect width='16' height='3' fill='%234caf50'/%3E%3Crect x='0' y='3' width='2' height='2' fill='%234caf50'/%3E%3Crect x='3' y='3' width='1' height='1' fill='%234caf50'/%3E%3Crect x='5' y='3' width='2' height='3' fill='%234caf50'/%3E%3Crect x='8' y='3' width='1' height='1' fill='%234caf50'/%3E%3Crect x='10' y='3' width='2' height='2' fill='%234caf50'/%3E%3Crect x='13' y='3' width='1' height='2' fill='%234caf50'/%3E%3Crect x='15' y='3' width='1' height='1' fill='%234caf50'/%3E%3C/svg%3E"),
+            
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='192' viewBox='0 0 16 48' shape-rendering='crispEdges'%3E%3Crect width='16' height='48' fill='%235d4037'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%234e342e'/%3E%3Crect x='10' y='8' width='2' height='2' fill='%234e342e'/%3E%3Crect x='4' y='20' width='2' height='2' fill='%234e342e'/%3E%3Crect x='12' y='28' width='2' height='2' fill='%234e342e'/%3E%3Crect x='2' y='36' width='2' height='2' fill='%234e342e'/%3E%3Crect x='10' y='42' width='2' height='2' fill='%234e342e'/%3E%3C/svg%3E"),
+            
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='256' viewBox='0 0 16 64' shape-rendering='crispEdges'%3E%3Cdefs%3E%3Cpattern id='b' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect width='16' height='16' fill='%23050505'/%3E%3Cpath d='M2 2h2v2H2zM10 4h2v2h-2zM4 10h2v2H4zM12 12h2v2h-2z' fill='%23333'/%3E%3Cpath d='M1 13h1v1H1zM14 2h1v1h-1z' fill='%23222'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='16' height='64' fill='url(%23b)'/%3E%3C/svg%3E"),
+
+            linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.8) 100%),
+
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 32 32' shape-rendering='crispEdges'%3E%3Cdefs%3E%3Cpattern id='s' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect width='16' height='16' fill='%23757575'/%3E%3Crect x='2' y='2' width='2' height='2' fill='%23666'/%3E%3Crect x='10' y='8' width='2' height='2' fill='%23666'/%3E%3C/pattern%3E%3Cpattern id='c' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect width='16' height='16' fill='%23757575'/%3E%3Crect x='4' y='4' width='2' height='2' fill='%23000'/%3E%3Crect x='8' y='10' width='2' height='2' fill='%23000'/%3E%3Crect x='12' y='2' width='2' height='2' fill='%23000'/%3E%3C/pattern%3E%3Cpattern id='i' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect width='16' height='16' fill='%23757575'/%3E%3Crect x='3' y='5' width='2' height='2' fill='%23d8af97'/%3E%3Crect x='9' y='11' width='2' height='2' fill='%23d8af97'/%3E%3C/pattern%3E%3Cpattern id='g' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect width='16' height='16' fill='%23757575'/%3E%3Crect x='5' y='3' width='2' height='2' fill='%23ffd700'/%3E%3Crect x='11' y='9' width='2' height='2' fill='%23ffd700'/%3E%3C/pattern%3E%3Cpattern id='d' width='16' height='16' patternUnits='userSpaceOnUse'%3E%3Crect width='16' height='16' fill='%23757575'/%3E%3Crect x='6' y='6' width='4' height='4' fill='%2300bcd4'/%3E%3Crect x='4' y='10' width='2' height='2' fill='%2300bcd4'/%3E%3Crect x='10' y='3' width='2' height='2' fill='%2300bcd4'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='32' height='32' fill='url(%23s)'/%3E%3Crect x='0' y='0' width='16' height='16' fill='url(%23c)'/%3E%3Crect x='16' y='16' width='16' height='16' fill='url(%23i)'/%3E%3Crect x='16' y='0' width='16' height='16' fill='url(%23s)'/%3E%3Crect x='0' y='16' width='16' height='16' fill='url(%23g)' opacity='0.5'/%3E%3Crect x='16' y='16' width='16' height='16' fill='url(%23d)' opacity='0.5'/%3E%3C/svg%3E")
+        `,
+        '--bg-size': '64px 64px, 64px 192px, 64px 256px, 100% 100%, 128px 128px',
+        '--bg-repeat': 'repeat-x, repeat-x, repeat-x, no-repeat, repeat',
+        '--bg-position': 'top left, 0 64px, bottom left, top left, top left',
+        '--bg-attachment': 'scroll, scroll, scroll, scroll, scroll'
+    },
     mario: {
         '--bg-main': '#6b8cff',
         '--bg-header': '#E70012',
@@ -1079,6 +1108,11 @@ function toggleThemeMenu() {
 function setTheme(themeName, toggleMenu = true) {
     const theme = themes[themeName];
     if (!theme) return;
+
+    // Remove old theme class
+    document.body.className = document.body.className.replace(/theme-\w+/g, '');
+    // Add new theme class
+    document.body.classList.add(`theme-${themeName}`);
 
     const root = document.documentElement;
     for (const [property, value] of Object.entries(theme)) {
