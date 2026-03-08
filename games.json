@@ -149,5 +149,13 @@
     "url": "https://23azostore.github.io/s/gunspin/",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDvt6AgqS55L_VrEPIguBhwf3WGGcvWqRMkkr7bXSYdM6RsnSjV3tdIUA8EDlSc2kjsktA_w&s=10",
     "tags": ["Action", "Arcade", "Shooter"]
+  },
+  {
+    "id": "basketball-stars-2026",
+    "title": "Basketball Stars 2026",
+    "description": "Play Basketball Stars! Dribble, shoot, and score in this fast-paced basketball game.",
+    "url": "https://j0n12.github.io/macvg/projects/basketball-stars/game.html",
+    "thumbnail": "https://store-images.s-microsoft.com/image/apps.65031.13857463489719805.7c20a8ed-8982-4c00-8cdb-ba641957b291.2737ebc0-3a45-45a1-8538-11dc2edfbeab",
+    "tags": ["Sports", "Basketball", "Multiplayer"]
   }
 ]

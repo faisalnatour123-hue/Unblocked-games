@@ -224,6 +224,44 @@ function filterGames(category) {
     renderGames();
 }
 
+function openGameInfo(e, gameId) {
+    e.stopPropagation();
+    const game = games.find(g => g.id === gameId);
+    if (!game) return;
+
+    document.getElementById('modal-game-title').textContent = game.title;
+    document.getElementById('modal-game-description').textContent = game.description;
+    
+    const thumb = document.getElementById('modal-game-thumbnail');
+    thumb.src = game.thumbnail;
+    thumb.onerror = () => {
+        thumb.src = `https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}`;
+    };
+
+    const tagsContainer = document.getElementById('modal-game-tags');
+    tagsContainer.innerHTML = '';
+    if (game.tags) {
+        game.tags.forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'text-xs uppercase px-2 py-1 bg-black/10 rounded border border-black/20 font-bold';
+            span.textContent = tag;
+            tagsContainer.appendChild(span);
+        });
+    }
+
+    const playBtn = document.getElementById('modal-play-btn');
+    playBtn.onclick = () => {
+        closeGameInfo();
+        openGame(game);
+    };
+
+    document.getElementById('game-info-modal').classList.remove('hidden');
+}
+
+function closeGameInfo() {
+    document.getElementById('game-info-modal').classList.add('hidden');
+}
+
 function createGameCard(game) {
     const isFav = favorites.has(game.id);
     const card = document.createElement('div');
@@ -245,10 +283,12 @@ function createGameCard(game) {
         </div>
         <div class="p-4 flex-1 flex flex-col bg-theme-card transition-colors duration-300">
             <h3 class="text-lg font-bold text-theme-card mb-1 pixel-font tracking-tight leading-tight" style="color: var(--text-card)">${game.title}</h3>
-            <p class="text-sm text-black font-bold line-clamp-2">${game.description}</p>
             ${game.tags ? `<div class="mt-2 flex flex-wrap gap-1">
                 ${game.tags.slice(0, 2).map(tag => `<span class="text-[10px] uppercase px-1.5 py-0.5 bg-black/10 rounded border border-black/20">${tag}</span>`).join('')}
             </div>` : ''}
+            <button onclick="openGameInfo(event, '${game.id}')" class="mt-3 w-full py-2 bg-blue-100 text-blue-800 border-2 border-blue-800 rounded-lg font-bold hover:bg-blue-200 transition-colors flex items-center justify-center gap-2 text-sm">
+                <i data-lucide="info" class="w-4 h-4"></i> MORE INFO
+            </button>
         </div>
     `;
     return card;
