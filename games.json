@@ -157,5 +157,22 @@
     "url": "https://j0n12.github.io/macvg/projects/basketball-stars/game.html",
     "thumbnail": "https://store-images.s-microsoft.com/image/apps.65031.13857463489719805.7c20a8ed-8982-4c00-8cdb-ba641957b291.2737ebc0-3a45-45a1-8538-11dc2edfbeab",
     "tags": ["Sports", "Basketball", "Multiplayer"]
+  },
+  {
+    "id": "minecraft",
+    "title": "Minecraft",
+    "description": "Explore infinite worlds and build everything from the simplest of homes to the grandest of castles in this classic sandbox game.",
+    "url": "https://db.quackprep.org/html/minecraft/index.html",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png",
+    "tags": ["Sandbox", "Adventure", "3D"]
+  },
+  {
+    "id": "race-survival-arena-king",
+    "title": "Race Survival: Arena King",
+    "description": "Race, survive, and dominate the arena in this intense car combat game!",
+    "url": "https://db.quackprep.org/html/race_survival_arena_king/index.html",
+    "thumbnail": "https://images.unsplash.com/photo-1511994298241-608e28f14fde?auto=format&fit=crop&w=600&q=80",
+    "tags": ["Racing", "Action", "3D"],
+    "warningMessage": "The game is russian in default, theres a button on top of the game to change the language!"
   }
 ]

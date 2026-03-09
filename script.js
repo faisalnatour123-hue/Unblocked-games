@@ -4,6 +4,433 @@ let filteredGames = [];
 let favorites = new Set();
 let recentGames = [];
 let currentCategory = 'all';
+let currentLanguage = 'en';
+
+const translations = {
+    en: {
+        site_title: "Faisal's Unblocked Games",
+        themes: "THEMES",
+        warning_russian: "The game is russian in default, theres a button on top of the game to change the language!",
+        search_placeholder: "Search games...",
+        all_games: "ALL GAMES",
+        favorites: "FAVORITES",
+        sort: "SORT",
+        sort_newest: "Newest First",
+        sort_oldest: "Oldest First",
+        sort_az: "A-Z",
+        sort_za: "Z-A",
+        no_games_found: "No games found matching",
+        try_again: "TRY AGAIN",
+        back: "BACK",
+        controls: "CONTROLS",
+        about: "About",
+        settings: "SETTINGS",
+        open_new_tab: "Open in New Tab",
+        open_new_tab_desc: "Launch games in a separate browser tab",
+        focus_mode: "Focus Mode",
+        focus_mode_desc: "Hide header while playing games",
+        cancel: "CANCEL",
+        save: "SAVE",
+        close: "CLOSE",
+        description: "DESCRIPTION",
+        tags: "TAGS",
+        play_now: "PLAY NOW",
+        more_info: "MORE INFO",
+        no_favorites: "NO FAVORITES YET! CLICK THE HEART ICON TO ADD SOME.",
+        no_category: "NO GAMES FOUND IN THIS CATEGORY.",
+        no_games: "NO GAMES IN THIS CASTLE YET!",
+        theme_featured: "Featured", theme_minecraft: "Minecraft", theme_dark_modes: "Dark Modes", theme_dark: "Dark", theme_obsidian: "Obsidian", theme_abyss: "Abyss", theme_night_modes: "Night Modes", theme_midnight: "Midnight", theme_deepspace: "Deep Space", theme_neon_night: "Neon Night", theme_mario_bros: "Mario Bros", theme_mario: "Mario", theme_luigi: "Luigi", theme_peach: "Peach", theme_bowser: "Bowser", theme_wario: "Wario", theme_anime: "Anime", theme_naruto: "Naruto", theme_onepiece: "One Piece", theme_dragon_ball: "Dragon Ball", theme_demon_slayer: "Demon Slayer", theme_bleach: "Bleach", theme_classic: "Classic", theme_classic_light: "Classic Light", theme_sports: "Sports", theme_basketball: "Basketball", theme_soccer: "Soccer", theme_tennis: "Tennis", theme_flags: "Flags", theme_usa: "USA", theme_asia: "Asia", theme_jordan: "Jordan", theme_palestine: "Palestine", theme_japan: "Japan", theme_south_korea: "South Korea"
+    },
+    es: {
+        site_title: "Juegos Desbloqueados de Faisal",
+        themes: "TEMAS",
+        warning_russian: "El juego está en ruso por defecto, ¡hay un botón en la parte superior para cambiar el idioma!",
+        search_placeholder: "Buscar juegos...",
+        all_games: "TODOS LOS JUEGOS",
+        favorites: "FAVORITOS",
+        sort: "ORDENAR",
+        sort_newest: "Más nuevos",
+        sort_oldest: "Más antiguos",
+        sort_az: "A-Z",
+        sort_za: "Z-A",
+        no_games_found: "No se encontraron juegos para",
+        try_again: "INTENTAR DE NUEVO",
+        back: "VOLVER",
+        controls: "CONTROLES",
+        about: "Acerca de",
+        settings: "AJUSTES",
+        open_new_tab: "Abrir en nueva pestaña",
+        open_new_tab_desc: "Lanzar juegos en una pestaña separada",
+        focus_mode: "Modo Enfoque",
+        focus_mode_desc: "Ocultar encabezado al jugar",
+        cancel: "CANCELAR",
+        save: "GUARDAR",
+        close: "CERRAR",
+        description: "DESCRIPCIÓN",
+        tags: "ETIQUETAS",
+        play_now: "JUGAR AHORA",
+        more_info: "MÁS INFO",
+        no_favorites: "¡AÚN NO HAY FAVORITOS! HAZ CLIC EN EL CORAZÓN PARA AÑADIR.",
+        no_category: "NO SE ENCONTRARON JUEGOS EN ESTA CATEGORÍA.",
+        no_games: "¡AÚN NO HAY JUEGOS EN ESTE CASTILLO!",
+        theme_featured: "Destacado", theme_minecraft: "Minecraft", theme_dark_modes: "Modos Oscuros", theme_dark: "Oscuro", theme_obsidian: "Obsidiana", theme_abyss: "Abismo", theme_night_modes: "Modos Nocturnos", theme_midnight: "Medianoche", theme_deepspace: "Espacio Profundo", theme_neon_night: "Noche de Neón", theme_mario_bros: "Mario Bros", theme_mario: "Mario", theme_luigi: "Luigi", theme_peach: "Peach", theme_bowser: "Bowser", theme_wario: "Wario", theme_anime: "Anime", theme_naruto: "Naruto", theme_onepiece: "One Piece", theme_dragon_ball: "Dragon Ball", theme_demon_slayer: "Demon Slayer", theme_bleach: "Bleach", theme_classic: "Clásico", theme_classic_light: "Clásico Claro", theme_sports: "Deportes", theme_basketball: "Baloncesto", theme_soccer: "Fútbol", theme_tennis: "Tenis", theme_flags: "Banderas", theme_usa: "EE. UU.", theme_asia: "Asia", theme_jordan: "Jordania", theme_palestine: "Palestina", theme_japan: "Japón", theme_south_korea: "Corea del Sur"
+    },
+    fr: {
+        site_title: "Jeux Débloqués de Faisal",
+        themes: "THÈMES",
+        warning_russian: "Le jeu est en russe par défaut, il y a un bouton en haut pour changer la langue !",
+        search_placeholder: "Rechercher des jeux...",
+        all_games: "TOUS LES JEUX",
+        favorites: "FAVORIS",
+        sort: "TRIER",
+        sort_newest: "Plus récents",
+        sort_oldest: "Plus anciens",
+        sort_az: "A-Z",
+        sort_za: "Z-A",
+        no_games_found: "Aucun jeu trouvé pour",
+        try_again: "RÉESSAYER",
+        back: "RETOUR",
+        controls: "CONTRÔLES",
+        about: "À propos de",
+        settings: "PARAMÈTRES",
+        open_new_tab: "Ouvrir dans un nouvel onglet",
+        open_new_tab_desc: "Lancer les jeux dans un onglet séparé",
+        focus_mode: "Mode Focus",
+        focus_mode_desc: "Masquer l'en-tête pendant le jeu",
+        cancel: "ANNULER",
+        save: "ENREGISTRER",
+        close: "FERMER",
+        description: "DESCRIPTION",
+        tags: "TAGS",
+        play_now: "JOUER",
+        more_info: "PLUS D'INFOS",
+        no_favorites: "AUCUN FAVORI ! CLIQUEZ SUR LE CŒUR POUR EN AJOUTER.",
+        no_category: "AUCUN JEU TROUVÉ DANS CETTE CATÉGORIE.",
+        no_games: "AUCUN JEU DANS CE CHÂTEAU POUR LE MOMENT !",
+        theme_featured: "En Vedette", theme_minecraft: "Minecraft", theme_dark_modes: "Modes Sombres", theme_dark: "Sombre", theme_obsidian: "Obsidienne", theme_abyss: "Abysse", theme_night_modes: "Modes Nuit", theme_midnight: "Minuit", theme_deepspace: "Espace Profond", theme_neon_night: "Nuit Néon", theme_mario_bros: "Mario Bros", theme_mario: "Mario", theme_luigi: "Luigi", theme_peach: "Peach", theme_bowser: "Bowser", theme_wario: "Wario", theme_anime: "Anime", theme_naruto: "Naruto", theme_onepiece: "One Piece", theme_dragon_ball: "Dragon Ball", theme_demon_slayer: "Demon Slayer", theme_bleach: "Bleach", theme_classic: "Classique", theme_classic_light: "Classique Clair", theme_sports: "Sports", theme_basketball: "Basket", theme_soccer: "Football", theme_tennis: "Tennis", theme_flags: "Drapeaux", theme_usa: "États-Unis", theme_asia: "Asie", theme_jordan: "Jordanie", theme_palestine: "Palestine", theme_japan: "Japon", theme_south_korea: "Corée du Sud"
+    },
+    ru: {
+        site_title: "Игры Фейсала",
+        themes: "ТЕМЫ",
+        warning_russian: "Игра по умолчанию на русском языке, наверху есть кнопка для изменения языка!",
+        search_placeholder: "Поиск игр...",
+        all_games: "ВСЕ ИГРЫ",
+        favorites: "ИЗБРАННОЕ",
+        sort: "СОРТИРОВКА",
+        sort_newest: "Сначала новые",
+        sort_oldest: "Сначала старые",
+        sort_az: "А-Я",
+        sort_za: "Я-А",
+        no_games_found: "Игры не найдены для",
+        try_again: "ПОПРОБОВАТЬ СНОВА",
+        back: "НАЗАД",
+        controls: "УПРАВЛЕНИЕ",
+        about: "Об игре",
+        settings: "НАСТРОЙКИ",
+        open_new_tab: "Открыть в новой вкладке",
+        open_new_tab_desc: "Запускать игры в отдельной вкладке",
+        focus_mode: "Режим фокусировки",
+        focus_mode_desc: "Скрыть заголовок во время игры",
+        cancel: "ОТМЕНА",
+        save: "СОХРАНИТЬ",
+        close: "ЗАКРЫТЬ",
+        description: "ОПИСАНИЕ",
+        tags: "ТЕГИ",
+        play_now: "ИГРАТЬ",
+        more_info: "ПОДРОБНЕЕ",
+        no_favorites: "НЕТ ИЗБРАННЫХ! НАЖМИТЕ НА СЕРДЕЧКО, ЧТОБЫ ДОБАВИТЬ.",
+        no_category: "В ЭТОЙ КАТЕГОРИИ ИГР НЕ НАЙДЕНО.",
+        no_games: "В ЭТОМ ЗАМКЕ ПОКА НЕТ ИГР!",
+        theme_featured: "Рекомендуемые", theme_minecraft: "Minecraft", theme_dark_modes: "Темные Режимы", theme_dark: "Темный", theme_obsidian: "Обсидиан", theme_abyss: "Бездна", theme_night_modes: "Ночные Режимы", theme_midnight: "Полночь", theme_deepspace: "Глубокий Космос", theme_neon_night: "Неоновая Ночь", theme_mario_bros: "Марио Брос", theme_mario: "Марио", theme_luigi: "Луиджи", theme_peach: "Пич", theme_bowser: "Боузер", theme_wario: "Варио", theme_anime: "Аниме", theme_naruto: "Наруто", theme_onepiece: "Ван Пис", theme_dragon_ball: "Драгонболл", theme_demon_slayer: "Клинок, рассекающий демонов", theme_bleach: "Блич", theme_classic: "Классика", theme_classic_light: "Классический Светлый", theme_sports: "Спорт", theme_basketball: "Баскетбол", theme_soccer: "Футбол", theme_tennis: "Теннис", theme_flags: "Флаги", theme_usa: "США", theme_asia: "Азия", theme_jordan: "Иордания", theme_palestine: "Палестина", theme_japan: "Япония", theme_south_korea: "Южная Корея"
+    },
+    ar: {
+        site_title: "ألعاب فيصل غير المحجوبة",
+        themes: "السمات",
+        warning_russian: "اللعبة باللغة الروسية افتراضيًا، يوجد زر أعلى اللعبة لتغيير اللغة!",
+        search_placeholder: "البحث عن ألعاب...",
+        all_games: "كل الألعاب",
+        favorites: "المفضلة",
+        sort: "ترتيب",
+        sort_newest: "الأحدث أولاً",
+        sort_oldest: "الأقدم أولاً",
+        sort_az: "أ-ي",
+        sort_za: "ي-أ",
+        no_games_found: "لم يتم العثور على ألعاب تطابق",
+        try_again: "حاول مرة أخرى",
+        back: "رجوع",
+        controls: "التحكم",
+        about: "حول",
+        settings: "الإعدادات",
+        open_new_tab: "فتح في علامة تبويب جديدة",
+        open_new_tab_desc: "تشغيل الألعاب في علامة تبويب منفصلة",
+        focus_mode: "وضع التركيز",
+        focus_mode_desc: "إخفاء الشريط العلوي أثناء اللعب",
+        cancel: "إلغاء",
+        save: "حفظ",
+        close: "إغلاق",
+        description: "الوصف",
+        tags: "العلامات",
+        play_now: "العب الآن",
+        more_info: "مزيد من المعلومات",
+        no_favorites: "لا توجد مفضلة بعد! انقر على أيقونة القلب للإضافة.",
+        no_category: "لم يتم العثور على ألعاب في هذه الفئة.",
+        no_games: "لا توجد ألعاب في هذه القلعة بعد!",
+        theme_featured: "مميز", theme_minecraft: "ماين كرافت", theme_dark_modes: "أوضاع داكنة", theme_dark: "داكن", theme_obsidian: "سبج", theme_abyss: "هاوية", theme_night_modes: "أوضاع ليلية", theme_midnight: "منتصف الليل", theme_deepspace: "فضاء عميق", theme_neon_night: "ليلة نيون", theme_mario_bros: "ماريو بروس", theme_mario: "ماريو", theme_luigi: "لويجي", theme_peach: "بيتش", theme_bowser: "باوزر", theme_wario: "واريو", theme_anime: "أنمي", theme_naruto: "ناروتو", theme_onepiece: "ون بيس", theme_dragon_ball: "دراغون بول", theme_demon_slayer: "قاتل الشياطين", theme_bleach: "بليتش", theme_classic: "كلاسيكي", theme_classic_light: "كلاسيكي فاتح", theme_sports: "رياضة", theme_basketball: "كرة سلة", theme_soccer: "كرة قدم", theme_tennis: "تنس", theme_flags: "أعلام", theme_usa: "الولايات المتحدة", theme_asia: "آسيا", theme_jordan: "الأردن", theme_palestine: "فلسطين", theme_japan: "اليابان", theme_south_korea: "كوريا الجنوبية"
+    },
+    de: {
+        site_title: "Faisals Entsperrte Spiele",
+        themes: "THEMEN",
+        warning_russian: "Das Spiel ist standardmäßig auf Russisch, es gibt eine Schaltfläche oben, um die Sprache zu ändern!",
+        search_placeholder: "Spiele suchen...",
+        all_games: "ALLE SPIELE",
+        favorites: "FAVORITEN",
+        sort: "SORTIEREN",
+        sort_newest: "Neueste zuerst",
+        sort_oldest: "Älteste zuerst",
+        sort_az: "A-Z",
+        sort_za: "Z-A",
+        no_games_found: "Keine Spiele gefunden für",
+        try_again: "ERNEUT VERSUCHEN",
+        back: "ZURÜCK",
+        controls: "STEUERUNG",
+        about: "Über",
+        settings: "EINSTELLUNGEN",
+        open_new_tab: "In neuem Tab öffnen",
+        open_new_tab_desc: "Spiele in einem separaten Browser-Tab starten",
+        focus_mode: "Fokus-Modus",
+        focus_mode_desc: "Kopfzeile beim Spielen ausblenden",
+        cancel: "ABBRECHEN",
+        save: "SPEICHERN",
+        close: "SCHLIESSEN",
+        description: "BESCHREIBUNG",
+        tags: "TAGS",
+        play_now: "JETZT SPIELEN",
+        more_info: "MEHR INFO",
+        no_favorites: "NOCH KEINE FAVORITEN! KLICKE AUF DAS HERZ, UM WELCHE HINZUZUFÜGEN.",
+        no_category: "KEINE SPIELE IN DIESER KATEGORIE GEFUNDEN.",
+        no_games: "NOCH KEINE SPIELE IN DIESEM SCHLOSS!",
+        theme_featured: "Vorgestellt", theme_minecraft: "Minecraft", theme_dark_modes: "Dunkle Modi", theme_dark: "Dunkel", theme_obsidian: "Obsidian", theme_abyss: "Abgrund", theme_night_modes: "Nacht-Modi", theme_midnight: "Mitternacht", theme_deepspace: "Tiefenraum", theme_neon_night: "Neon-Nacht", theme_mario_bros: "Mario Bros", theme_mario: "Mario", theme_luigi: "Luigi", theme_peach: "Peach", theme_bowser: "Bowser", theme_wario: "Wario", theme_anime: "Anime", theme_naruto: "Naruto", theme_onepiece: "One Piece", theme_dragon_ball: "Dragon Ball", theme_demon_slayer: "Demon Slayer", theme_bleach: "Bleach", theme_classic: "Klassisch", theme_classic_light: "Klassisch Hell", theme_sports: "Sport", theme_basketball: "Basketball", theme_soccer: "Fußball", theme_tennis: "Tennis", theme_flags: "Flaggen", theme_usa: "USA", theme_asia: "Asien", theme_jordan: "Jordanien", theme_palestine: "Palästina", theme_japan: "Japan", theme_south_korea: "Südkorea"
+    }
+};
+
+const tagTranslations = {
+    es: { "Sports": "Deportes", "2 Player": "2 Jugadores", "Funny": "Divertido", "Arcade": "Arcade", "Skill": "Habilidad", "Horror": "Terror", "Strategy": "Estrategia", "Papa's": "Papa's", "Cooking": "Cocina", "Retro": "Retro", "Platformer": "Plataformas", "Adventure": "Aventura", "Puzzle": "Puzle", "Multiplayer": "Multijugador", "Action": "Acción", "3D": "3D", "Fighting": "Lucha", "Ragdoll": "Ragdoll", "Shooter": "Disparos", "Basketball": "Baloncesto", "Sandbox": "Sandbox", "Racing": "Carreras" },
+    fr: { "Sports": "Sports", "2 Player": "2 Joueurs", "Funny": "Amusant", "Arcade": "Arcade", "Skill": "Compétence", "Horror": "Horreur", "Strategy": "Stratégie", "Papa's": "Papa's", "Cooking": "Cuisine", "Retro": "Rétro", "Platformer": "Plateforme", "Adventure": "Aventure", "Puzzle": "Puzzle", "Multiplayer": "Multijoueur", "Action": "Action", "3D": "3D", "Fighting": "Combat", "Ragdoll": "Ragdoll", "Shooter": "Tir", "Basketball": "Basket", "Sandbox": "Sandbox", "Racing": "Course" },
+    ru: { "Sports": "Спорт", "2 Player": "2 Игрока", "Funny": "Смешные", "Arcade": "Аркады", "Skill": "Навык", "Horror": "Ужасы", "Strategy": "Стратегия", "Papa's": "Papa's", "Cooking": "Готовка", "Retro": "Ретро", "Platformer": "Платформер", "Adventure": "Приключения", "Puzzle": "Головоломки", "Multiplayer": "Мультиплеер", "Action": "Экшен", "3D": "3D", "Fighting": "Файтинги", "Ragdoll": "Рэгдолл", "Shooter": "Шутеры", "Basketball": "Баскетбол", "Sandbox": "Песочница", "Racing": "Гонки" },
+    ar: { "Sports": "رياضة", "2 Player": "لاعبان", "Funny": "مضحك", "Arcade": "آركيد", "Skill": "مهارة", "Horror": "رعب", "Strategy": "استراتيجية", "Papa's": "باباس", "Cooking": "طبخ", "Retro": "ريترو", "Platformer": "منصات", "Adventure": "مغامرة", "Puzzle": "لغز", "Multiplayer": "متعدد اللاعبين", "Action": "أكشن", "3D": "ثلاثي الأبعاد", "Fighting": "قتال", "Ragdoll": "راغدول", "Shooter": "تصويب", "Basketball": "كرة سلة", "Sandbox": "ساندبوكس", "Racing": "سباق" },
+    de: { "Sports": "Sport", "2 Player": "2 Spieler", "Funny": "Lustig", "Arcade": "Arcade", "Skill": "Geschicklichkeit", "Horror": "Horror", "Strategy": "Strategie", "Papa's": "Papa's", "Cooking": "Kochen", "Retro": "Retro", "Platformer": "Platformer", "Adventure": "Abenteuer", "Puzzle": "Puzzle", "Multiplayer": "Mehrspieler", "Action": "Aktion", "3D": "3D", "Fighting": "Kampf", "Ragdoll": "Ragdoll", "Shooter": "Shooter", "Basketball": "Basketball", "Sandbox": "Sandbox", "Racing": "Rennen" }
+};
+
+const gameTranslations = {
+    "basket-random": {
+        es: { desc: "Un juego de baloncesto divertido y aleatorio. ¡Anota canastas con físicas ragdoll!" },
+        fr: { desc: "Un jeu de basket amusant et aléatoire. Marquez des paniers avec une physique ragdoll !" },
+        ru: { desc: "Веселая и случайная баскетбольная игра. Забрасывайте мячи с физикой рэгдолл!" },
+        ar: { desc: "لعبة كرة سلة مضحكة وعشوائية. سجل الأهداف بفيزياء راغدول!" },
+        de: { desc: "Ein lustiges und zufälliges Basketballspiel. Wirf Körbe mit Ragdoll-Physik!" }
+    },
+    "rise-higher": {
+        es: { desc: "¡Protege el globo mientras sube más alto en el cielo!" },
+        fr: { desc: "Protégez le ballon alors qu'il monte plus haut dans le ciel !" },
+        ru: { desc: "Защищайте воздушный шар, пока он поднимается все выше в небо!" },
+        ar: { desc: "احمِ البالون بينما يرتفع أعلى في السماء!" },
+        de: { desc: "Beschütze den Ballon, während er höher in den Himmel steigt!" }
+    },
+    "soccer-random": {
+        es: { desc: "¡Anota goles en este divertido y aleatorio juego de fútbol con físicas ragdoll!" },
+        fr: { desc: "Marquez des buts dans ce jeu de football amusant et aléatoire avec une physique ragdoll !" },
+        ru: { desc: "Забивайте голы в этой веселой и случайной футбольной игре с физикой рэгдолл!" },
+        ar: { desc: "سجل الأهداف في لعبة كرة القدم المضحكة والعشوائية هذه بفيزياء راغدول!" },
+        de: { desc: "Schieße Tore in diesem lustigen und zufälligen Fußballspiel mit Ragdoll-Physik!" }
+    },
+    "fnaf-3": {
+        es: { desc: "Treinta años después de que Freddy Fazbear's Pizza cerrara sus puertas, los eventos que tuvieron lugar allí se han convertido en nada más que un rumor y un recuerdo de la infancia." },
+        fr: { desc: "Trente ans après la fermeture de Freddy Fazbear's Pizza, les événements qui s'y sont déroulés ne sont plus qu'une rumeur et un souvenir d'enfance." },
+        ru: { desc: "Спустя тридцать лет после того, как пиццерия закрыла свои двери, события, произошедшие там, стали не более чем слухами и детскими воспоминаниями." },
+        ar: { desc: "بعد ثلاثين عامًا من إغلاق بيتزا فريدي فازبير أبوابها، أصبحت الأحداث التي وقعت هناك مجرد شائعة وذكرى طفولة." },
+        de: { desc: "Dreißig Jahre nachdem Freddy Fazbear's Pizza seine Türen geschlossen hat, sind die Ereignisse, die dort stattfanden, zu nichts weiter als einem Gerücht und einer Kindheitserinnerung geworden." }
+    },
+    "papas-pizzeria": {
+        es: { desc: "¡Ayuda a Papa Louie a dirigir su pizzería! Hornea, decora y sirve pizzas a clientes hambrientos en este clásico juego de gestión de tiempo." },
+        fr: { desc: "Aidez Papa Louie à gérer sa pizzeria ! Préparez, garnissez et servez des pizzas aux clients affamés dans ce jeu classique de gestion du temps." },
+        ru: { desc: "Помогите Папе Луи управлять его пиццерией! Выпекайте, украшайте и подавайте пиццу голодным клиентам в этой классической игре в жанре тайм-менеджмент." },
+        ar: { desc: "ساعد بابا لوي في إدارة متجر البيتزا الخاص به! اخبز وزين وقدم البيتزا للعملاء الجائعين في لعبة إدارة الوقت الكلاسيكية هذه." },
+        de: { desc: "Hilf Papa Louie, seine Pizzeria zu leiten! Backe, belege und serviere Pizzen an hungrige Kunden in diesem klassischen Zeitmanagementspiel." }
+    },
+    "super-mario-world": {
+        es: { desc: "¡La clásica aventura de SNES! Únete a Mario y Yoshi para salvar a la Princesa Toadstool de Bowser en Dinosaur Land. (Nota: Tarda unos segundos en cargar)" },
+        fr: { desc: "L'aventure classique de la SNES ! Rejoignez Mario et Yoshi pour sauver la princesse Toadstool de Bowser dans Dinosaur Land. (Remarque : Prend quelques secondes à charger)" },
+        ru: { desc: "Классическое приключение SNES! Присоединяйтесь к Марио и Йоши, чтобы спасти принцессу Тоадстул от Боузера в Стране Динозавров. (Примечание: Загрузка занимает несколько секунд)" },
+        ar: { desc: "مغامرة SNES الكلاسيكية! انضم إلى ماريو ويوشي لإنقاذ الأميرة تودستول من باوزر في أرض الديناصورات. (ملاحظة: يستغرق التحميل بضع ثوانٍ)" },
+        de: { desc: "Das klassische SNES-Abenteuer! Begleite Mario und Yoshi, um Prinzessin Toadstool vor Bowser im Dinosaurierland zu retten. (Hinweis: Das Laden dauert ein paar Sekunden)" }
+    },
+    "fireboy-and-watergirl": {
+        es: { desc: "Ayuda a Fireboy y Watergirl a explorar el Templo del Bosque. ¡Resuelve puzles y evita peligros en este clásico juego de plataformas cooperativo!" },
+        fr: { desc: "Aidez Fireboy et Watergirl à explorer le Temple de la Forêt. Résolvez des énigmes et évitez les dangers dans ce jeu de plateforme coopératif classique !" },
+        ru: { desc: "Помогите Огненному мальчику и Водяной девочке исследовать Лесной храм. Решайте головоломки и избегайте опасностей в этом классическом кооперативном платформере!" },
+        ar: { desc: "ساعد ولد النار وبنت الماء في استكشاف معبد الغابة. حل الألغاز وتجنب المخاطر في لعبة المنصات التعاونية الكلاسيكية هذه!" },
+        de: { desc: "Hilf Fireboy und Watergirl, den Waldtempel zu erkunden. Löse Rätsel und weiche Gefahren in diesem klassischen kooperativen Platformer aus!" }
+    },
+    "volley-random": {
+        es: { desc: "Un juego de voleibol divertido y aleatorio. ¡Anota puntos con físicas ragdoll!" },
+        fr: { desc: "Un jeu de volley-ball amusant et aléatoire. Marquez des points avec une physique ragdoll !" },
+        ru: { desc: "Веселая и случайная волейбольная игра. Зарабатывайте очки с физикой рэгдолл!" },
+        ar: { desc: "لعبة كرة طائرة مضحكة وعشوائية. سجل النقاط بفيزياء راغدول!" },
+        de: { desc: "Ein lustiges und zufälliges Volleyballspiel. Sammle Punkte mit Ragdoll-Physik!" }
+    },
+    "papas-wingeria": {
+        es: { desc: "¡Cocina y sirve deliciosas alitas en Papa's Wingeria! Toma pedidos, fríe alitas, báñalas en salsa y colócalas en bandejas para tus clientes hambrientos." },
+        fr: { desc: "Cuisinez et servez de délicieuses ailes dans Papa's Wingeria ! Prenez les commandes, faites frire les ailes, mélangez-les dans la sauce et disposez-les sur des plateaux pour vos clients affamés." },
+        ru: { desc: "Готовьте и подавайте вкусные крылышки в Papa's Wingeria! Принимайте заказы, жарьте крылышки, обмакивайте их в соус и раскладывайте на тарелках для голодных клиентов." },
+        ar: { desc: "اطبخ وقدم أجنحة لذيذة في بابا وينجيريا! خذ الطلبات، واقلِ الأجنحة، واغمسها في الصلصة، ورتبها على أطباق لعملائك الجائعين." },
+        de: { desc: "Koche und serviere köstliche Wings in Papa's Wingeria! Nimm Bestellungen auf, frittiere Wings, schwenke sie in Soße und richte sie auf Platten für deine hungrigen Kunden an." }
+    },
+    "tag": {
+        es: { desc: "¡Juega al clásico juego de la mancha! Corre, salta y deslízate para evitar ser el que 'la lleva' en este rápido juego multijugador." },
+        fr: { desc: "Jouez au jeu classique du loup ! Courez, sautez et glissez pour éviter d'être 'le loup' dans ce jeu multijoueur rapide." },
+        ru: { desc: "Сыграйте в классическую игру в салочки! Бегайте, прыгайте и скользите, чтобы не стать 'водой' в этой динамичной многопользовательской игре." },
+        ar: { desc: "العب لعبة المطاردة الكلاسيكية! اركض واقفز وانزلق لتجنب أن تكون 'المطارد' في هذه اللعبة متعددة اللاعبين سريعة الوتيرة." },
+        de: { desc: "Spiele das klassische Fangen-Spiel! Renne, springe und rutsche, um nicht der 'Fänger' zu sein, in diesem rasanten Mehrspielerspiel." }
+    },
+    "boxing-random": {
+        es: { desc: "¡Lanza puñetazos en este divertido y aleatorio juego de boxeo con físicas ragdoll! Juega contra la CPU o un amigo." },
+        fr: { desc: "Donnez des coups de poing dans ce jeu de boxe amusant et aléatoire avec une physique ragdoll ! Jouez contre l'ordinateur ou un ami." },
+        ru: { desc: "Наносите удары в этой веселой и случайной боксерской игре с физикой рэгдолл! Играйте против компьютера или друга." },
+        ar: { desc: "سدد اللكمات في لعبة الملاكمة المضحكة والعشوائية هذه بفيزياء راغدول! العب ضد الكمبيوتر أو صديق." },
+        de: { desc: "Teile Schläge aus in diesem lustigen und zufälligen Boxspiel mit Ragdoll-Physik! Spiele gegen den Computer oder einen Freund." }
+    },
+    "sonic-cd": {
+        es: { desc: "¡Viaja en el tiempo para salvar Little Planet!" },
+        fr: { desc: "Voyagez dans le temps pour sauver Little Planet !" },
+        ru: { desc: "Путешествуйте во времени, чтобы спасти Маленькую Планету!" },
+        ar: { desc: "سافر عبر الزمن لإنقاذ الكوكب الصغير!" },
+        de: { desc: "Reise durch die Zeit, um Little Planet zu retten!" }
+    },
+    "papas-burgeria": {
+        es: { desc: "¡Asa, apila y sirve hamburguesas a todos tus locos clientes! Dirige la mejor hamburguesería de la ciudad." },
+        fr: { desc: "Faites griller, empilez et servez des hamburgers à tous vos clients farfelus ! Gérez la meilleure boutique de hamburgers de la ville." },
+        ru: { desc: "Жарьте, складывайте и подавайте бургеры всем вашим сумасшедшим клиентам! Управляйте лучшей бургерной в городе." },
+        ar: { desc: "اشوِ، وكدس، وقدم البرغر لجميع عملائك المجانين! أدر أفضل متجر برغر في المدينة." },
+        de: { desc: "Grille, staple und serviere Burger an all deine verrückten Kunden! Leite den besten Burgerladen der Stadt." }
+    },
+    "a-small-world-cup": {
+        es: { desc: "Un divertido y caótico juego de fútbol basado en físicas donde controlas a un jugador ragdoll para anotar goles." },
+        fr: { desc: "Un jeu de football amusant et chaotique basé sur la physique où vous contrôlez un joueur ragdoll pour marquer des buts." },
+        ru: { desc: "Веселая и хаотичная футбольная игра, основанная на физике, где вы управляете игроком-рэгдоллом, чтобы забивать голы." },
+        ar: { desc: "لعبة كرة قدم ممتعة وفوضوية تعتمد على الفيزياء حيث تتحكم في لاعب راغدول لتسجيل الأهداف." },
+        de: { desc: "Ein lustiges und chaotisches physikbasiertes Fußballspiel, bei dem du einen Ragdoll-Spieler steuerst, um Tore zu schießen." }
+    },
+    "slope": {
+        es: { desc: "Un juego de carrera infinita en 3D donde controlas una bola que rueda por una pendiente. ¡Evita los obstáculos y mantén la bola en la pista!" },
+        fr: { desc: "Un jeu de course sans fin en 3D où vous contrôlez une balle roulant sur une pente. Évitez les obstacles et gardez la balle sur la piste !" },
+        ru: { desc: "Бесконечный 3D-раннер, в котором вы управляете катящимся по склону шаром. Избегайте препятствий и удерживайте шар на трассе!" },
+        ar: { desc: "لعبة ركض لا نهاية لها ثلاثية الأبعاد حيث تتحكم في كرة تتدحرج على منحدر. تجنب العقبات وأبقِ الكرة على المسار!" },
+        de: { desc: "Ein 3D-Endlos-Runner-Spiel, bei dem du einen Ball steuerst, der einen Abhang hinunterrollt. Weiche Hindernissen aus und halte den Ball auf der Strecke!" }
+    },
+    "ragdoll-hit": {
+        es: { desc: "Un divertido juego de lucha ragdoll donde te enfrentas a oponentes con combates basados en físicas." },
+        fr: { desc: "Un jeu de combat ragdoll amusant où vous affrontez des adversaires avec des combats basés sur la physique." },
+        ru: { desc: "Веселый файтинг с рэгдоллами, где вы сражаетесь с противниками в боях, основанных на физике." },
+        ar: { desc: "لعبة قتال راغدول ممتعة حيث تقاتل الخصوم بقتال يعتمد على الفيزياء." },
+        de: { desc: "Ein lustiges Ragdoll-Kampfspiel, bei dem du gegen Gegner mit physikbasierten Kämpfen antrittst." }
+    },
+    "gunspin": {
+        es: { desc: "¡Dispara tu arma para hacerla girar y volar lo más lejos posible! Mejora tus armas y alcanza nuevas distancias." },
+        fr: { desc: "Tirez avec votre arme pour la faire tourner et voler aussi loin que possible ! Améliorez vos armes et atteignez de nouvelles distances." },
+        ru: { desc: "Стреляйте из пистолета, чтобы раскрутить его и улететь как можно дальше! Улучшайте свое оружие и достигайте новых дистанций." },
+        ar: { desc: "أطلق النار من سلاحك لجعله يدور ويطير إلى أبعد مسافة ممكنة! قم بترقية أسلحتك والوصول إلى مسافات جديدة." },
+        de: { desc: "Schieße mit deiner Waffe, um sie zu drehen und so weit wie möglich zu fliegen! Verbessere deine Waffen und erreiche neue Entfernungen." }
+    },
+    "basketball-stars-2026": {
+        es: { desc: "¡Juega a Basketball Stars! Dribla, dispara y anota en este rápido juego de baloncesto." },
+        fr: { desc: "Jouez à Basketball Stars ! Dribblez, tirez et marquez dans ce jeu de basket rapide." },
+        ru: { desc: "Играйте в Basketball Stars! Ведите мяч, бросайте и забивайте в этой динамичной баскетбольной игре." },
+        ar: { desc: "العب نجوم كرة السلة! راوغ وسدد وسجل في لعبة كرة السلة سريعة الوتيرة هذه." },
+        de: { desc: "Spiele Basketball Stars! Dribble, wirf und punkte in diesem rasanten Basketballspiel." }
+    },
+    "minecraft": {
+        es: { desc: "Explora mundos infinitos y construye de todo, desde las casas más simples hasta los castillos más grandiosos en este clásico juego sandbox." },
+        fr: { desc: "Explorez des mondes infinis et construisez tout, des maisons les plus simples aux châteaux les plus grandioses dans ce jeu bac à sable classique." },
+        ru: { desc: "Исследуйте бесконечные миры и стройте все, от самых простых домов до величайших замков в этой классической игре-песочнице." },
+        ar: { desc: "استكشف عوالم لا حصر لها وابنِ كل شيء من أبسط المنازل إلى أروع القلاع في لعبة الساندبوكس الكلاسيكية هذه." },
+        de: { desc: "Erkunde unendliche Welten und baue alles, von den einfachsten Häusern bis zu den großartigsten Schlössern in diesem klassischen Sandbox-Spiel." }
+    },
+    "race-survival-arena-king": {
+        es: { desc: "¡Compite, sobrevive y domina la arena en este intenso juego de combate de coches!" },
+        fr: { desc: "Faites la course, survivez et dominez l'arène dans ce jeu de combat de voitures intense !" },
+        ru: { desc: "Гоняйте, выживайте и доминируйте на арене в этой напряженной игре с автомобильными боями!" },
+        ar: { desc: "تسابق وابق على قيد الحياة وسيطر على الساحة في لعبة قتال السيارات المكثفة هذه!" },
+        de: { desc: "Fahre Rennen, überlebe und dominiere die Arena in diesem intensiven Auto-Kampfspiel!" }
+    }
+};
+
+function getTranslatedText(game, field) {
+    if (currentLanguage === 'en') return game[field];
+    if (field === 'description' && gameTranslations[game.id]?.[currentLanguage]?.desc) {
+        return gameTranslations[game.id][currentLanguage].desc;
+    }
+    if (field === 'title' && gameTranslations[game.id]?.[currentLanguage]?.title) {
+        return gameTranslations[game.id][currentLanguage].title;
+    }
+    return game[field];
+}
+
+function getTranslatedTag(tag) {
+    if (currentLanguage === 'en') return tag;
+    return tagTranslations[currentLanguage]?.[tag] || tag;
+}
+
+function toggleLanguageMenu() {
+    const menu = document.getElementById('language-menu');
+    menu.classList.toggle('hidden');
+}
+
+function setLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    applyLanguage();
+    toggleLanguageMenu();
+    renderGames(); // Re-render to update translated text in cards
+}
+
+function applyLanguage() {
+    const t = translations[currentLanguage] || translations['en'];
+    
+    // Update display
+    const langDisplay = { en: '🇺🇸 EN', es: '🇪🇸 ES', fr: '🇫🇷 FR', ru: '🇷🇺 RU', ar: '🇸🇦 AR', de: '🇩🇪 DE' };
+    document.getElementById('current-lang-display').textContent = langDisplay[currentLanguage] || currentLanguage.toUpperCase();
+    
+    // Update text content
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (t[key]) {
+            el.textContent = t[key];
+        }
+    });
+    
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (t[key]) {
+            el.placeholder = t[key];
+        }
+    });
+
+    // Handle RTL for Arabic
+    if (currentLanguage === 'ar') {
+        document.body.dir = 'rtl';
+    } else {
+        document.body.dir = 'ltr';
+    }
+
+    // Update dynamic category buttons
+    document.querySelectorAll('.filter-btn[data-category]').forEach(btn => {
+        const cat = btn.dataset.category;
+        if (cat !== 'all' && cat !== 'favorites') {
+            btn.textContent = getTranslatedTag(cat).toUpperCase();
+        }
+    });
+}
 
 // DOM Elements
 const gamesGrid = document.getElementById('games-grid');
@@ -27,6 +454,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Load Favorites and Recent Games
     loadUserData();
+    
+    // Load Language
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+        currentLanguage = savedLang;
+    }
+    applyLanguage();
 
     try {
         const response = await fetch('games.json');
@@ -194,7 +628,7 @@ function setupCategoryFilters() {
     sortedTags.forEach(tag => {
         const btn = document.createElement('button');
         btn.className = 'filter-btn px-6 py-2 bg-theme-card text-theme-card font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all whitespace-nowrap';
-        btn.textContent = tag.toUpperCase();
+        btn.textContent = getTranslatedTag(tag).toUpperCase();
         btn.dataset.category = tag;
         btn.onclick = () => filterGames(tag);
         categoryFilters.appendChild(btn);
@@ -229,8 +663,8 @@ function openGameInfo(e, gameId) {
     const game = games.find(g => g.id === gameId);
     if (!game) return;
 
-    document.getElementById('modal-game-title').textContent = game.title;
-    document.getElementById('modal-game-description').textContent = game.description;
+    document.getElementById('modal-game-title').textContent = getTranslatedText(game, 'title');
+    document.getElementById('modal-game-description').textContent = getTranslatedText(game, 'description');
     
     const thumb = document.getElementById('modal-game-thumbnail');
     thumb.src = game.thumbnail;
@@ -244,7 +678,7 @@ function openGameInfo(e, gameId) {
         game.tags.forEach(tag => {
             const span = document.createElement('span');
             span.className = 'text-xs uppercase px-2 py-1 bg-black/10 rounded border border-black/20 font-bold';
-            span.textContent = tag;
+            span.textContent = getTranslatedTag(tag);
             tagsContainer.appendChild(span);
         });
     }
@@ -282,12 +716,12 @@ function createGameCard(game) {
             </button>
         </div>
         <div class="p-4 flex-1 flex flex-col bg-theme-card transition-colors duration-300">
-            <h3 class="text-lg font-bold text-theme-card mb-1 pixel-font tracking-tight leading-tight" style="color: var(--text-card)">${game.title}</h3>
+            <h3 class="text-lg font-bold text-theme-card mb-1 pixel-font tracking-tight leading-tight" style="color: var(--text-card)">${getTranslatedText(game, 'title')}</h3>
             ${game.tags ? `<div class="mt-2 flex flex-wrap gap-1">
-                ${game.tags.slice(0, 2).map(tag => `<span class="text-[10px] uppercase px-1.5 py-0.5 bg-black/10 rounded border border-black/20">${tag}</span>`).join('')}
+                ${game.tags.slice(0, 2).map(tag => `<span class="text-[10px] uppercase px-1.5 py-0.5 bg-black/10 rounded border border-black/20">${getTranslatedTag(tag)}</span>`).join('')}
             </div>` : ''}
             <button onclick="openGameInfo(event, '${game.id}')" class="mt-3 w-full py-2 bg-blue-100 text-blue-800 border-2 border-blue-800 rounded-lg font-bold hover:bg-blue-200 transition-colors flex items-center justify-center gap-2 text-sm">
-                <i data-lucide="info" class="w-4 h-4"></i> MORE INFO
+                <i data-lucide="info" class="w-4 h-4"></i> ${translations[currentLanguage]?.more_info || 'MORE INFO'}
             </button>
         </div>
     `;
@@ -299,18 +733,18 @@ function renderGames() {
     
     if (filteredGames.length === 0 && games.length > 0) {
         if (currentCategory === 'favorites') {
-             gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">NO FAVORITES YET! CLICK THE HEART ICON TO ADD SOME.</p></div>';
+             gamesGrid.innerHTML = `<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">${translations[currentLanguage]?.no_favorites || 'NO FAVORITES YET! CLICK THE HEART ICON TO ADD SOME.'}</p></div>`;
              return;
         }
         // Handled by search logic or empty category
         if (currentCategory !== 'all') {
-             gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">NO GAMES FOUND IN THIS CATEGORY.</p></div>';
+             gamesGrid.innerHTML = `<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">${translations[currentLanguage]?.no_category || 'NO GAMES FOUND IN THIS CATEGORY.'}</p></div>`;
              return;
         }
     }
 
     if (games.length === 0) {
-        gamesGrid.innerHTML = '<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">NO GAMES IN THIS CASTLE YET!</p></div>';
+        gamesGrid.innerHTML = `<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">${translations[currentLanguage]?.no_games || 'NO GAMES IN THIS CASTLE YET!'}</p></div>`;
         return;
     }
 
@@ -445,10 +879,23 @@ function openGame(game) {
     
     applySettings(); // Re-apply settings (e.g. hide header)
     
-    gameTitle.textContent = game.title;
-    gameAboutTitle.textContent = game.title;
-    gameDescription.textContent = game.description;
+    gameTitle.textContent = getTranslatedText(game, 'title');
+    gameAboutTitle.textContent = getTranslatedText(game, 'title');
+    gameDescription.textContent = getTranslatedText(game, 'description');
     gameIframe.src = game.url;
+
+    const warningBox = document.getElementById('game-warning-message');
+    const warningText = document.getElementById('game-warning-text');
+    if (warningBox && warningText) {
+        if (game.warningMessage) {
+            warningText.textContent = translations[currentLanguage]?.warning_russian || game.warningMessage;
+            warningBox.classList.remove('hidden');
+            warningBox.classList.add('flex');
+        } else {
+            warningBox.classList.add('hidden');
+            warningBox.classList.remove('flex');
+        }
+    }
 
     // Apply custom styles if present (e.g. for cropping)
     gameIframe.style.cssText = '';
@@ -1172,11 +1619,25 @@ function setTheme(themeName, toggleMenu = true) {
 
 // Close theme menu when clicking outside
 document.addEventListener('click', (e) => {
-    const menu = document.getElementById('theme-menu');
-    const button = document.querySelector('button[onclick="toggleThemeMenu()"]');
+    const themeMenu = document.getElementById('theme-menu');
+    const themeButton = document.querySelector('button[onclick="toggleThemeMenu()"]');
     
-    if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !button.contains(e.target)) {
-        menu.classList.add('hidden');
+    if (themeMenu && !themeMenu.classList.contains('hidden') && !themeMenu.contains(e.target) && !themeButton.contains(e.target)) {
+        themeMenu.classList.add('hidden');
+    }
+
+    const langMenu = document.getElementById('language-menu');
+    const langButton = document.querySelector('button[onclick="toggleLanguageMenu()"]');
+    
+    if (langMenu && !langMenu.classList.contains('hidden') && !langMenu.contains(e.target) && !langButton.contains(e.target)) {
+        langMenu.classList.add('hidden');
+    }
+
+    const sortMenu = document.getElementById('sort-menu');
+    const sortButton = document.querySelector('button[onclick="toggleSortMenu()"]');
+    
+    if (sortMenu && !sortMenu.classList.contains('hidden') && !sortMenu.contains(e.target) && !sortButton.contains(e.target)) {
+        sortMenu.classList.add('hidden');
     }
 });
 

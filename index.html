@@ -215,7 +215,7 @@
                 <div class="bg-white p-2 border-4 border-black rounded-lg mario-shadow flex items-center justify-center w-12 h-12" id="logo-container">
                     <i data-lucide="gamepad-2" class="text-theme-card w-8 h-8" id="app-logo"></i>
                 </div>
-                <span class="text-xl md:text-2xl font-bold text-theme-header pixel-font tracking-tighter drop-shadow-md">
+                <span class="text-xl md:text-2xl font-bold text-theme-header pixel-font tracking-tighter drop-shadow-md" data-i18n="site_title">
                     Faisal's Unblocked Games
                 </span>
             </div>
@@ -228,6 +228,7 @@
                     <input
                         type="text"
                         id="search-input-desktop"
+                        data-i18n-placeholder="search_placeholder"
                         placeholder="Search games..."
                         class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-theme-card placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all"
                     />
@@ -243,108 +244,140 @@
                     <i data-lucide="settings" class="w-6 h-6 text-black"></i>
                 </button>
 
+                <!-- Language Button -->
+                <div class="relative">
+                    <button onclick="toggleLanguageMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Change Language">
+                        <i data-lucide="globe" class="w-6 h-6 text-black"></i>
+                        <span class="text-sm" id="current-lang-display">EN</span>
+                    </button>
+                    
+                    <!-- Language Dropdown -->
+                    <div id="language-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50">
+                        <div class="p-2 space-y-1">
+                            <button onclick="setLanguage('en')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                🇺🇸 English
+                            </button>
+                            <button onclick="setLanguage('es')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                🇪🇸 Español
+                            </button>
+                            <button onclick="setLanguage('fr')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                🇫🇷 Français
+                            </button>
+                            <button onclick="setLanguage('ru')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                🇷🇺 Русский
+                            </button>
+                            <button onclick="setLanguage('ar')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                🇸🇦 العربية
+                            </button>
+                            <button onclick="setLanguage('de')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                🇩🇪 Deutsch
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Theme Button -->
                 <div class="relative">
                     <button onclick="toggleThemeMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Change Theme">
                         <i data-lucide="palette" class="w-6 h-6 text-black"></i>
-                        <span class="text-sm">THEMES</span>
+                        <span class="text-sm" data-i18n="themes">THEMES</span>
                     </button>
                     
                     <!-- Theme Dropdown -->
                     <div id="theme-menu" class="hidden absolute right-0 mt-2 w-64 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 max-h-96 overflow-y-auto">
                         <div class="p-2 space-y-1">
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Featured</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_featured">Featured</p>
                             <button onclick="setTheme('minecraft')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">⛏️</span> Minecraft
+                                <span class="text-lg">⛏️</span> <span data-i18n="theme_minecraft">Minecraft</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Dark Modes</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_dark_modes">Dark Modes</p>
                             <button onclick="setTheme('dark')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#111827] border border-black"></div> Dark
+                                <div class="w-4 h-4 rounded-full bg-[#111827] border border-black"></div> <span data-i18n="theme_dark">Dark</span>
                             </button>
                             <button onclick="setTheme('obsidian')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#0b0c10] border border-black"></div> Obsidian
+                                <div class="w-4 h-4 rounded-full bg-[#0b0c10] border border-black"></div> <span data-i18n="theme_obsidian">Obsidian</span>
                             </button>
                             <button onclick="setTheme('abyss')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#050505] border border-black"></div> Abyss
+                                <div class="w-4 h-4 rounded-full bg-[#050505] border border-black"></div> <span data-i18n="theme_abyss">Abyss</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Night Modes</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_night_modes">Night Modes</p>
                             <button onclick="setTheme('midnight')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#191970] border border-black"></div> Midnight
+                                <div class="w-4 h-4 rounded-full bg-[#191970] border border-black"></div> <span data-i18n="theme_midnight">Midnight</span>
                             </button>
                             <button onclick="setTheme('deepspace')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#000000] border border-black"></div> Deep Space
+                                <div class="w-4 h-4 rounded-full bg-[#000000] border border-black"></div> <span data-i18n="theme_deepspace">Deep Space</span>
                             </button>
                             <button onclick="setTheme('neon_night')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#2e003e] border border-black"></div> Neon Night
+                                <div class="w-4 h-4 rounded-full bg-[#2e003e] border border-black"></div> <span data-i18n="theme_neon_night">Neon Night</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Mario Bros</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_mario_bros">Mario Bros</p>
                             <button onclick="setTheme('mario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#E70012] border border-black"></div> Mario
+                                <div class="w-4 h-4 rounded-full bg-[#E70012] border border-black"></div> <span data-i18n="theme_mario">Mario</span>
                             </button>
                             <button onclick="setTheme('luigi')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#009E49] border border-black"></div> Luigi
+                                <div class="w-4 h-4 rounded-full bg-[#009E49] border border-black"></div> <span data-i18n="theme_luigi">Luigi</span>
                             </button>
                             <button onclick="setTheme('peach')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#FF69B4] border border-black"></div> Peach
+                                <div class="w-4 h-4 rounded-full bg-[#FF69B4] border border-black"></div> <span data-i18n="theme_peach">Peach</span>
                             </button>
                             <button onclick="setTheme('bowser')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#2C2C2C] border border-black"></div> Bowser
+                                <div class="w-4 h-4 rounded-full bg-[#2C2C2C] border border-black"></div> <span data-i18n="theme_bowser">Bowser</span>
                             </button>
                             <button onclick="setTheme('wario')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#FCD116] border border-black"></div> Wario
+                                <div class="w-4 h-4 rounded-full bg-[#FCD116] border border-black"></div> <span data-i18n="theme_wario">Wario</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Anime</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_anime">Anime</p>
                             <button onclick="setTheme('naruto')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/128px-Naruto_logo.svg.png" class="w-6 h-6 object-contain" alt="Naruto" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#FF8C00] border border-black\'></div>'"> Naruto
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Naruto_logo.svg/128px-Naruto_logo.svg.png" class="w-6 h-6 object-contain" alt="Naruto" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#FF8C00] border border-black\'></div>'"> <span data-i18n="theme_naruto">Naruto</span>
                             </button>
                             <button onclick="setTheme('one_piece')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <img src="https://static.wikia.nocookie.net/onepiece/images/8/87/One_Piece_Anime_Logo.png/revision/latest?cb=20250813015436" class="w-6 h-6 object-contain" alt="One Piece" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#00BFFF] border border-black\'></div>'"> One Piece
+                                <img src="https://static.wikia.nocookie.net/onepiece/images/8/87/One_Piece_Anime_Logo.png/revision/latest?cb=20250813015436" class="w-6 h-6 object-contain" alt="One Piece" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#00BFFF] border border-black\'></div>'"> <span data-i18n="theme_onepiece">One Piece</span>
                             </button>
                             <button onclick="setTheme('dragon_ball')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlAZAb25Y2kMY741duDSJ9xm4ARsSWijeSRA&s" class="w-6 h-6 object-contain" alt="Dragon Ball" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#FF4500] border border-black\'></div>'"> Dragon Ball
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlAZAb25Y2kMY741duDSJ9xm4ARsSWijeSRA&s" class="w-6 h-6 object-contain" alt="Dragon Ball" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#FF4500] border border-black\'></div>'"> <span data-i18n="theme_dragon_ball">Dragon Ball</span>
                             </button>
                             <button onclick="setTheme('demon_slayer')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqLSe0YxHCOtJikJKKAC5nm7NmlqwyXG1tWA&s" class="w-6 h-6 object-contain" alt="Demon Slayer" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#2E8B57] border border-black\'></div>'"> Demon Slayer
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqLSe0YxHCOtJikJKKAC5nm7NmlqwyXG1tWA&s" class="w-6 h-6 object-contain" alt="Demon Slayer" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#2E8B57] border border-black\'></div>'"> <span data-i18n="theme_demon_slayer">Demon Slayer</span>
                             </button>
                             <button onclick="setTheme('bleach')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTFfcX6ww1AJvhRsWEF7rDFKijx0wtv_fZRQ&s" class="w-6 h-6 object-contain" alt="Bleach" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#000000] border border-white\'></div>'"> Bleach
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTFfcX6ww1AJvhRsWEF7rDFKijx0wtv_fZRQ&s" class="w-6 h-6 object-contain" alt="Bleach" referrerPolicy="no-referrer" onerror="this.outerHTML='<div class=\'w-4 h-4 rounded-full bg-[#000000] border border-white\'></div>'"> <span data-i18n="theme_bleach">Bleach</span>
                             </button>
                             <button onclick="setTheme('classic')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-black"></div> Classic
+                                <div class="w-4 h-4 rounded-full bg-[#ffffff] border border-black"></div> <span data-i18n="theme_classic">Classic</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Sports</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_sports">Sports</p>
                             <button onclick="setTheme('basketball')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🏀</span> Basketball
+                                <span class="text-lg">🏀</span> <span data-i18n="theme_basketball">Basketball</span>
                             </button>
                             <button onclick="setTheme('soccer')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">⚽</span> Soccer
+                                <span class="text-lg">⚽</span> <span data-i18n="theme_soccer">Soccer</span>
                             </button>
                             <button onclick="setTheme('tennis')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🎾</span> Tennis
+                                <span class="text-lg">🎾</span> <span data-i18n="theme_tennis">Tennis</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Flags</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_flags">Flags</p>
                             <button onclick="setTheme('usa')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🇺🇸</span> USA
+                                <span class="text-lg">🇺🇸</span> <span data-i18n="theme_usa">USA</span>
                             </button>
                             <div class="border-t border-gray-200 my-1"></div>
-                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase">Asia</p>
+                            <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_asia">Asia</p>
                             <button onclick="setTheme('jordan')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🇯🇴</span> Jordan
+                                <span class="text-lg">🇯🇴</span> <span data-i18n="theme_jordan">Jordan</span>
                             </button>
                             <button onclick="setTheme('palestine')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🇵🇸</span> Palestine
+                                <span class="text-lg">🇵🇸</span> <span data-i18n="theme_palestine">Palestine</span>
                             </button>
                             <button onclick="setTheme('japan')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🇯🇵</span> Japan
+                                <span class="text-lg">🇯🇵</span> <span data-i18n="theme_japan">Japan</span>
                             </button>
                             <button onclick="setTheme('south_korea')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
-                                <span class="text-lg">🇰🇷</span> South Korea
+                                <span class="text-lg">🇰🇷</span> <span data-i18n="theme_south_korea">South Korea</span>
                             </button>
                             <button onclick="setTheme('china')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <span class="text-lg">🇨🇳</span> China
@@ -411,10 +444,10 @@
             <div class="mb-8 overflow-x-auto pb-4 scrollbar-hide">
                 <div class="flex gap-3 min-w-max" id="category-filters">
                     <button onclick="filterGames('all')" class="filter-btn active px-6 py-2 bg-theme-card text-theme-card font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all" data-category="all">
-                        ALL GAMES
+                        <span data-i18n="all_games">ALL GAMES</span>
                     </button>
                     <button onclick="filterGames('favorites')" class="filter-btn px-6 py-2 bg-white text-black font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-2" data-category="favorites">
-                        <i data-lucide="heart" class="w-4 h-4"></i> FAVORITES
+                        <i data-lucide="heart" class="w-4 h-4"></i> <span data-i18n="favorites">FAVORITES</span>
                     </button>
                     <!-- Dynamic categories will be added here -->
                 </div>
@@ -428,6 +461,7 @@
                     <input
                         type="text"
                         id="search-input-mobile"
+                        data-i18n-placeholder="search_placeholder"
                         placeholder="Search games..."
                         class="block w-full pl-10 pr-3 py-3 border-4 border-black rounded-xl leading-5 bg-theme-card placeholder-gray-700 focus:outline-none focus:bg-white text-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
                     />
@@ -447,13 +481,13 @@
                 <div class="relative">
                     <button onclick="toggleSortMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Sort Games">
                         <i data-lucide="arrow-up-down" class="w-5 h-5 text-black"></i>
-                        <span class="text-sm">SORT</span>
+                        <span class="text-sm" data-i18n="sort">SORT</span>
                     </button>
                     <div id="sort-menu" class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] border-4 border-black hidden z-50">
-                        <button onclick="sortGames('newest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 first:rounded-t-lg">Newest First</button>
-                        <button onclick="sortGames('oldest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">Oldest First</button>
-                        <button onclick="sortGames('az'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200">A-Z</button>
-                        <button onclick="sortGames('za'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 last:rounded-b-lg">Z-A</button>
+                        <button onclick="sortGames('newest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 first:rounded-t-lg" data-i18n="sort_newest">Newest First</button>
+                        <button onclick="sortGames('oldest'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200" data-i18n="sort_oldest">Oldest First</button>
+                        <button onclick="sortGames('az'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200" data-i18n="sort_az">A-Z</button>
+                        <button onclick="sortGames('za'); toggleSortMenu()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 last:rounded-b-lg" data-i18n="sort_za">Z-A</button>
                     </div>
                 </div>
             </div>
@@ -463,8 +497,8 @@
             </div>
             
             <div id="no-results" class="hidden text-center py-12 bg-white/90 border-4 border-black rounded-xl">
-                <p class="text-gray-800 text-xl font-bold">No games found matching "<span id="search-term" class="text-theme-card"></span>"</p>
-                <button onclick="clearSearch()" class="mt-6 bg-theme-accent text-white px-6 py-3 rounded-xl border-4 border-black font-bold hover:brightness-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
+                <p class="text-gray-800 text-xl font-bold"><span data-i18n="no_games_found">No games found matching</span> "<span id="search-term" class="text-theme-card"></span>"</p>
+                <button onclick="clearSearch()" class="mt-6 bg-theme-accent text-white px-6 py-3 rounded-xl border-4 border-black font-bold hover:brightness-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" data-i18n="try_again">
                     TRY AGAIN
                 </button>
             </div>
@@ -475,7 +509,7 @@
             <div class="flex items-center justify-between mb-6">
                 <button onclick="showGameList()" class="flex items-center gap-2 px-6 py-3 bg-theme-card text-black border-4 border-black rounded-xl font-bold hover:brightness-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all">
                     <i data-lucide="arrow-left" class="w-6 h-6"></i>
-                    <span class="pixel-font text-sm">BACK</span>
+                    <span class="pixel-font text-sm" data-i18n="back">BACK</span>
                 </button>
                 
                 <h1 id="game-title" class="text-xl md:text-2xl font-bold text-white pixel-font hidden sm:block drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] text-stroke-black"></h1>
@@ -487,6 +521,13 @@
 
             <div class="flex flex-col lg:flex-row gap-6 h-full">
                 <div id="game-container" class="flex-1 bg-black border-4 border-black rounded-xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] relative min-h-[600px]">
+                    <div id="game-warning-message" class="hidden absolute top-4 left-1/2 -translate-x-1/2 z-50 p-3 bg-yellow-100/90 backdrop-blur-sm border-4 border-yellow-500 text-yellow-900 font-bold rounded-xl shadow-[4px_4px_0px_0px_rgba(234,179,8,1)] items-center gap-3 w-11/12 max-w-2xl text-center">
+                        <i data-lucide="alert-triangle" class="w-6 h-6 flex-shrink-0"></i>
+                        <span id="game-warning-text" class="text-sm md:text-base flex-1"></span>
+                        <button onclick="document.getElementById('game-warning-message').classList.add('hidden')" class="p-1 hover:bg-yellow-200 rounded transition-colors">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
                     <iframe
                         id="game-iframe"
                         src=""
@@ -502,7 +543,7 @@
                 <div id="game-controls" class="hidden w-full lg:w-72 bg-theme-card border-4 border-black rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] h-fit">
                     <h3 class="text-xl font-bold text-theme-card mb-4 pixel-font flex items-center gap-2" style="color: var(--text-card)">
                         <i data-lucide="gamepad" class="w-6 h-6"></i>
-                        CONTROLS
+                        <span data-i18n="controls">CONTROLS</span>
                     </h3>
                     <ul id="controls-list" class="space-y-3 font-bold text-black text-sm">
                         <!-- Controls injected here -->
@@ -513,7 +554,7 @@
             <div class="mt-6 p-6 bg-theme-accent border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)]">
                 <h2 class="text-xl font-bold text-white mb-3 pixel-font flex items-center gap-3">
                     <span class="bg-white text-black w-8 h-8 flex items-center justify-center rounded border-2 border-black text-sm">?</span>
-                    About <span id="game-about-title"></span>
+                    <span data-i18n="about">About</span> <span id="game-about-title" class="ml-2"></span>
                 </h2>
                 <p id="game-description" class="text-white font-bold text-lg leading-relaxed"></p>
             </div>
@@ -534,7 +575,7 @@
     <div id="settings-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm">
         <div class="bg-white border-4 border-black rounded-xl p-6 w-full max-w-md shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] m-4">
             <div class="flex justify-between items-center mb-6 border-b-4 border-black pb-4">
-                <h2 class="text-2xl font-bold pixel-font">SETTINGS</h2>
+                <h2 class="text-2xl font-bold pixel-font" data-i18n="settings">SETTINGS</h2>
                 <button onclick="toggleSettings()" class="hover:bg-gray-100 p-1 rounded">
                     <i data-lucide="x" class="w-6 h-6"></i>
                 </button>
@@ -544,8 +585,8 @@
                 <!-- Open in New Tab -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="font-bold text-lg">Open in New Tab</h3>
-                        <p class="text-sm text-gray-600">Launch games in a separate browser tab</p>
+                        <h3 class="font-bold text-lg" data-i18n="open_new_tab">Open in New Tab</h3>
+                        <p class="text-sm text-gray-600" data-i18n="open_new_tab_desc">Launch games in a separate browser tab</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="setting-new-tab" class="sr-only peer">
@@ -556,8 +597,8 @@
                 <!-- Hide Header in Game -->
                 <div class="flex items-center justify-between">
                     <div>
-                        <h3 class="font-bold text-lg">Focus Mode</h3>
-                        <p class="text-sm text-gray-600">Hide header while playing games</p>
+                        <h3 class="font-bold text-lg" data-i18n="focus_mode">Focus Mode</h3>
+                        <p class="text-sm text-gray-600" data-i18n="focus_mode_desc">Hide header while playing games</p>
                     </div>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="setting-hide-header" class="sr-only peer">
@@ -567,8 +608,8 @@
             </div>
 
             <div class="mt-8 flex justify-end gap-4">
-                <button onclick="toggleSettings()" class="px-4 py-2 font-bold text-gray-600 hover:bg-gray-100 rounded-lg">CANCEL</button>
-                <button onclick="saveSettings()" class="px-6 py-2 bg-black text-white font-bold rounded-lg border-2 border-black hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all">SAVE</button>
+                <button onclick="toggleSettings()" class="px-4 py-2 font-bold text-gray-600 hover:bg-gray-100 rounded-lg" data-i18n="cancel">CANCEL</button>
+                <button onclick="saveSettings()" class="px-6 py-2 bg-black text-white font-bold rounded-lg border-2 border-black hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all" data-i18n="save">SAVE</button>
             </div>
         </div>
     </div>
@@ -590,12 +631,12 @@
                 
                 <div class="space-y-4">
                     <div>
-                        <h3 class="text-xl font-bold mb-2 pixel-font text-theme-card" style="color: var(--text-card)">DESCRIPTION</h3>
+                        <h3 class="text-xl font-bold mb-2 pixel-font text-theme-card" style="color: var(--text-card)" data-i18n="description">DESCRIPTION</h3>
                         <p id="modal-game-description" class="text-lg font-bold text-gray-800 leading-relaxed"></p>
                     </div>
                     
                     <div>
-                        <h3 class="text-xl font-bold mb-2 pixel-font text-theme-card" style="color: var(--text-card)">TAGS</h3>
+                        <h3 class="text-xl font-bold mb-2 pixel-font text-theme-card" style="color: var(--text-card)" data-i18n="tags">TAGS</h3>
                         <div id="modal-game-tags" class="flex flex-wrap gap-2">
                             <!-- Tags injected here -->
                         </div>
@@ -604,11 +645,11 @@
             </div>
 
             <div class="p-6 border-t-4 border-black bg-gray-50 flex justify-end gap-4">
-                <button onclick="closeGameInfo()" class="px-6 py-3 font-bold text-gray-600 hover:bg-gray-200 rounded-xl border-2 border-transparent hover:border-gray-300 transition-all">
+                <button onclick="closeGameInfo()" class="px-6 py-3 font-bold text-gray-600 hover:bg-gray-200 rounded-xl border-2 border-transparent hover:border-gray-300 transition-all" data-i18n="close">
                     CLOSE
                 </button>
                 <button id="modal-play-btn" class="px-8 py-3 bg-theme-accent text-white font-bold rounded-xl border-4 border-black hover:brightness-110 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all flex items-center gap-2">
-                    <i data-lucide="play" class="w-5 h-5"></i> PLAY NOW
+                    <i data-lucide="play" class="w-5 h-5"></i> <span data-i18n="play_now">PLAY NOW</span>
                 </button>
             </div>
         </div>
