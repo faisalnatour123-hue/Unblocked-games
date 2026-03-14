@@ -163,7 +163,7 @@
     "title": "Minecraft",
     "description": "Explore infinite worlds and build everything from the simplest of homes to the grandest of castles in this classic sandbox game.",
     "url": "https://db.quackprep.org/html/minecraft/index.html",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVpdsQYqaRsLn2GNXRJzIQdTLmsqyQmA-jVg&s",
     "tags": ["Sandbox", "Adventure", "3D"]
   },
   {
@@ -171,8 +171,35 @@
     "title": "Race Survival: Arena King",
     "description": "Race, survive, and dominate the arena in this intense car combat game!",
     "url": "https://db.quackprep.org/html/race_survival_arena_king/index.html",
-    "thumbnail": "https://images.unsplash.com/photo-1511994298241-608e28f14fde?auto=format&fit=crop&w=600&q=80",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBLLIxQAhVRkTh4Ud9NOWCWKrSVKc96Wlm5wPICB0N2CZ0AZoCWMP_yf5v5PFGK7Tn6Dfi_JipC7po8T-2lMbQSgvdQUVGzbGBQKYoN4k&s",
     "tags": ["Racing", "Action", "3D"],
     "warningMessage": "The game is russian in default, theres a button on top of the game to change the language!"
+  },
+  {
+    "id": "papas-donuteria",
+    "title": "Papa's Donuteria",
+    "description": "Fry, glaze, and decorate delicious donuts for your customers in Papa's Donuteria!",
+    "url": "https://f.kbhgames.com/RS/game.php?r=//f.kbhgames.com/2014/06/papasdonuteria.swf&w=800&h=600&warnsupport=false&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=204213&mp_game_uid=papas-donuteria&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fpapas-donuteria&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
+    "thumbnail": "https://www2.minijuegosgratis.com/v3/games/thumbnails/204213_1.jpg",
+    "customStyle": "top: -100px; height: calc(100% + 100px);",
+    "tags": ["Papa's", "Cooking", "Strategy"]
+  },
+  {
+    "id": "papas-cheeseria",
+    "title": "Papa's Cheeseria",
+    "description": "Build massive grilled cheese sandwiches and pile on the fries in Papa's Cheeseria!",
+    "url": "https://g2.igroutka.ru/games/164/9XrI4p2SoHqE5iYM/2/papas_cheeseria/?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=209596&mp_game_uid=papas-cheeseria&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fpapas-cheeseria&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
+    "thumbnail": "https://www1.minijuegosgratis.com/v3/games/thumbnails/209596_1.jpg",
+    "customStyle": "top: -100px; height: calc(100% + 100px);",
+    "tags": ["Papa's", "Cooking", "Strategy"]
+  },
+  {
+    "id": "papas-freezeria",
+    "title": "Papa's Freezeria",
+    "description": "Blend and serve refreshing sundaes on Calypso Island in Papa's Freezeria!",
+    "url": "https://www.miniplay.com/helpers/game/sandbox.php?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=18573&mp_game_uid=papa-s-freezeria&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fpapa-s-freezeria&mp_int=1&mp_locale=en_US&mp_player_type=FLASH&mp_player_url=aHR0cHM6Ly93d3cubWluaWp1ZWdvc2dyYXRpcy5jb20vdjMvZ2FtZXMvZ2FtZXMvcHJvZC8xODU3My9pZ3JhLXBhcGEtbHVpLW1vcm96aGVub2Uuc3dm&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=Asia%2FBaghdad&mp_view_type=",
+    "thumbnail": "https://www1.minijuegosgratis.com/v3/games/thumbnails/18573_1.jpg",
+    "customStyle": "top: -100px; height: calc(100% + 100px);",
+    "tags": ["Papa's", "Cooking", "Strategy"]
   }
 ]

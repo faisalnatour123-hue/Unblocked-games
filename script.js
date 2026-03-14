@@ -1,4 +1,4 @@
-// Game data will be fetched from games.json
+// Game data will be fetched from data.json
 let games = [];
 let filteredGames = [];
 let favorites = new Set();
@@ -13,6 +13,7 @@ const translations = {
         warning_russian: "The game is russian in default, theres a button on top of the game to change the language!",
         search_placeholder: "Search games...",
         all_games: "ALL GAMES",
+        featured_games: "FEATURED GAMES",
         favorites: "FAVORITES",
         sort: "SORT",
         sort_newest: "Newest First",
@@ -47,6 +48,7 @@ const translations = {
         warning_russian: "El juego está en ruso por defecto, ¡hay un botón en la parte superior para cambiar el idioma!",
         search_placeholder: "Buscar juegos...",
         all_games: "TODOS LOS JUEGOS",
+        featured_games: "JUEGOS DESTACADOS",
         favorites: "FAVORITOS",
         sort: "ORDENAR",
         sort_newest: "Más nuevos",
@@ -81,6 +83,7 @@ const translations = {
         warning_russian: "Le jeu est en russe par défaut, il y a un bouton en haut pour changer la langue !",
         search_placeholder: "Rechercher des jeux...",
         all_games: "TOUS LES JEUX",
+        featured_games: "JEUX EN VEDETTE",
         favorites: "FAVORIS",
         sort: "TRIER",
         sort_newest: "Plus récents",
@@ -115,6 +118,7 @@ const translations = {
         warning_russian: "Игра по умолчанию на русском языке, наверху есть кнопка для изменения языка!",
         search_placeholder: "Поиск игр...",
         all_games: "ВСЕ ИГРЫ",
+        featured_games: "РЕКОМЕНДУЕМЫЕ ИГРЫ",
         favorites: "ИЗБРАННОЕ",
         sort: "СОРТИРОВКА",
         sort_newest: "Сначала новые",
@@ -149,6 +153,7 @@ const translations = {
         warning_russian: "اللعبة باللغة الروسية افتراضيًا، يوجد زر أعلى اللعبة لتغيير اللغة!",
         search_placeholder: "البحث عن ألعاب...",
         all_games: "كل الألعاب",
+        featured_games: "ألعاب مميزة",
         favorites: "المفضلة",
         sort: "ترتيب",
         sort_newest: "الأحدث أولاً",
@@ -183,6 +188,7 @@ const translations = {
         warning_russian: "Das Spiel ist standardmäßig auf Russisch, es gibt eine Schaltfläche oben, um die Sprache zu ändern!",
         search_placeholder: "Spiele suchen...",
         all_games: "ALLE SPIELE",
+        featured_games: "EMPFOHLENE SPIELE",
         favorites: "FAVORITEN",
         sort: "SORTIEREN",
         sort_newest: "Neueste zuerst",
@@ -313,6 +319,34 @@ const gameTranslations = {
         ar: { desc: "اشوِ، وكدس، وقدم البرغر لجميع عملائك المجانين! أدر أفضل متجر برغر في المدينة." },
         de: { desc: "Grille, staple und serviere Burger an all deine verrückten Kunden! Leite den besten Burgerladen der Stadt." }
     },
+    "papas-hotdoggeria": {
+        es: { desc: "¡Asa y sirve perritos calientes y otros bocadillos de estadio en Papa's Hot Doggeria! Mantén a los fans contentos con comida deliciosa." },
+        fr: { desc: "Faites griller et servez des hot-dogs et autres collations de stade dans Papa's Hot Doggeria ! Gardez les fans heureux avec de la nourriture délicieuse." },
+        ru: { desc: "Жарьте и подавайте хот-доги и другие стадионные закуски в Papa's Hot Doggeria! Радуйте болельщиков вкусной едой." },
+        ar: { desc: "اشوِ وقدم النقانق وغيرها من وجبات الملعب الخفيفة في Papa's Hot Doggeria! حافظ على سعادة المشجعين بالطعام اللذيذ." },
+        de: { desc: "Grille und serviere Hot Dogs und andere Stadion-Snacks in Papa's Hot Doggeria! Halte die Fans mit leckerem Essen bei Laune." }
+    },
+    "papas-donuteria": {
+        es: { desc: "¡Fríe, glasea y decora deliciosas donas para tus clientes en Papa's Donuteria!" },
+        fr: { desc: "Faites frire, glacer et décorer de délicieux beignets pour vos clients dans Papa's Donuteria !" },
+        ru: { desc: "Жарьте, глазируйте и украшайте вкусные пончики для своих клиентов в Papa's Donuteria!" },
+        ar: { desc: "اقلِ الدونات اللذيذة وزينها لعملائك في Papa's Donuteria!" },
+        de: { desc: "Frittiere, glasiere und dekoriere leckere Donuts für deine Kunden in Papa's Donuteria!" }
+    },
+    "papas-cheeseria": {
+        es: { desc: "¡Prepara sándwiches de queso a la parrilla gigantes y apila papas fritas en Papa's Cheeseria!" },
+        fr: { desc: "Préparez d'énormes sandwichs au fromage grillé et empilez les frites dans Papa's Cheeseria !" },
+        ru: { desc: "Готовьте огромные сэндвичи с сыром на гриле и накладывайте горы картофеля фри в Papa's Cheeseria!" },
+        ar: { desc: "قم ببناء شطائر جبن مشوية ضخمة وكدس البطاطس المقلية في Papa's Cheeseria!" },
+        de: { desc: "Baue riesige gegrillte Käsesandwiches und staple Pommes in Papa's Cheeseria!" }
+    },
+    "papas-freezeria": {
+        es: { desc: "¡Mezcla y sirve refrescantes helados en la isla Calypso en Papa's Freezeria!" },
+        fr: { desc: "Mélangez et servez des coupes glacées rafraîchissantes sur l'île de Calypso dans Papa's Freezeria !" },
+        ru: { desc: "Смешивайте и подавайте освежающее мороженое на острове Калипсо в Papa's Freezeria!" },
+        ar: { desc: "اخلط وقدم مثلجات منعشة في جزيرة كاليبسو في Papa's Freezeria!" },
+        de: { desc: "Mische und serviere erfrischende Eisbecher auf Calypso Island in Papa's Freezeria!" }
+    },
     "a-small-world-cup": {
         es: { desc: "Un divertido y caótico juego de fútbol basado en físicas donde controlas a un jugador ragdoll para anotar goles." },
         fr: { desc: "Un jeu de football amusant et chaotique basé sur la physique où vous contrôlez un joueur ragdoll pour marquer des buts." },
@@ -391,6 +425,7 @@ function setLanguage(lang) {
     applyLanguage();
     toggleLanguageMenu();
     renderGames(); // Re-render to update translated text in cards
+    renderFeaturedGames();
 }
 
 function applyLanguage() {
@@ -434,6 +469,8 @@ function applyLanguage() {
 
 // DOM Elements
 const gamesGrid = document.getElementById('games-grid');
+const featuredGamesGrid = document.getElementById('featured-games-grid');
+const featuredGamesContainer = document.getElementById('featured-games-container');
 const categoryFilters = document.getElementById('category-filters');
 const gameListView = document.getElementById('game-list-view');
 const gamePlayerView = document.getElementById('game-player-view');
@@ -463,12 +500,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     applyLanguage();
 
     try {
-        const response = await fetch('games.json');
+        const response = await fetch('/data.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         games = await response.json();
         filteredGames = [...games];
         
         setupCategoryFilters();
         renderGames();
+        renderFeaturedGames();
     } catch (error) {
         console.error('Error loading games:', error);
         gamesGrid.innerHTML = '<p class="text-red-500 text-center col-span-full">Failed to load games. Please try again later.</p>';
@@ -633,6 +674,62 @@ function setupCategoryFilters() {
         btn.onclick = () => filterGames(tag);
         categoryFilters.appendChild(btn);
     });
+
+    // Add drag to scroll functionality
+    const wrapper = document.getElementById('category-filters-wrapper');
+    if (wrapper) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false;
+
+        wrapper.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            wrapper.classList.add('active');
+            startX = e.pageX - wrapper.offsetLeft;
+            scrollLeft = wrapper.scrollLeft;
+        });
+        wrapper.addEventListener('mouseleave', () => {
+            isDown = false;
+            wrapper.classList.remove('active');
+        });
+        wrapper.addEventListener('mouseup', () => {
+            isDown = false;
+            wrapper.classList.remove('active');
+        });
+        wrapper.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - wrapper.offsetLeft;
+            const walk = (x - startX) * 2; // Scroll-fast
+            if (Math.abs(walk) > 5) {
+                isDragging = true;
+            }
+            wrapper.scrollLeft = scrollLeft - walk;
+        });
+
+        // Prevent click if dragging
+        wrapper.addEventListener('click', (e) => {
+            if (isDragging) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }, { capture: true });
+
+        // Add mouse wheel scrolling
+        wrapper.addEventListener('wheel', (e) => {
+            if (e.deltaY !== 0) {
+                const atLeftEdge = wrapper.scrollLeft === 0 && e.deltaY < 0;
+                const atRightEdge = Math.ceil(wrapper.scrollLeft) >= wrapper.scrollWidth - wrapper.clientWidth && e.deltaY > 0;
+                
+                if (!atLeftEdge && !atRightEdge) {
+                    e.preventDefault();
+                    wrapper.scrollLeft += e.deltaY;
+                }
+            }
+        }, { passive: false });
+    }
 }
 
 function filterGames(category) {
@@ -667,7 +764,7 @@ function openGameInfo(e, gameId) {
     document.getElementById('modal-game-description').textContent = getTranslatedText(game, 'description');
     
     const thumb = document.getElementById('modal-game-thumbnail');
-    thumb.src = game.thumbnail;
+    thumb.src = game.thumbnail || `https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}`;
     thumb.onerror = () => {
         thumb.src = `https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}`;
     };
@@ -682,6 +779,51 @@ function openGameInfo(e, gameId) {
             tagsContainer.appendChild(span);
         });
     }
+
+    // Setup Rating UI
+    const starRating = document.getElementById('star-rating');
+    const ratingAverage = document.getElementById('rating-average');
+    const ratingCount = document.getElementById('rating-count');
+    
+    // Reset
+    ratingAverage.textContent = '0.0';
+    ratingCount.textContent = '(0)';
+    Array.from(starRating.children).forEach(star => {
+        star.classList.remove('text-yellow-400', 'fill-yellow-400');
+        star.classList.add('text-gray-300');
+    });
+
+    if (window.currentRatingUnsubscribe) {
+        window.currentRatingUnsubscribe();
+    }
+
+    if (window.getGameRatings) {
+        window.currentRatingUnsubscribe = window.getGameRatings(gameId, (data) => {
+            ratingAverage.textContent = data.average;
+            ratingCount.textContent = `(${data.count})`;
+            
+            // Update stars based on user rating or average
+            const displayRating = data.userRating || Math.round(data.average);
+            Array.from(starRating.children).forEach((star, index) => {
+                if (index < displayRating) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400', 'fill-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400', 'fill-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        });
+    }
+
+    // Add click listeners to stars
+    Array.from(starRating.children).forEach(star => {
+        star.onclick = () => {
+            if (window.rateGame) {
+                window.rateGame(gameId, parseInt(star.getAttribute('data-rating')));
+            }
+        };
+    });
 
     const playBtn = document.getElementById('modal-play-btn');
     playBtn.onclick = () => {
@@ -705,7 +847,7 @@ function createGameCard(game) {
     card.innerHTML = `
         <div class="h-40 w-full bg-theme-main relative overflow-hidden border-b-4 border-black">
             <img 
-                src="${game.thumbnail}" 
+                src="${game.thumbnail || `https://placehold.co/600x400?text=${encodeURIComponent(game.title).replace(/'/g, '%27')}`}" 
                 alt="${game.title}"
                 class="w-full h-full object-fill"
                 referrerPolicy="no-referrer"
@@ -731,6 +873,14 @@ function createGameCard(game) {
 function renderGames() {
     gamesGrid.innerHTML = '';
     
+    if (featuredGamesContainer) {
+        if (currentCategory === 'all' && (!searchInputDesktop.value && !searchInputMobile.value)) {
+            featuredGamesContainer.classList.remove('hidden');
+        } else {
+            featuredGamesContainer.classList.add('hidden');
+        }
+    }
+    
     if (filteredGames.length === 0 && games.length > 0) {
         if (currentCategory === 'favorites') {
              gamesGrid.innerHTML = `<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">${translations[currentLanguage]?.no_favorites || 'NO FAVORITES YET! CLICK THE HEART ICON TO ADD SOME.'}</p></div>`;
@@ -750,6 +900,37 @@ function renderGames() {
 
     filteredGames.forEach(game => {
         gamesGrid.appendChild(createGameCard(game));
+    });
+    lucide.createIcons();
+}
+
+function renderFeaturedGames() {
+    if (!featuredGamesGrid) return;
+    featuredGamesGrid.innerHTML = '';
+    
+    if (games.length === 0) return;
+
+    // Use current date to seed random selection
+    const today = new Date();
+    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+    
+    let currentSeed = seed;
+    const random = () => {
+        let x = Math.sin(currentSeed++) * 10000;
+        return x - Math.floor(x);
+    };
+
+    // Pick 4 featured games
+    const numFeatured = Math.min(4, games.length);
+    const shuffled = [...games];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const featured = shuffled.slice(0, numFeatured);
+
+    featured.forEach(game => {
+        featuredGamesGrid.appendChild(createGameCard(game));
     });
     lucide.createIcons();
 }
@@ -1093,8 +1274,8 @@ const themes = {
     },
     naruto: {
         '--bg-main': '#FF8C00',
-        '--bg-header': '#000000',
-        '--bg-card': '#1a1a1a',
+        '--bg-header': '#1a1a1a',
+        '--bg-card': '#2d2d2d',
         '--bg-accent': '#FF4500',
         '--text-header': '#FF8C00',
         '--text-card': '#FFFFFF',
@@ -1107,8 +1288,8 @@ const themes = {
     one_piece: {
         '--bg-main': '#00BFFF',
         '--bg-header': '#DC143C',
-        '--bg-card': '#FFD700',
-        '--bg-accent': '#FFFFFF',
+        '--bg-card': '#FFF8DC',
+        '--bg-accent': '#FFD700',
         '--text-header': '#FFFFFF',
         '--text-card': '#000000',
         '--bg-image': "url('https://www.transparenttextures.com/patterns/nautical-leather.png')",
@@ -1120,8 +1301,8 @@ const themes = {
     dragon_ball: {
         '--bg-main': '#FF4500',
         '--bg-header': '#00008B',
-        '--bg-card': '#FFFF00',
-        '--bg-accent': '#FFFFFF',
+        '--bg-card': '#FFFACD',
+        '--bg-accent': '#FF8C00',
         '--text-header': '#FFFF00',
         '--text-card': '#000000',
         '--bg-image': "url('https://www.transparenttextures.com/patterns/stardust.png')",
@@ -1131,30 +1312,30 @@ const themes = {
         '--bg-attachment': 'scroll'
     },
     demon_slayer: {
-        '--bg-main': '#2E8B57',
-        '--bg-header': '#000000',
-        '--bg-card': '#FFFFFF',
-        '--bg-accent': '#2E8B57',
+        '--bg-main': '#1a1a1a',
+        '--bg-header': '#111111',
+        '--bg-card': '#F5F5F5',
+        '--bg-accent': '#8B0000',
         '--text-header': '#2E8B57',
         '--text-card': '#000000',
-        '--bg-image': "url('https://www.transparenttextures.com/patterns/checkered-pattern.png')",
-        '--bg-size': 'auto',
+        '--bg-image': "conic-gradient(#1a1a1a 25%, #2E8B57 25% 50%, #1a1a1a 50% 75%, #2E8B57 75%)",
+        '--bg-size': '100px 100px',
         '--bg-repeat': 'repeat',
         '--bg-position': 'top left',
-        '--bg-attachment': 'scroll'
+        '--bg-attachment': 'fixed'
     },
     bleach: {
-        '--bg-main': '#000000',
-        '--bg-header': '#FFFFFF',
-        '--bg-card': '#000000',
-        '--bg-accent': '#FF4500',
-        '--text-header': '#000000',
-        '--text-card': '#FFFFFF',
-        '--bg-image': "url('https://www.transparenttextures.com/patterns/shattered-island.png')",
-        '--bg-size': 'auto',
-        '--bg-repeat': 'repeat',
-        '--bg-position': 'top left',
-        '--bg-attachment': 'scroll'
+        '--bg-main': '#0a0a0a',
+        '--bg-header': '#000000',
+        '--bg-card': '#1a1a1a',
+        '--bg-accent': '#cc0000',
+        '--text-header': '#ffffff',
+        '--text-card': '#ffffff',
+        '--bg-image': "linear-gradient(105deg, transparent 40%, rgba(255, 0, 0, 0.4) 42%, #cccccc 43%, #ffffff 44%, #999999 45%, #222222 45%, #0a0a0a 50%, rgba(255, 0, 0, 0.2) 52%, transparent 55%), linear-gradient(170deg, transparent 65%, rgba(255,255,255,0.05) 65%, rgba(255,255,255,0.1) 70%, transparent 70%), radial-gradient(circle at 50% 50%, #1a0505 0%, #000000 100%)",
+        '--bg-size': '100% 100%',
+        '--bg-repeat': 'no-repeat',
+        '--bg-position': 'center',
+        '--bg-attachment': 'fixed'
     },
     wario: {
         '--bg-main': '#9C59D1',
@@ -1639,6 +1820,13 @@ document.addEventListener('click', (e) => {
     if (sortMenu && !sortMenu.classList.contains('hidden') && !sortMenu.contains(e.target) && !sortButton.contains(e.target)) {
         sortMenu.classList.add('hidden');
     }
+
+    const authMenu = document.getElementById('auth-menu');
+    const authButton = document.getElementById('auth-btn');
+    
+    if (authMenu && !authMenu.classList.contains('hidden') && !authMenu.contains(e.target) && !authButton.contains(e.target)) {
+        authMenu.classList.add('hidden');
+    }
 });
 
 // Load saved theme
@@ -1671,6 +1859,269 @@ function toggleFullscreen() {
     }
     lucide.createIcons();
 }
+
+// Auth and Custom Theme UI Functions
+function toggleAuthMenu() {
+    const menu = document.getElementById('auth-menu');
+    menu.classList.toggle('hidden');
+}
+
+let isSignUpMode = false;
+
+function openAuthModal() {
+    document.getElementById('auth-modal').classList.remove('hidden');
+    document.getElementById('auth-menu').classList.add('hidden');
+}
+
+function closeAuthModal() {
+    document.getElementById('auth-modal').classList.add('hidden');
+    document.getElementById('auth-form').reset();
+    document.getElementById('auth-error').classList.add('hidden');
+}
+
+function toggleAuthMode() {
+    isSignUpMode = !isSignUpMode;
+    const title = document.getElementById('auth-modal-title');
+    const submitBtn = document.getElementById('auth-submit-btn');
+    const toggleBtn = document.getElementById('auth-toggle-btn');
+    
+    const signinIdGroup = document.getElementById('signin-identifier-group');
+    const signinIdInput = document.getElementById('signin-identifier');
+    
+    const signupUserGroup = document.getElementById('signup-username-group');
+    const signupUserInput = document.getElementById('signup-username');
+    
+    const signupEmailGroup = document.getElementById('signup-email-group');
+    const forgotPasswordContainer = document.getElementById('forgot-password-container');
+
+    if (isSignUpMode) {
+        title.textContent = 'Create Account';
+        submitBtn.textContent = 'SIGN UP';
+        toggleBtn.textContent = 'Already have an account? Sign in';
+        
+        signinIdGroup.classList.add('hidden');
+        signinIdInput.required = false;
+        
+        signupUserGroup.classList.remove('hidden');
+        signupUserInput.required = true;
+        
+        signupEmailGroup.classList.remove('hidden');
+        forgotPasswordContainer.classList.add('hidden');
+    } else {
+        title.textContent = 'Sign In';
+        submitBtn.textContent = 'SIGN IN';
+        toggleBtn.textContent = 'Need an account? Sign up';
+        
+        signinIdGroup.classList.remove('hidden');
+        signinIdInput.required = true;
+        
+        signupUserGroup.classList.add('hidden');
+        signupUserInput.required = false;
+        
+        signupEmailGroup.classList.add('hidden');
+        forgotPasswordContainer.classList.remove('hidden');
+    }
+    document.getElementById('auth-error').classList.add('hidden');
+}
+
+window.handleForgotPassword = async function() {
+    const identifier = document.getElementById('signin-identifier').value;
+    const errorDiv = document.getElementById('auth-error');
+    errorDiv.classList.add('hidden');
+
+    if (!identifier) {
+        errorDiv.textContent = "Please enter your email or username in the field above first.";
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        if (window.resetPassword) {
+            await window.resetPassword(identifier);
+            errorDiv.textContent = "Password reset email sent! Check your inbox.";
+            errorDiv.classList.remove('hidden');
+            errorDiv.classList.replace('text-red-600', 'text-green-600');
+            errorDiv.classList.replace('bg-red-100', 'bg-green-100');
+            errorDiv.classList.replace('border-red-600', 'border-green-600');
+            
+            // Reset colors after 5 seconds
+            setTimeout(() => {
+                errorDiv.classList.replace('text-green-600', 'text-red-600');
+                errorDiv.classList.replace('bg-green-100', 'bg-red-100');
+                errorDiv.classList.replace('border-green-600', 'border-red-600');
+                errorDiv.classList.add('hidden');
+            }, 5000);
+        }
+    } catch (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.classList.remove('hidden');
+    }
+};
+
+window.handleAuthSubmit = async function(e) {
+    e.preventDefault();
+    const password = document.getElementById('auth-password').value;
+    const errorDiv = document.getElementById('auth-error');
+    
+    errorDiv.classList.add('hidden');
+    const submitBtn = document.getElementById('auth-submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'PLEASE WAIT...';
+    submitBtn.disabled = true;
+
+    try {
+        if (isSignUpMode) {
+            const username = document.getElementById('signup-username').value;
+            const email = document.getElementById('signup-email').value;
+            if (window.signUpWithEmail) await window.signUpWithEmail(username, email, password);
+        } else {
+            const identifier = document.getElementById('signin-identifier').value;
+            if (window.signInWithEmail) await window.signInWithEmail(identifier, password);
+        }
+        closeAuthModal();
+    } catch (error) {
+        errorDiv.textContent = error.message;
+        errorDiv.classList.remove('hidden');
+    } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+};
+
+function handleAuthAction() {
+    if (window.firebaseAuth && window.firebaseAuth.currentUser) {
+        if (window.signOutUser) window.signOutUser();
+        toggleAuthMenu();
+    } else {
+        openAuthModal();
+    }
+}
+
+window.updateAuthUI = function(user) {
+    const authIcon = document.getElementById('auth-icon');
+    const authAvatar = document.getElementById('auth-avatar');
+    const authUserInfo = document.getElementById('auth-user-info');
+    const authUserName = document.getElementById('auth-user-name');
+    const authActionText = document.getElementById('auth-action-text');
+    const authActionIcon = document.getElementById('auth-action-icon');
+    const customThemeBtn = document.getElementById('custom-theme-btn');
+    const adminDashboardBtn = document.getElementById('admin-dashboard-btn');
+
+    if (user) {
+        if (user.photoURL) {
+            authAvatar.src = user.photoURL;
+            authAvatar.classList.remove('hidden');
+            authIcon.classList.add('hidden');
+        } else {
+            const initial = (user.displayName || user.email || '?').charAt(0).toUpperCase();
+            authAvatar.src = `https://placehold.co/100x100/000000/FFFFFF?text=${initial}`;
+            authAvatar.classList.remove('hidden');
+            authIcon.classList.add('hidden');
+        }
+        
+        authUserInfo.classList.remove('hidden');
+        authUserName.textContent = user.displayName || user.email;
+        authActionText.textContent = 'Sign Out';
+        authActionIcon.setAttribute('data-lucide', 'log-out');
+        customThemeBtn.style.display = 'flex';
+        
+        if (user.email === 'faisalnatour123@gmail.com') {
+            adminDashboardBtn.classList.remove('hidden');
+        } else {
+            adminDashboardBtn.classList.add('hidden');
+        }
+    } else {
+        authAvatar.classList.add('hidden');
+        authIcon.classList.remove('hidden');
+        authUserInfo.classList.add('hidden');
+        authActionText.textContent = 'Sign In';
+        authActionIcon.setAttribute('data-lucide', 'log-in');
+        customThemeBtn.style.display = 'none';
+        adminDashboardBtn.classList.add('hidden');
+    }
+    lucide.createIcons();
+};
+
+window.openAdminModal = function() {
+    document.getElementById('admin-modal').classList.remove('hidden');
+    toggleAuthMenu();
+    if (window.loadAdminUsers) window.loadAdminUsers();
+};
+
+window.closeAdminModal = function() {
+    document.getElementById('admin-modal').classList.add('hidden');
+};
+
+function openCustomThemeModal() {
+    document.getElementById('custom-theme-modal').classList.remove('hidden');
+    toggleThemeMenu();
+}
+
+function closeCustomThemeModal() {
+    document.getElementById('custom-theme-modal').classList.add('hidden');
+}
+
+function applyCustomThemePreview() {
+    const themeData = {
+        bgMain: document.getElementById('ct-bg-main').value,
+        bgHeader: document.getElementById('ct-bg-header').value,
+        bgCard: document.getElementById('ct-bg-card').value,
+        bgAccent: document.getElementById('ct-bg-accent').value,
+        textHeader: document.getElementById('ct-text-header').value,
+        textCard: document.getElementById('ct-text-card').value,
+        bgImage: document.getElementById('ct-bg-image').value
+    };
+    window.applyCustomTheme(themeData);
+}
+
+function saveCustomTheme() {
+    const themeData = {
+        bgMain: document.getElementById('ct-bg-main').value,
+        bgHeader: document.getElementById('ct-bg-header').value,
+        bgCard: document.getElementById('ct-bg-card').value,
+        bgAccent: document.getElementById('ct-bg-accent').value,
+        textHeader: document.getElementById('ct-text-header').value,
+        textCard: document.getElementById('ct-text-card').value,
+        bgImage: document.getElementById('ct-bg-image').value
+    };
+    window.applyCustomTheme(themeData);
+    if (window.saveCustomThemeToDb) {
+        window.saveCustomThemeToDb(themeData);
+    }
+    closeCustomThemeModal();
+}
+
+window.applyCustomTheme = function(themeData) {
+    document.body.className = document.body.className.replace(/theme-\w+/g, '');
+    document.body.classList.add('theme-custom');
+    
+    const root = document.documentElement;
+    root.style.setProperty('--bg-main', themeData.bgMain);
+    root.style.setProperty('--bg-header', themeData.bgHeader);
+    root.style.setProperty('--bg-card', themeData.bgCard);
+    root.style.setProperty('--bg-accent', themeData.bgAccent);
+    root.style.setProperty('--text-header', themeData.textHeader);
+    root.style.setProperty('--text-card', themeData.textCard);
+    
+    if (themeData.bgImage) {
+        root.style.setProperty('--bg-image', `url('${themeData.bgImage}')`);
+        root.style.setProperty('--bg-size', 'cover');
+        root.style.setProperty('--bg-repeat', 'no-repeat');
+        root.style.setProperty('--bg-position', 'center');
+        root.style.setProperty('--bg-attachment', 'fixed');
+    } else {
+        root.style.setProperty('--bg-image', 'none');
+    }
+    
+    // Update inputs if they exist
+    const inputs = ['bg-main', 'bg-header', 'bg-card', 'bg-accent', 'text-header', 'text-card', 'bg-image'];
+    inputs.forEach(id => {
+        const el = document.getElementById(`ct-${id}`);
+        if (el && themeData[id.replace(/-([a-z])/g, g => g[1].toUpperCase())]) {
+            el.value = themeData[id.replace(/-([a-z])/g, g => g[1].toUpperCase())];
+        }
+    });
+};
 
 // Listen for fullscreen changes to update icon
 document.addEventListener('fullscreenchange', () => {

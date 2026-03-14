@@ -280,12 +280,15 @@
                 <div class="relative">
                     <button onclick="toggleThemeMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Change Theme">
                         <i data-lucide="palette" class="w-6 h-6 text-black"></i>
-                        <span class="text-sm" data-i18n="themes">THEMES</span>
+                        <span class="text-sm hidden md:inline" data-i18n="themes">THEMES</span>
                     </button>
                     
                     <!-- Theme Dropdown -->
                     <div id="theme-menu" class="hidden absolute right-0 mt-2 w-64 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50 max-h-96 overflow-y-auto">
                         <div class="p-2 space-y-1">
+                            <button id="custom-theme-btn" onclick="openCustomThemeModal()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2 text-blue-600" style="display: none;">
+                                <i data-lucide="paint-bucket" class="w-4 h-4"></i> Custom Theme
+                            </button>
                             <p class="px-4 py-1 text-xs font-bold text-gray-500 uppercase" data-i18n="theme_featured">Featured</p>
                             <button onclick="setTheme('minecraft')" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
                                 <span class="text-lg">⛏️</span> <span data-i18n="theme_minecraft">Minecraft</span>
@@ -431,9 +434,52 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Auth Button -->
+                <div class="relative">
+                    <button id="auth-btn" onclick="toggleAuthMenu()" class="bg-white p-2 border-4 border-black rounded-lg mario-shadow hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center justify-center min-w-[48px] min-h-[48px]" title="Sign In">
+                        <i data-lucide="user" class="w-6 h-6 text-black" id="auth-icon"></i>
+                        <img id="auth-avatar" src="" class="w-8 h-8 rounded-full hidden border-2 border-black object-cover" alt="Profile" referrerPolicy="no-referrer">
+                    </button>
+                    
+                    <!-- Auth Dropdown -->
+                    <div id="auth-menu" class="hidden absolute right-0 mt-2 w-48 bg-white border-4 border-black rounded-xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] z-50">
+                        <div class="p-2 space-y-1">
+                            <div id="auth-user-info" class="hidden px-4 py-2 border-b-2 border-gray-200 mb-2">
+                                <p id="auth-user-name" class="font-bold text-sm truncate">Name</p>
+                            </div>
+                            <button id="admin-dashboard-btn" onclick="openAdminModal()" class="hidden w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2 text-purple-600">
+                                <i data-lucide="shield" class="w-4 h-4"></i> Admin Panel
+                            </button>
+                            <button id="auth-action-btn" onclick="handleAuthAction()" class="w-full text-left px-4 py-2 font-bold hover:bg-gray-200 rounded flex items-center gap-2">
+                                <i data-lucide="log-in" class="w-4 h-4" id="auth-action-icon"></i> <span id="auth-action-text">Sign In</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
+
+    <!-- Admin Modal -->
+    <div id="admin-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-theme-main w-full max-w-4xl rounded-2xl border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-6 border-b-4 border-black bg-theme-accent flex justify-between items-center transition-colors duration-300">
+                <h2 class="text-3xl font-black uppercase tracking-tight text-black flex items-center gap-3">
+                    <i data-lucide="shield" class="w-8 h-8"></i> Admin Dashboard
+                </h2>
+                <button onclick="closeAdminModal()" class="p-2 hover:bg-black/10 rounded-full transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto bg-theme-card flex-1 transition-colors duration-300">
+                <h3 class="text-xl font-bold mb-4 text-theme-card" style="color: var(--text-card)">Registered Users</h3>
+                <div id="admin-users-list" class="space-y-3">
+                    <div class="text-center p-4 font-bold text-theme-card" style="color: var(--text-card)">Loading users...</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
@@ -441,7 +487,7 @@
         <!-- Game List View -->
         <div id="game-list-view">
             <!-- Category Filters (Tags) - Moved to top -->
-            <div class="mb-8 overflow-x-auto pb-4 scrollbar-hide">
+            <div id="category-filters-wrapper" class="mb-8 overflow-x-auto pb-4 scrollbar-hide cursor-grab active:cursor-grabbing">
                 <div class="flex gap-3 min-w-max" id="category-filters">
                     <button onclick="filterGames('all')" class="filter-btn active px-6 py-2 bg-theme-card text-theme-card font-bold border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] transition-all" data-category="all">
                         <span data-i18n="all_games">ALL GAMES</span>
@@ -470,14 +516,24 @@
 
 
 
-            <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Games will be injected here -->
+            <div id="featured-games-container">
+                <div class="mb-8 flex items-center justify-between">
+                    <h2 class="text-3xl font-bold pixel-font text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                        <i data-lucide="star" class="inline-block w-8 h-8 mr-2 text-yellow-400"></i>
+                        <span data-i18n="featured_games">FEATURED GAMES</span>
+                    </h2>
+                </div>
+                <div id="featured-games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
+                    <!-- Featured Games will be injected here -->
+                </div>
             </div>
 
-            <!-- Recently Played Section Removed -->
-
-            <!-- Sort Button Row -->
-            <div class="flex justify-end mb-4">
+            <div class="mb-8 flex items-center justify-between">
+                <h2 class="text-3xl font-bold pixel-font text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                    <i data-lucide="gamepad-2" class="inline-block w-8 h-8 mr-2 text-theme-accent"></i>
+                    <span data-i18n="all_games">ALL GAMES</span>
+                </h2>
+                <!-- Sort Button Row -->
                 <div class="relative">
                     <button onclick="toggleSortMenu()" class="bg-white px-4 py-2 border-4 border-black rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:bg-gray-100 active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 font-bold" title="Sort Games">
                         <i data-lucide="arrow-up-down" class="w-5 h-5 text-black"></i>
@@ -630,10 +686,22 @@
                 </div>
                 
                 <div class="space-y-4">
-                    <div>
+                    <div class="flex items-center justify-between">
                         <h3 class="text-xl font-bold mb-2 pixel-font text-theme-card" style="color: var(--text-card)" data-i18n="description">DESCRIPTION</h3>
-                        <p id="modal-game-description" class="text-lg font-bold text-gray-800 leading-relaxed"></p>
+                        <div class="flex items-center gap-2" id="game-rating-container">
+                            <div class="flex" id="star-rating">
+                                <i data-lucide="star" class="w-6 h-6 text-gray-300 cursor-pointer hover:text-yellow-400 transition-colors" data-rating="1"></i>
+                                <i data-lucide="star" class="w-6 h-6 text-gray-300 cursor-pointer hover:text-yellow-400 transition-colors" data-rating="2"></i>
+                                <i data-lucide="star" class="w-6 h-6 text-gray-300 cursor-pointer hover:text-yellow-400 transition-colors" data-rating="3"></i>
+                                <i data-lucide="star" class="w-6 h-6 text-gray-300 cursor-pointer hover:text-yellow-400 transition-colors" data-rating="4"></i>
+                                <i data-lucide="star" class="w-6 h-6 text-gray-300 cursor-pointer hover:text-yellow-400 transition-colors" data-rating="5"></i>
+                            </div>
+                            <span id="rating-average" class="font-bold text-gray-600">0.0</span>
+                            <span id="rating-count" class="text-sm text-gray-500">(0)</span>
+                        </div>
                     </div>
+                    <p id="modal-game-description" class="text-lg font-bold text-gray-800 leading-relaxed"></p>
+                </div>
                     
                     <div>
                         <h3 class="text-xl font-bold mb-2 pixel-font text-theme-card" style="color: var(--text-card)" data-i18n="tags">TAGS</h3>
@@ -655,6 +723,104 @@
         </div>
     </div>
 
+    <!-- Custom Theme Modal -->
+    <div id="custom-theme-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white border-4 border-black rounded-xl w-full max-w-md shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
+            <div class="flex justify-between items-center p-6 border-b-4 border-black bg-theme-header text-theme-header">
+                <h2 class="text-xl font-bold pixel-font">Custom Theme</h2>
+                <button onclick="closeCustomThemeModal()" class="hover:bg-white/20 p-1 rounded transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div>
+                    <label class="block font-bold mb-2">Background Image URL</label>
+                    <input type="text" id="ct-bg-image" class="w-full p-2 border-2 border-black rounded" placeholder="https://example.com/image.png">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold mb-2">Main Background</label>
+                        <input type="color" id="ct-bg-main" class="w-full h-10 border-2 border-black rounded cursor-pointer" value="#ffffff">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Header Background</label>
+                        <input type="color" id="ct-bg-header" class="w-full h-10 border-2 border-black rounded cursor-pointer" value="#1a1a1a">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Card Background</label>
+                        <input type="color" id="ct-bg-card" class="w-full h-10 border-2 border-black rounded cursor-pointer" value="#f3f4f6">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Accent Color</label>
+                        <input type="color" id="ct-bg-accent" class="w-full h-10 border-2 border-black rounded cursor-pointer" value="#e5e7eb">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Header Text</label>
+                        <input type="color" id="ct-text-header" class="w-full h-10 border-2 border-black rounded cursor-pointer" value="#ffffff">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Card Text</label>
+                        <input type="color" id="ct-text-card" class="w-full h-10 border-2 border-black rounded cursor-pointer" value="#000000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 border-t-4 border-black bg-gray-50 flex justify-end gap-4">
+                <button onclick="applyCustomThemePreview()" class="px-4 py-2 font-bold text-gray-600 hover:bg-gray-200 rounded-xl border-2 border-transparent transition-all">
+                    PREVIEW
+                </button>
+                <button onclick="saveCustomTheme()" class="px-6 py-2 bg-black text-white font-bold rounded-xl border-2 border-black hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all">
+                    SAVE THEME
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="hidden fixed inset-0 bg-black/50 z-[60] flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-white border-4 border-black rounded-xl w-full max-w-md shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
+            <div class="flex justify-between items-center p-6 border-b-4 border-black bg-theme-header text-theme-header transition-colors duration-300">
+                <h2 id="auth-modal-title" class="text-2xl font-bold pixel-font truncate pr-4">Sign In</h2>
+                <button onclick="closeAuthModal()" class="hover:bg-white/20 p-1 rounded transition-colors">
+                    <i data-lucide="x" class="w-8 h-8"></i>
+                </button>
+            </div>
+            <div class="p-6 bg-theme-card transition-colors duration-300">
+                <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4">
+                    <div id="signin-identifier-group">
+                        <label class="block font-bold mb-2 text-theme-card" style="color: var(--text-card)">Username or Email</label>
+                        <input type="text" id="signin-identifier" class="w-full p-3 border-4 border-black rounded-xl font-bold" placeholder="Enter username or email">
+                    </div>
+                    <div id="signup-username-group" class="hidden">
+                        <label class="block font-bold mb-2 text-theme-card" style="color: var(--text-card)">Username</label>
+                        <input type="text" id="signup-username" class="w-full p-3 border-4 border-black rounded-xl font-bold" placeholder="Enter username">
+                    </div>
+                    <div id="signup-email-group" class="hidden">
+                        <label class="block font-bold mb-2 text-theme-card" style="color: var(--text-card)">Email <span class="text-sm font-normal text-gray-500">(Optional)</span></label>
+                        <input type="email" id="signup-email" class="w-full p-3 border-4 border-black rounded-xl font-bold" placeholder="Enter email (optional)">
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2 text-theme-card" style="color: var(--text-card)">Password</label>
+                        <input type="password" id="auth-password" required class="w-full p-3 border-4 border-black rounded-xl font-bold" placeholder="Enter password">
+                        <div class="text-right mt-2" id="forgot-password-container">
+                            <button type="button" onclick="handleForgotPassword()" class="text-sm font-bold text-blue-600 hover:underline">Forgot password?</button>
+                        </div>
+                    </div>
+                    <div id="auth-error" class="text-red-600 font-bold hidden p-3 bg-red-100 border-2 border-red-600 rounded-xl"></div>
+                    <button type="submit" id="auth-submit-btn" class="w-full py-3 bg-black text-white font-bold rounded-xl border-4 border-black hover:bg-gray-800 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] active:translate-y-1 active:shadow-none transition-all">
+                        SIGN IN
+                    </button>
+                </form>
+                <div class="mt-6 text-center">
+                    <button onclick="toggleAuthMode()" id="auth-toggle-btn" class="text-blue-600 font-bold hover:underline">
+                        Need an account? Sign up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- City Boy Easter Egg -->
     <div id="city-boy-easter-egg" class="fixed inset-0 z-[100] hidden bg-black flex items-center justify-center">
         <div id="city-boy-video" class="w-full h-full"></div>
@@ -662,5 +828,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script type="module" src="firebase.js"></script>
 </body>
 </html>
