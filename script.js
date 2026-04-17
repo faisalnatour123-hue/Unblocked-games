@@ -500,7 +500,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     applyLanguage();
 
     try {
-        const response = await fetch('/data.json');
+        const response = await fetch('./data.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -779,51 +779,6 @@ function openGameInfo(e, gameId) {
             tagsContainer.appendChild(span);
         });
     }
-
-    // Setup Rating UI
-    const starRating = document.getElementById('star-rating');
-    const ratingAverage = document.getElementById('rating-average');
-    const ratingCount = document.getElementById('rating-count');
-    
-    // Reset
-    ratingAverage.textContent = '0.0';
-    ratingCount.textContent = '(0)';
-    Array.from(starRating.children).forEach(star => {
-        star.classList.remove('text-yellow-400', 'fill-yellow-400');
-        star.classList.add('text-gray-300');
-    });
-
-    if (window.currentRatingUnsubscribe) {
-        window.currentRatingUnsubscribe();
-    }
-
-    if (window.getGameRatings) {
-        window.currentRatingUnsubscribe = window.getGameRatings(gameId, (data) => {
-            ratingAverage.textContent = data.average;
-            ratingCount.textContent = `(${data.count})`;
-            
-            // Update stars based on user rating or average
-            const displayRating = data.userRating || Math.round(data.average);
-            Array.from(starRating.children).forEach((star, index) => {
-                if (index < displayRating) {
-                    star.classList.remove('text-gray-300');
-                    star.classList.add('text-yellow-400', 'fill-yellow-400');
-                } else {
-                    star.classList.remove('text-yellow-400', 'fill-yellow-400');
-                    star.classList.add('text-gray-300');
-                }
-            });
-        });
-    }
-
-    // Add click listeners to stars
-    Array.from(starRating.children).forEach(star => {
-        star.onclick = () => {
-            if (window.rateGame) {
-                window.rateGame(gameId, parseInt(star.getAttribute('data-rating')));
-            }
-        };
-    });
 
     const playBtn = document.getElementById('modal-play-btn');
     playBtn.onclick = () => {
@@ -1860,198 +1815,6 @@ function toggleFullscreen() {
     lucide.createIcons();
 }
 
-// Auth and Custom Theme UI Functions
-function toggleAuthMenu() {
-    const menu = document.getElementById('auth-menu');
-    menu.classList.toggle('hidden');
-}
-
-let isSignUpMode = false;
-
-function openAuthModal() {
-    document.getElementById('auth-modal').classList.remove('hidden');
-    document.getElementById('auth-menu').classList.add('hidden');
-}
-
-function closeAuthModal() {
-    document.getElementById('auth-modal').classList.add('hidden');
-    document.getElementById('auth-form').reset();
-    document.getElementById('auth-error').classList.add('hidden');
-}
-
-function toggleAuthMode() {
-    isSignUpMode = !isSignUpMode;
-    const title = document.getElementById('auth-modal-title');
-    const submitBtn = document.getElementById('auth-submit-btn');
-    const toggleBtn = document.getElementById('auth-toggle-btn');
-    
-    const signinIdGroup = document.getElementById('signin-identifier-group');
-    const signinIdInput = document.getElementById('signin-identifier');
-    
-    const signupUserGroup = document.getElementById('signup-username-group');
-    const signupUserInput = document.getElementById('signup-username');
-    
-    const signupEmailGroup = document.getElementById('signup-email-group');
-    const forgotPasswordContainer = document.getElementById('forgot-password-container');
-
-    if (isSignUpMode) {
-        title.textContent = 'Create Account';
-        submitBtn.textContent = 'SIGN UP';
-        toggleBtn.textContent = 'Already have an account? Sign in';
-        
-        signinIdGroup.classList.add('hidden');
-        signinIdInput.required = false;
-        
-        signupUserGroup.classList.remove('hidden');
-        signupUserInput.required = true;
-        
-        signupEmailGroup.classList.remove('hidden');
-        forgotPasswordContainer.classList.add('hidden');
-    } else {
-        title.textContent = 'Sign In';
-        submitBtn.textContent = 'SIGN IN';
-        toggleBtn.textContent = 'Need an account? Sign up';
-        
-        signinIdGroup.classList.remove('hidden');
-        signinIdInput.required = true;
-        
-        signupUserGroup.classList.add('hidden');
-        signupUserInput.required = false;
-        
-        signupEmailGroup.classList.add('hidden');
-        forgotPasswordContainer.classList.remove('hidden');
-    }
-    document.getElementById('auth-error').classList.add('hidden');
-}
-
-window.handleForgotPassword = async function() {
-    const identifier = document.getElementById('signin-identifier').value;
-    const errorDiv = document.getElementById('auth-error');
-    errorDiv.classList.add('hidden');
-
-    if (!identifier) {
-        errorDiv.textContent = "Please enter your email or username in the field above first.";
-        errorDiv.classList.remove('hidden');
-        return;
-    }
-
-    try {
-        if (window.resetPassword) {
-            await window.resetPassword(identifier);
-            errorDiv.textContent = "Password reset email sent! Check your inbox.";
-            errorDiv.classList.remove('hidden');
-            errorDiv.classList.replace('text-red-600', 'text-green-600');
-            errorDiv.classList.replace('bg-red-100', 'bg-green-100');
-            errorDiv.classList.replace('border-red-600', 'border-green-600');
-            
-            // Reset colors after 5 seconds
-            setTimeout(() => {
-                errorDiv.classList.replace('text-green-600', 'text-red-600');
-                errorDiv.classList.replace('bg-green-100', 'bg-red-100');
-                errorDiv.classList.replace('border-green-600', 'border-red-600');
-                errorDiv.classList.add('hidden');
-            }, 5000);
-        }
-    } catch (error) {
-        errorDiv.textContent = error.message;
-        errorDiv.classList.remove('hidden');
-    }
-};
-
-window.handleAuthSubmit = async function(e) {
-    e.preventDefault();
-    const password = document.getElementById('auth-password').value;
-    const errorDiv = document.getElementById('auth-error');
-    
-    errorDiv.classList.add('hidden');
-    const submitBtn = document.getElementById('auth-submit-btn');
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'PLEASE WAIT...';
-    submitBtn.disabled = true;
-
-    try {
-        if (isSignUpMode) {
-            const username = document.getElementById('signup-username').value;
-            const email = document.getElementById('signup-email').value;
-            if (window.signUpWithEmail) await window.signUpWithEmail(username, email, password);
-        } else {
-            const identifier = document.getElementById('signin-identifier').value;
-            if (window.signInWithEmail) await window.signInWithEmail(identifier, password);
-        }
-        closeAuthModal();
-    } catch (error) {
-        errorDiv.textContent = error.message;
-        errorDiv.classList.remove('hidden');
-    } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }
-};
-
-function handleAuthAction() {
-    if (window.firebaseAuth && window.firebaseAuth.currentUser) {
-        if (window.signOutUser) window.signOutUser();
-        toggleAuthMenu();
-    } else {
-        openAuthModal();
-    }
-}
-
-window.updateAuthUI = function(user) {
-    const authIcon = document.getElementById('auth-icon');
-    const authAvatar = document.getElementById('auth-avatar');
-    const authUserInfo = document.getElementById('auth-user-info');
-    const authUserName = document.getElementById('auth-user-name');
-    const authActionText = document.getElementById('auth-action-text');
-    const authActionIcon = document.getElementById('auth-action-icon');
-    const customThemeBtn = document.getElementById('custom-theme-btn');
-    const adminDashboardBtn = document.getElementById('admin-dashboard-btn');
-
-    if (user) {
-        if (user.photoURL) {
-            authAvatar.src = user.photoURL;
-            authAvatar.classList.remove('hidden');
-            authIcon.classList.add('hidden');
-        } else {
-            const initial = (user.displayName || user.email || '?').charAt(0).toUpperCase();
-            authAvatar.src = `https://placehold.co/100x100/000000/FFFFFF?text=${initial}`;
-            authAvatar.classList.remove('hidden');
-            authIcon.classList.add('hidden');
-        }
-        
-        authUserInfo.classList.remove('hidden');
-        authUserName.textContent = user.displayName || user.email;
-        authActionText.textContent = 'Sign Out';
-        authActionIcon.setAttribute('data-lucide', 'log-out');
-        customThemeBtn.style.display = 'flex';
-        
-        if (user.email === 'faisalnatour123@gmail.com') {
-            adminDashboardBtn.classList.remove('hidden');
-        } else {
-            adminDashboardBtn.classList.add('hidden');
-        }
-    } else {
-        authAvatar.classList.add('hidden');
-        authIcon.classList.remove('hidden');
-        authUserInfo.classList.add('hidden');
-        authActionText.textContent = 'Sign In';
-        authActionIcon.setAttribute('data-lucide', 'log-in');
-        customThemeBtn.style.display = 'none';
-        adminDashboardBtn.classList.add('hidden');
-    }
-    lucide.createIcons();
-};
-
-window.openAdminModal = function() {
-    document.getElementById('admin-modal').classList.remove('hidden');
-    toggleAuthMenu();
-    if (window.loadAdminUsers) window.loadAdminUsers();
-};
-
-window.closeAdminModal = function() {
-    document.getElementById('admin-modal').classList.add('hidden');
-};
-
 function openCustomThemeModal() {
     document.getElementById('custom-theme-modal').classList.remove('hidden');
     toggleThemeMenu();
@@ -2072,23 +1835,6 @@ function applyCustomThemePreview() {
         bgImage: document.getElementById('ct-bg-image').value
     };
     window.applyCustomTheme(themeData);
-}
-
-function saveCustomTheme() {
-    const themeData = {
-        bgMain: document.getElementById('ct-bg-main').value,
-        bgHeader: document.getElementById('ct-bg-header').value,
-        bgCard: document.getElementById('ct-bg-card').value,
-        bgAccent: document.getElementById('ct-bg-accent').value,
-        textHeader: document.getElementById('ct-text-header').value,
-        textCard: document.getElementById('ct-text-card').value,
-        bgImage: document.getElementById('ct-bg-image').value
-    };
-    window.applyCustomTheme(themeData);
-    if (window.saveCustomThemeToDb) {
-        window.saveCustomThemeToDb(themeData);
-    }
-    closeCustomThemeModal();
 }
 
 window.applyCustomTheme = function(themeData) {
@@ -2133,3 +1879,23 @@ document.addEventListener('fullscreenchange', () => {
         lucide.createIcons();
     }
 });
+
+// Expose functions to window for onclick handlers
+window.showGameList = showGameList;
+window.playRandomGame = playRandomGame;
+window.toggleSettings = toggleSettings;
+window.toggleLanguageMenu = toggleLanguageMenu;
+window.setLanguage = setLanguage;
+window.toggleThemeMenu = toggleThemeMenu;
+window.openCustomThemeModal = openCustomThemeModal;
+window.setTheme = setTheme;
+window.filterGames = filterGames;
+window.toggleSortMenu = toggleSortMenu;
+window.sortGames = sortGames;
+window.clearSearch = clearSearch;
+window.toggleFullscreen = toggleFullscreen;
+window.saveSettings = saveSettings;
+window.closeGameInfo = closeGameInfo;
+window.closeCustomThemeModal = closeCustomThemeModal;
+window.applyCustomThemePreview = applyCustomThemePreview;
+window.closeCityBoy = closeCityBoy;

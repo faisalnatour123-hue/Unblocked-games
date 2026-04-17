@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Simple unblocked games site",
   "scripts": {
-    "build": "echo 'No build step required for static site'",
+    "build": "vite build",
     "dev": "vite"
   },
   "dependencies": {
