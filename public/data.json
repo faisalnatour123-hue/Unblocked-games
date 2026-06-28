@@ -201,5 +201,24 @@
     "thumbnail": "https://www1.minijuegosgratis.com/v3/games/thumbnails/18573_1.jpg",
     "customStyle": "top: -100px; height: calc(100% + 100px);",
     "tags": ["Papa's", "Cooking", "Strategy"]
+  },
+  {
+    "id": "mario-bros",
+    "title": "Mario Bros",
+    "description": "Play the classic Mario Bros game.",
+    "url": "https://cbgamesdev.github.io/chilibowlflash/example/mariobros.html",
+    "width": 960,
+    "height": 700,
+    "scrolling": "no",
+    "allowtransparency": "true",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Super_Mario_Bros._box.png/220px-Super_Mario_Bros._box.png",
+    "tags": ["Retro", "Arcade"],
+    "controls": [
+      { "key": "A", "action": "Jump" },
+      { "key": "S", "action": "Run / Interact" },
+      { "key": "Arrows", "action": "Move" },
+      { "key": "Enter", "action": "Start" },
+      { "key": "Shift", "action": "Select" }
+    ]
   }
 ]

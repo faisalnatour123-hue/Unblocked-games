@@ -215,8 +215,8 @@
     <header class="bg-theme-header border-b-4 border-black sticky top-0 z-10 shadow-lg transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="showGameList()">
-                <div class="bg-white p-2 border-4 border-black rounded-lg mario-shadow flex items-center justify-center w-12 h-12" id="logo-container">
-                    <i data-lucide="gamepad-2" class="text-theme-card w-8 h-8" id="app-logo"></i>
+                <div class="bg-black p-1 border-4 border-black rounded-lg mario-shadow flex items-center justify-center w-14 h-14 overflow-hidden" id="logo-container">
+                    <img src="./public/logo.png" alt="Logo" id="app-logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/000000/FFFFFF.png?text=Logo'">
                 </div>
                 <span class="text-xl md:text-2xl font-bold text-theme-header pixel-font tracking-tighter drop-shadow-md" data-i18n="site_title">
                     Faisal's Unblocked Games
@@ -474,20 +474,6 @@
                 </div>
             </div>
 
-
-
-            <div id="featured-games-container">
-                <div class="mb-8 flex items-center justify-between">
-                    <h2 class="text-3xl font-bold pixel-font text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
-                        <i data-lucide="star" class="inline-block w-8 h-8 mr-2 text-yellow-400"></i>
-                        <span data-i18n="featured_games">FEATURED GAMES</span>
-                    </h2>
-                </div>
-                <div id="featured-games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
-                    <!-- Featured Games will be injected here -->
-                </div>
-            </div>
-
             <div class="mb-8 flex items-center justify-between">
                 <h2 class="text-3xl font-bold pixel-font text-white drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                     <i data-lucide="gamepad-2" class="inline-block w-8 h-8 mr-2 text-theme-accent"></i>
@@ -530,9 +516,14 @@
                 
                 <h1 id="game-title" class="text-xl md:text-2xl font-bold text-white pixel-font hidden sm:block drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] text-stroke-black"></h1>
                 
-                <button onclick="toggleFullscreen()" class="flex items-center gap-2 px-4 py-3 bg-white text-black border-4 border-black rounded-xl hover:bg-gray-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" title="Toggle Fullscreen">
-                    <i data-lucide="maximize-2" id="fullscreen-icon" class="w-6 h-6"></i>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button id="toggle-controls-btn" onclick="toggleControlsVisibility()" class="hidden items-center gap-2 px-4 py-3 bg-white text-black border-4 border-black rounded-xl hover:bg-gray-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" title="Toggle Controls">
+                        <i data-lucide="gamepad-2" class="w-6 h-6"></i>
+                    </button>
+                    <button onclick="toggleFullscreen()" class="flex items-center gap-2 px-4 py-3 bg-white text-black border-4 border-black rounded-xl hover:bg-gray-100 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-1 active:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all" title="Toggle Fullscreen">
+                        <i data-lucide="maximize-2" id="fullscreen-icon" class="w-6 h-6"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="flex flex-col lg:flex-row gap-6 h-full">
@@ -557,10 +548,15 @@
                 
                 <!-- Controls Sidebar -->
                 <div id="game-controls" class="hidden w-full lg:w-72 bg-theme-card border-4 border-black rounded-xl p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.5)] h-fit">
-                    <h3 class="text-xl font-bold text-theme-card mb-4 pixel-font flex items-center gap-2" style="color: var(--text-card)">
-                        <i data-lucide="gamepad" class="w-6 h-6"></i>
-                        <span data-i18n="controls">CONTROLS</span>
-                    </h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-theme-card pixel-font flex items-center gap-2" style="color: var(--text-card)">
+                            <i data-lucide="gamepad" class="w-6 h-6"></i>
+                            <span data-i18n="controls">CONTROLS</span>
+                        </h3>
+                        <button onclick="toggleControlsVisibility()" class="p-1 hover:bg-black/10 rounded-lg transition-colors text-theme-card" style="color: var(--text-card)">
+                            <i data-lucide="x" class="w-5 h-5"></i>
+                        </button>
+                    </div>
                     <ul id="controls-list" class="space-y-3 font-bold text-black text-sm">
                         <!-- Controls injected here -->
                     </ul>

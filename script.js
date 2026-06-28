@@ -13,7 +13,6 @@ const translations = {
         warning_russian: "The game is russian in default, theres a button on top of the game to change the language!",
         search_placeholder: "Search games...",
         all_games: "ALL GAMES",
-        featured_games: "FEATURED GAMES",
         favorites: "FAVORITES",
         sort: "SORT",
         sort_newest: "Newest First",
@@ -48,7 +47,6 @@ const translations = {
         warning_russian: "El juego está en ruso por defecto, ¡hay un botón en la parte superior para cambiar el idioma!",
         search_placeholder: "Buscar juegos...",
         all_games: "TODOS LOS JUEGOS",
-        featured_games: "JUEGOS DESTACADOS",
         favorites: "FAVORITOS",
         sort: "ORDENAR",
         sort_newest: "Más nuevos",
@@ -83,7 +81,6 @@ const translations = {
         warning_russian: "Le jeu est en russe par défaut, il y a un bouton en haut pour changer la langue !",
         search_placeholder: "Rechercher des jeux...",
         all_games: "TOUS LES JEUX",
-        featured_games: "JEUX EN VEDETTE",
         favorites: "FAVORIS",
         sort: "TRIER",
         sort_newest: "Plus récents",
@@ -118,7 +115,6 @@ const translations = {
         warning_russian: "Игра по умолчанию на русском языке, наверху есть кнопка для изменения языка!",
         search_placeholder: "Поиск игр...",
         all_games: "ВСЕ ИГРЫ",
-        featured_games: "РЕКОМЕНДУЕМЫЕ ИГРЫ",
         favorites: "ИЗБРАННОЕ",
         sort: "СОРТИРОВКА",
         sort_newest: "Сначала новые",
@@ -153,7 +149,6 @@ const translations = {
         warning_russian: "اللعبة باللغة الروسية افتراضيًا، يوجد زر أعلى اللعبة لتغيير اللغة!",
         search_placeholder: "البحث عن ألعاب...",
         all_games: "كل الألعاب",
-        featured_games: "ألعاب مميزة",
         favorites: "المفضلة",
         sort: "ترتيب",
         sort_newest: "الأحدث أولاً",
@@ -188,7 +183,6 @@ const translations = {
         warning_russian: "Das Spiel ist standardmäßig auf Russisch, es gibt eine Schaltfläche oben, um die Sprache zu ändern!",
         search_placeholder: "Spiele suchen...",
         all_games: "ALLE SPIELE",
-        featured_games: "EMPFOHLENE SPIELE",
         favorites: "FAVORITEN",
         sort: "SORTIEREN",
         sort_newest: "Neueste zuerst",
@@ -469,8 +463,6 @@ function applyLanguage() {
 
 // DOM Elements
 const gamesGrid = document.getElementById('games-grid');
-const featuredGamesGrid = document.getElementById('featured-games-grid');
-const featuredGamesContainer = document.getElementById('featured-games-container');
 const categoryFilters = document.getElementById('category-filters');
 const gameListView = document.getElementById('game-list-view');
 const gamePlayerView = document.getElementById('game-player-view');
@@ -509,7 +501,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         setupCategoryFilters();
         renderGames();
-        renderFeaturedGames();
     } catch (error) {
         console.error('Error loading games:', error);
         gamesGrid.innerHTML = '<p class="text-red-500 text-center col-span-full">Failed to load games. Please try again later.</p>';
@@ -828,14 +819,6 @@ function createGameCard(game) {
 function renderGames() {
     gamesGrid.innerHTML = '';
     
-    if (featuredGamesContainer) {
-        if (currentCategory === 'all' && (!searchInputDesktop.value && !searchInputMobile.value)) {
-            featuredGamesContainer.classList.remove('hidden');
-        } else {
-            featuredGamesContainer.classList.add('hidden');
-        }
-    }
-    
     if (filteredGames.length === 0 && games.length > 0) {
         if (currentCategory === 'favorites') {
              gamesGrid.innerHTML = `<div class="col-span-full text-center py-12 bg-white/90 border-4 border-black rounded-xl"><p class="text-theme-card text-lg font-bold pixel-font" style="color: var(--text-card)">${translations[currentLanguage]?.no_favorites || 'NO FAVORITES YET! CLICK THE HEART ICON TO ADD SOME.'}</p></div>`;
@@ -855,37 +838,6 @@ function renderGames() {
 
     filteredGames.forEach(game => {
         gamesGrid.appendChild(createGameCard(game));
-    });
-    lucide.createIcons();
-}
-
-function renderFeaturedGames() {
-    if (!featuredGamesGrid) return;
-    featuredGamesGrid.innerHTML = '';
-    
-    if (games.length === 0) return;
-
-    // Use current date to seed random selection
-    const today = new Date();
-    const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    
-    let currentSeed = seed;
-    const random = () => {
-        let x = Math.sin(currentSeed++) * 10000;
-        return x - Math.floor(x);
-    };
-
-    // Pick 4 featured games
-    const numFeatured = Math.min(4, games.length);
-    const shuffled = [...games];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    const featured = shuffled.slice(0, numFeatured);
-
-    featured.forEach(game => {
-        featuredGamesGrid.appendChild(createGameCard(game));
     });
     lucide.createIcons();
 }
@@ -1018,6 +970,32 @@ function openGame(game) {
     gameTitle.textContent = getTranslatedText(game, 'title');
     gameAboutTitle.textContent = getTranslatedText(game, 'title');
     gameDescription.textContent = getTranslatedText(game, 'description');
+    
+    // Check if the game has special iframe attributes
+    if (game.allow) {
+        gameIframe.setAttribute('allow', game.allow);
+    } else {
+        gameIframe.removeAttribute('allow');
+    }
+
+    if (game.sandbox) {
+        gameIframe.setAttribute('sandbox', game.sandbox);
+    } else {
+        gameIframe.removeAttribute('sandbox');
+    }
+
+    if (game.scrolling) {
+        gameIframe.setAttribute('scrolling', game.scrolling);
+    } else {
+        gameIframe.removeAttribute('scrolling');
+    }
+
+    if (game.allowtransparency) {
+        gameIframe.setAttribute('allowtransparency', game.allowtransparency);
+    } else {
+        gameIframe.removeAttribute('allowtransparency');
+    }
+    
     gameIframe.src = game.url;
 
     const warningBox = document.getElementById('game-warning-message');
@@ -1035,8 +1013,47 @@ function openGame(game) {
 
     // Apply custom styles if present (e.g. for cropping)
     gameIframe.style.cssText = '';
+    
+    // Scale fixed-size games
+    if (game.width && game.height) {
+        gameIframe.classList.remove('w-full', 'h-full');
+        gameIframe.style.width = game.width + 'px';
+        gameIframe.style.height = game.height + 'px';
+        gameIframe.style.transformOrigin = '0 0';
+        
+        const container = document.getElementById('game-container');
+        if (window.gameResizeObserver) {
+            window.gameResizeObserver.disconnect();
+        }
+        window.gameResizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                const rect = entry.contentRect;
+                const scaleX = rect.width / game.width;
+                const scaleY = rect.height / game.height;
+                const scale = Math.min(scaleX, scaleY);
+                
+                const scaledWidth = game.width * scale;
+                const scaledHeight = game.height * scale;
+                const offsetX = (rect.width - scaledWidth) / 2;
+                const offsetY = (rect.height - scaledHeight) / 2;
+                
+                gameIframe.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+            }
+        });
+        window.gameResizeObserver.observe(container);
+    } else {
+        gameIframe.classList.add('w-full', 'h-full');
+        gameIframe.style.transform = '';
+        gameIframe.style.width = '';
+        gameIframe.style.height = '';
+        if (window.gameResizeObserver) {
+            window.gameResizeObserver.disconnect();
+            window.gameResizeObserver = null;
+        }
+    }
+
     if (game.customStyle) {
-        gameIframe.style.cssText = game.customStyle;
+        gameIframe.style.cssText += game.customStyle;
     }
 
     // Mobile Controls Logic
@@ -1059,9 +1076,12 @@ function openGame(game) {
     // Handle Controls
     const controlsContainer = document.getElementById('game-controls');
     const controlsList = document.getElementById('controls-list');
+    const toggleControlsBtn = document.getElementById('toggle-controls-btn');
     
     if (game.controls && game.controls.length > 0) {
         controlsContainer.classList.remove('hidden');
+        toggleControlsBtn.classList.add('hidden'); // hidden when sidebar is visible
+        toggleControlsBtn.classList.remove('flex');
         controlsList.innerHTML = game.controls.map(control => `
             <li class="flex items-center justify-between bg-white/50 p-2 rounded border-2 border-black">
                 <span class="bg-black text-white px-2 py-1 rounded font-mono text-xs">${control.key}</span>
@@ -1070,11 +1090,33 @@ function openGame(game) {
         `).join('');
     } else {
         controlsContainer.classList.add('hidden');
+        toggleControlsBtn.classList.add('hidden');
+        toggleControlsBtn.classList.remove('flex');
         controlsList.innerHTML = '';
     }
     
+    // Store current game controls for toggle logic
+    window.currentGameControls = game.controls;
+    
     // Scroll to top
     window.scrollTo(0, 0);
+}
+
+window.toggleControlsVisibility = function toggleControlsVisibility() {
+    const controlsContainer = document.getElementById('game-controls');
+    const toggleControlsBtn = document.getElementById('toggle-controls-btn');
+    
+    if (controlsContainer.classList.contains('hidden')) {
+        controlsContainer.classList.remove('hidden');
+        toggleControlsBtn.classList.add('hidden');
+        toggleControlsBtn.classList.remove('flex');
+    } else {
+        controlsContainer.classList.add('hidden');
+        if (window.currentGameControls && window.currentGameControls.length > 0) {
+            toggleControlsBtn.classList.remove('hidden');
+            toggleControlsBtn.classList.add('flex');
+        }
+    }
 }
 
 function setupMobileControls() {
