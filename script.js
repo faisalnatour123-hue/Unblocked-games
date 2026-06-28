@@ -1784,9 +1784,7 @@ function setTheme(themeName, toggleMenu = true) {
         root.style.setProperty(property, value);
     }
     
-    // Ensure logo is always gamepad-2
-    const logoContainer = document.getElementById('logo-container');
-    logoContainer.innerHTML = `<i data-lucide="gamepad-2" class="text-theme-card w-8 h-8"></i>`;
+    // Removed logo overwrite so custom logo persists
     lucide.createIcons();
 
     localStorage.setItem('selectedTheme', themeName);

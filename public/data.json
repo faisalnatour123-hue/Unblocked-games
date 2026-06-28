@@ -211,7 +211,7 @@
     "height": 700,
     "scrolling": "no",
     "allowtransparency": "true",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Super_Mario_Bros._box.png/220px-Super_Mario_Bros._box.png",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/03/Super_Mario_Bros._box.png",
     "tags": ["Retro", "Arcade"],
     "controls": [
       { "key": "A", "action": "Jump" },
