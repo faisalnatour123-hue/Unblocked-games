@@ -1214,7 +1214,7 @@ const themes = {
         `,
         '--bg-size': '64px 64px, 64px 192px, 64px 256px, 100% 100%, 128px 128px',
         '--bg-repeat': 'repeat-x, repeat-x, repeat-x, no-repeat, repeat',
-        '--bg-position': 'top left, 0 64px, bottom left, top left, top left',
+        '--bg-position': '0 84px, 0 148px, bottom left, top left, top left',
         '--bg-attachment': 'scroll, scroll, scroll, scroll, scroll'
     },
     mario: {
